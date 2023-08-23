@@ -42,6 +42,7 @@ The character builder will enable Dark Souls players to theorycraft any build th
 * characterBuilds:
 
 Weapon JSON dataset acquired from: https://gist.github.com/BonsaiDen/4096890
+
 Armor dataset acquired from: http://www.raymondhill.net/darksouls/darksouls-armor-calc.php
 
 Many thanks to BonsaiDen (https://gist.github.com/BonsaiDen) and gorhill (https://github.com/gorhill) for creating and making these data sets public!
