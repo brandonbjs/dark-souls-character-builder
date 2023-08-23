@@ -35,6 +35,17 @@ The character builder will enable Dark Souls players to theorycraft any build th
 * App.js
 * CharacterBuilder.js
 
+#### Database Collections and Models
+* users: 
+* weapons:
+* armor:
+* characterBuilds:
+
+Weapon JSON dataset acquired from: https://gist.github.com/BonsaiDen/4096890
+Armor dataset acquired from: http://www.raymondhill.net/darksouls/darksouls-armor-calc.php
+
+Many thanks to BonsaiDen (https://gist.github.com/BonsaiDen) and gorhill (https://github.com/gorhill) for creating and making these data sets public!
+
 #### Functions to be Used
 Project in early stages of development! Will update this section once the project is further along.
 
