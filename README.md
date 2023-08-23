@@ -23,12 +23,12 @@ The character builder will enable Dark Souls players to theorycraft any build th
 * Choose a starting class
 * Determine an adequate soul level
 * Allocate appropriate number of stat points based on soul level
-* Chose 4 weapons (left hand/right hand, 2 sets)
-* Chose 4 armor pieces (head, chest, hands, legs)
-* Chose 2 rings
-* Chose spells (number varies based on Attunement stat)
-* Chose arrow/bolt type
-* Chose 5 held items
+* Choose 4 weapons (left hand/right hand, 2 sets)
+* Choose 4 armor pieces (head, chest, hands, legs)
+* Choose 2 rings
+* Choose spells (number varies based on Attunement stat)
+* Choose arrow/bolt type
+* Choose 5 held items
 * View stat changes as they mix and match weapons and armors at varying upgrade levels
 
 #### React Components
