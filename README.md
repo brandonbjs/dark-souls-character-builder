@@ -12,7 +12,7 @@
 The objective of this project is to create an interactive character builder for the popular FromSoftware videogame title, Dark Souls. The user will be able to theorycraft different character builds by placing stat allocations, selecting weapons, selecting armor, selecting spells and, ultimately, view how their builds affect their character's stats at any particular soul level.
 
 ### Purpose:
-The purpose of this project is to provide players with a way to theorycraft their different character builds without having to invest a significant amount of time in game. Before the player gets invested in a character or build, they can use this application to compare weapons, compare stat allocations, and come up with the best possible build for their needs and playstyle. Then they can go in game and spend time accrueing the right items and souls to reach their desired build.
+The purpose of this project is to practice, improve, and showcase my MERN stack development capabilities. The purpose of this web application is to provide players with a way to theorycraft their different character builds without having to invest a significant amount of time in game. Before the player gets invested in a character or build, they can use this application to compare weapons, compare stat allocations, and come up with the best possible build for their needs and playstyle. Then they can go in game and spend time accrueing the right items and souls to reach their desired build.
 
 ### Planning: 
 * **Front-End Development:** The front-end user interface will be designed using React and styled using CSS. I will uphold ES6 best practices to provide the user with an intuitive and enjoyable character building experience.
