@@ -1,0 +1,24 @@
+{
+  "name": "souls-builder-api",
+  "version": "1.0.0",
+  "description": "Dark Souls Character Builder API",
+  "main": "CharBuilderAPI.js",
+  "type": "module",
+  "scripts": {
+    "start": "node CharBuilderAPI.js"
+  },
+  "engines": {
+    "node": "18.17.0"  
+  },  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonbjs/dark-souls-character-builder.git"
+  },
+  "author": "Brandon James Shaffer",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.1"
+  }
+}
