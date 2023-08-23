@@ -36,10 +36,13 @@ The character builder will enable Dark Souls players to theorycraft any build th
 * CharacterBuilder.js
 
 #### Functions to be Used
+Project in early stages of development! Will update this section once the project is further along.
 
 #### Endpoints to be Used
+Project in early stages of development! Will update this section once the project is further along.
 
 #### API Request-Response Formats
+Project in early stages of development! Will update this section once the project is further along.
 
 #### Design Ideas
 * Login/registration to allow the saving and sharing of builds (with custom URL for each build?)
