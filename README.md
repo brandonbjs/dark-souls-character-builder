@@ -5,7 +5,7 @@
 * Brandon James Shaffer | B.S. in Computer Science from Northern Arizona University
   * Email: bjs397@nau.edu
   * GitHub: https://github.com/brandonbjs
-  * linkedIn: https://www.linkedin.com/in/brandonbjs/
+  * LinkedIn: https://www.linkedin.com/in/brandonbjs/
 
 ## Summary of Project
 
