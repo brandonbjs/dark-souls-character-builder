@@ -1,5 +1,7 @@
 ![Alt Text](https://github.com/brandonbjs/dark-souls-character-builder/blob/main/public/images/dark-souls-title.jpg)
 # Dark Souls Character Builder
+Welcome to my MERN stack Dark Souls Character Builder web application!
+Try the most recent build of this web application here: https://brandonbjs.github.io/Dark-Souls-Character-Builder-gh-pages/
 
 ## Developer Information:
 * Brandon James Shaffer | B.S. in Computer Science from Northern Arizona University
