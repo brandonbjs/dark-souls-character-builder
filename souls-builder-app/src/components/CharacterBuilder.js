@@ -1,10 +1,50 @@
 import React, { Component } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+
 
 class CharacterBuilder extends Component {
 
+  
+
+
+  constructor(props) {
+    super(props);
+
+    // Define a mapping of character classes to their initial levels
+    this.classLevelMapping = {
+      warrior: 4,
+      knight: 8,
+      wanderer: 6,
+      thief: 11,
+      bandit: 7,
+      hunter: 4,
+      sorcerer: 14,
+      pyromancer: 4,
+      cleric: 8,
+      deprived: 8,
+    };
+
+    this.state = {
+      buildId: uuidv4(),
+      characterClass: '', // Initial state for character class
+      characterGender: '', // Initial state for character gender
+      buildLevel: 4,
+    };
+  }
+
+  handleClassChange = (e) => {
+    const selectedClass = e.target.value;
+
+    // Update the buildLevel based on the selected character class
+    this.setState({
+      characterClass: selectedClass,
+      buildLevel: this.classLevelMapping[selectedClass] || 1,
+    });
+  };
+
   handleNewBuildClick = () => {
     // Open a new page in another tab
-    window.open('http://localhost:3000/', '_blank');
+    window.open('https://brandonbjs.github.io/Dark-Souls-Character-Builder-gh-pages/', '_blank');
   };
 
   handleResetClick = () => {
@@ -26,17 +66,19 @@ class CharacterBuilder extends Component {
         <div className="attributes-grid">
           <div className="dropdown">
             <label htmlFor="characterClass">Class</label>
-            <select id="characterClass" className='characterClass'>
-              <option value="knight">Warrior</option>
-              <option value="mage">Knight</option>
-              <option value="mage">Wanderer</option>
-              <option value="mage">Thief</option>
-              <option value="mage">Bandit</option>
-              <option value="mage">Hunter</option>
-              <option value="mage">Sorcerer</option>
-              <option value="mage">Pyromancer</option>
-              <option value="mage">Cleric</option>
-              <option value="mage">Deprived</option>
+            <select id="characterClass" className='characterClass'
+             value={this.state.characterClass}
+             onChange={this.handleClassChange}>
+              <option value="warrior">Warrior</option>
+              <option value="knight">Knight</option>
+              <option value="wanderer">Wanderer</option>
+              <option value="thief">Thief</option>
+              <option value="bandit">Bandit</option>
+              <option value="hunter">Hunter</option>
+              <option value="sorcerer">Sorcerer</option>
+              <option value="pyromancer">Pyromancer</option>
+              <option value="cleric">Cleric</option>
+              <option value="deprived">Deprived</option>
             </select>
 
             <button type="button" className='newBuildButton' 
@@ -46,9 +88,11 @@ class CharacterBuilder extends Component {
 
           </div>
 
-          <div className="dropdown">
+          <div className="genderDropdown">
             <label htmlFor="characterGender">Gender</label>
-            <select id="characterGender" className='characterGender'>
+            <select id="characterGender" className='characterGender'
+             value={this.state.characterGender}
+             onChange={(e) => this.setState({ characterGender: e.target.value })}>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
@@ -57,6 +101,10 @@ class CharacterBuilder extends Component {
                     onClick={this.handleResetClick}>
               Reset
             </button>
+          </div>
+
+          <div className='buildLevel'>
+            <p>Level: {this.state.buildLevel}</p>
           </div>
 
         </div>
