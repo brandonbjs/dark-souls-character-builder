@@ -3,10 +3,9 @@
 }
 
 
-/* styles.css */
-
 /* Reset default margin and padding for better consistency */
 body, h1, h2, p, ul {
+  color: #dd0f0f;
   margin: 0;
   padding: 0;
 }
@@ -19,7 +18,7 @@ body {
 
 
 /*============================= Style the navigation bar ==============================*/
-.navbar {
+.navigationBar {
   background-color: #333;
   padding: 15px;
   text-align: center;
@@ -59,21 +58,79 @@ body {
 /*=====================================================================================*/
 
 /*============================= Style the character builder ==============================*/
-/* styles.css */
 
 .character-builder {
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 1fr 1fr; /* Three columns */
-  gap: 20px; /* Adjust the gap between grid items */
+  gap: 3px; /* Adjust the gap between grid items */
   padding: 20px;
+  justify-content: center;
 }
+
 .attributes-grid,
 .stats-grid,
 .items-grid {
-  border: 1px solid rgb(233, 16, 45);
+  border: 1px solid rgb(207, 201, 202);
   height: 50vh;
   width: 20vw;
+  text-align: left;
+  padding: 1vh;
+  justify-content: space-between; /* Align items along the row axis */
+  align-items: flex-start; /* Align items along the column axis */
+}
+
+.dropdown {
+  margin-bottom: 1vh;
+}
+
+
+label {
+  display:inline;
+  margin-bottom: 5px;
+  color: #d10909; /* White text color */
+  font-size: 1em;
+  width: 1vw; /* Set a fixed width for the labels */
+}
+
+select {
+  width: 40%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #333; /* Dark background color */
+  color: #fff; /* White text color */
+  border: 1px solid #555; /* Dark border */
+}
+
+button {
+  width: 25%;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 3vw;
+  background-color: #333; /* Dark background color */
+  color: #fff; /* White text color */
+  border: 1px solid #555; /* Dark border */
+}
+
+.characterClass {
+  margin-left: 1vw;
+}
+
+.characterGender {
+  margin-left: 0.5vw;
+}
+
+/* Add a subtle animation on hover for a Dark Souls touch */
+select:hover,
+button:hover {
+  border-color: #d10909;
 }
 
 
 /*========================================================================================*/
+
+/*============================= Style the bonfire ==============================*/
+
+.bonfire {
+
+}
+/*==============================================================================*/
