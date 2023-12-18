@@ -12,7 +12,7 @@ body, h1, h2, p, ul {
 
 /* Apply a background color to the entire body */
 body {
-  background-color: #1a1a1a;
+  background-color: #000000;
   font-family: 'Arial', sans-serif;
 }
 
@@ -20,7 +20,7 @@ body {
 /*============================= Style the navigation bar ==============================*/
 .navigationBar {
   background-color: #333;
-  padding: 15px;
+  padding: 5px;
   text-align: center;
 }
 
@@ -63,7 +63,7 @@ body {
   display: flex;
   grid-template-columns: 1fr 1fr 1fr; /* Three columns */
   gap: 3px; /* Adjust the gap between grid items */
-  padding: 20px;
+  padding: 10px;
   justify-content: center;
 }
 
@@ -71,7 +71,8 @@ body {
 .stats-grid,
 .items-grid {
   border: 1px solid rgb(207, 201, 202);
-  height: 50vh;
+  background-color: #1a1a1a;
+  height: 60vh;
   width: 20vw;
   text-align: left;
   padding: 1vh;
@@ -105,7 +106,7 @@ button {
   width: 25%;
   padding: 10px;
   border-radius: 5px;
-  margin-left: 3vw;
+  margin-left: 1vw;
   background-color: #333; /* Dark background color */
   color: #fff; /* White text color */
   border: 1px solid #555; /* Dark border */
@@ -130,7 +131,6 @@ button:hover {
 
 /*============================= Style the bonfire ==============================*/
 
-.bonfire {
-  margin-top: 1vh;
-}
+
+
 /*==============================================================================*/

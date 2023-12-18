@@ -22,7 +22,9 @@ class App extends Component {
         <div className='bonfire'>
           <img src="/Dark-Souls-Character-Builder-gh-pages/images/dark-souls-bonfire.gif"
             alt="Animated Bonfire by tRoedder (@https://trmrddr.tumblr.com/)" 
-            style={{ display: 'block', margin: 'auto' }} />
+            style={{ display: 'block', margin: 'auto' }} 
+            width="20%"
+            height="10%"/>
         </div>
         
       </div>
