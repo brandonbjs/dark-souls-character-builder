@@ -1,10 +1,11 @@
-![Alt Text](https://github.com/brandonbjs/dark-souls-character-builder/souls-builder-app/public/images/dark-souls-title.jpg)
+![Alt Text](https://github.com/brandonbjs/dark-souls-character-builder/blob/main/public/images/dark-souls-title.jpg)
 # Dark Souls Character Builder
 
 ## Developer Information:
 * Brandon James Shaffer | B.S. in Computer Science from Northern Arizona University
   * Email: bjs397@nau.edu
   * GitHub: https://github.com/brandonbjs
+  * LinkedIn: https://www.linkedin.com/in/brandonbjs/
 
 ## Summary of Project
 
