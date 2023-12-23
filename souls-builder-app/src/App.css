@@ -72,7 +72,7 @@ body {
 .items-grid {
   border: 1px solid rgb(207, 201, 202);
   background-color: #1a1a1a;
-  height: 60vh;
+  height: 50vh;
   width: 20vw;
   text-align: left;
   padding: 1vh;
@@ -126,14 +126,89 @@ button {
   margin-left: 0.5vw;
 }
 
-.buildLevel {
+.levelNumber {
   width: 25%;
-  padding: 10px;
+  padding: 5px;
+  padding-left: 1vw;
+  padding-right: 1vw;
   border-radius: 5px;
-  margin-left: 1vw;
+  margin-left: 5vw;
   background-color: #333; /* Dark background color */
   color: #fff; /* White text color */
   border: 1px solid #555; /* Dark border */
+}
+
+.buildLevel {
+  margin-top: 2vh;
+}
+
+.humanityNumber {
+  width: 25%;
+  padding: 5px;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-radius: 5px;
+  margin-left: 4vw;
+  background-color: #333; /* Dark background color */
+  color: #fff; /* White text color */
+  border: 1px solid #555; /* Dark border */
+}
+
+.attributesInfo {
+  margin-top: 1vh;
+  color: #dad386; /* White text color */
+  font-size: 0.8em;
+}
+
+.attribute-row {
+  margin-top: 1vh;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.attribute-name {
+  width: 4.5vw; /* Adjust this width to fit the longest attribute name */
+  text-align: left;
+  margin-right: 0.3vw;
+}
+
+.attribute-values {
+  width: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.initial-attunement {
+  margin-right: 0.3vw;
+}
+
+.current-value {
+  display: inline-flex; /* Use flexbox for easy centering */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+  width: 2vw; /* Fixed width */
+  padding: 5px;
+  margin-left: 1.5vw; /* Adjust as needed */
+  border-radius: 5px;
+  background-color: #333; /* Dark background */
+  color: #fff; /* White text */
+  border: 1px solid #555; /* Dark border */
+  font-size: 1em; /* Adjust as needed */
+}
+
+.attributeButton {
+  width: 2vw;
+}
+
+
+.init {
+  padding-left: 2.2vw;
+}
+
+.current {
+  padding-left: 1vw;
 }
 
 /* Add a subtle animation on hover for a Dark Souls touch */
