@@ -21,13 +21,13 @@ class NavigationBar extends Component {
     return (
       <div className="navbar">
         <div className="navbar-center">
-          <a href="#" className={activePage === 'build' ? 'active' : ''} onClick={() => this.setActivePage('build')}>
+          <a href="1" className={activePage === 'build' ? 'active' : ''} onClick={() => this.setActivePage('build')}>
             Build
           </a>
-          <a href="#" className={activePage === 'create account' ? 'active' : ''} onClick={() => this.setActivePage('build')}>
+          <a href="2" className={activePage === 'create account' ? 'active' : ''} onClick={() => this.setActivePage('build')}>
             Create Account
           </a>
-          <a href="#" className={activePage === 'login' ? 'active' : ''} onClick={() => this.setActivePage('build')}>
+          <a href="3" className={activePage === 'login' ? 'active' : ''} onClick={() => this.setActivePage('build')}>
             Login
           </a>
         </div>

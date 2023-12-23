@@ -25,16 +25,26 @@ class CharacterBuilder extends Component {
     }
 
     this.classAttributeMapping = {
-      warrior: {vitality: 11, attunement: 8, endurance: 12, strength: 13, dexterity: 13, resistance: 11, intelligence: 9, faith: 9},
-      knight: {vitality: 14, attunement: 10, endurance: 10, strength: 11, dexterity: 11, resistance: 10, intelligence: 9, faith: 11},
-      wanderer: {vitality: 10, attunement: 11, endurance: 10, strength: 10, dexterity: 14, resistance: 12, intelligence: 11, faith: 8},
-      thief: {vitality: 9, attunement: 11, endurance: 9, strength: 9, dexterity: 15, resistance: 10, intelligence: 12, faith: 11},
-      bandit: {vitality: 12, attunement: 8, endurance: 14, strength: 14, dexterity: 9, resistance: 11, intelligence: 8, faith: 10},
-      hunter: {vitality: 11, attunement: 9, endurance: 11, strength: 12, dexterity: 14, resistance: 11, intelligence: 9, faith: 9},
-      sorcerer: {vitality: 8, attunement: 15, endurance: 8, strength: 9, dexterity: 11, resistance: 8, intelligence: 15, faith: 8},
-      pyromancer: {vitality: 10, attunement: 12, endurance: 11, strength: 12, dexterity: 9, resistance: 12, intelligence: 10, faith: 8},
-      cleric: {vitality: 11, attunement: 11, endurance: 9, strength: 12, dexterity: 8, resistance: 11, intelligence: 8, faith: 14},
-      deprived: {vitality: 11, attunement: 11, endurance: 11, strength: 11, dexterity: 11, resistance: 11, intelligence: 11, faith: 11},
+      warrior: {vitality: 11, attunement: 8, endurance: 12, strength: 13,
+         dexterity: 13, resistance: 11, intelligence: 9, faith: 9},
+      knight: {vitality: 14, attunement: 10, endurance: 10, strength: 11, 
+        dexterity: 11, resistance: 10, intelligence: 9, faith: 11},
+      wanderer: {vitality: 10, attunement: 11, endurance: 10, strength: 10, 
+        dexterity: 14, resistance: 12, intelligence: 11, faith: 8},
+      thief: {vitality: 9, attunement: 11, endurance: 9, strength: 9, 
+        dexterity: 15, resistance: 10, intelligence: 12, faith: 11},
+      bandit: {vitality: 12, attunement: 8, endurance: 14, strength: 14, 
+        dexterity: 9, resistance: 11, intelligence: 8, faith: 10},
+      hunter: {vitality: 11, attunement: 9, endurance: 11, strength: 12, 
+        dexterity: 14, resistance: 11, intelligence: 9, faith: 9},
+      sorcerer: {vitality: 8, attunement: 15, endurance: 8, strength: 9, 
+        dexterity: 11, resistance: 8, intelligence: 15, faith: 8},
+      pyromancer: {vitality: 10, attunement: 12, endurance: 11, strength: 12, 
+        dexterity: 9, resistance: 12, intelligence: 10, faith: 8},
+      cleric: {vitality: 11, attunement: 11, endurance: 9, strength: 12, 
+        dexterity: 8, resistance: 11, intelligence: 8, faith: 14},
+      deprived: {vitality: 11, attunement: 11, endurance: 11, strength: 11, 
+        dexterity: 11, resistance: 11, intelligence: 11, faith: 11},
 
     }
 
@@ -100,183 +110,37 @@ class CharacterBuilder extends Component {
     window.location.reload()
   }
 
-  // DECREMENT VITALITY FUNCTION
-  handleDecrementVitality = () => {
-    // decrement vitality if level is greater than 0
-    if ( this.state.buildLevel > 0 && this.state.vitality > this.state.initVitality ) {
+  // Generic method to increment an attribute
+  handleIncrement = (attribute) => {
+    if (attribute === 'humanity') {
       this.setState((prevState) => ({
-        buildLevel: prevState.buildLevel - 1,
-        vitality: prevState.vitality - 1,
+        humanity: prevState.humanity + 1,
+      }))
+    } else {
+      this.setState((prevState) => ({
+        buildLevel: prevState.buildLevel + 1,
+        [attribute]: prevState[attribute] + 1,
       }))
     }
   }
 
-  // INCREMENT VITALITY FUNCTION
-  handleIncrementVitality = () => {
-    // increment vitality state
-    this.setState((prevState) => ({
-      buildLevel: prevState.buildLevel + 1,
-      vitality: prevState.vitality + 1,
-    }))
-  }
-
-  // DECREMENT ATTUNEMENT FUNCTION
-  handleDecrementAttunement = () => {
-    // decrement attunement if level is greater than 0
-    if ( this.state.buildLevel > 0 && this.state.attunement > this.state.initAttunement ) {
-      this.setState((prevState) => ({
-        buildLevel: prevState.buildLevel - 1,
-        attunement: prevState.attunement - 1,
-      }))
-    }
-  }
-
-  // INCREMENT ATTUNEMENT FUNCTION
-  handleIncrementAttunement = () => {
-    // increment attunement state
-    this.setState((prevState) => ({
-      buildLevel: prevState.buildLevel + 1,
-      attunement: prevState.attunement + 1,
-    }))
-  }
-
-    // DECREMENT ENDURANCE FUNCTION
-    handleDecrementEndurance = () => {
-      // decrement endurance if level is greater than 0
-      if ( this.state.buildLevel > 0 && this.state.endurance > this.state.initEndurance ) {
+    // Generic method to decrement an attribute
+    handleDecrement = (attribute) => {
+      if (attribute === 'humanity' && this.state.humanity > 0) {
         this.setState((prevState) => ({
-          buildLevel: prevState.buildLevel - 1,
-          endurance: prevState.endurance - 1,
+          humanity: prevState.humanity - 1,
         }))
-      }
-    }
-  
-    // INCREMENT ENDURANCE FUNCTION
-    handleIncrementEndurance = () => {
-      // increment endurance state
-      this.setState((prevState) => ({
-        buildLevel: prevState.buildLevel + 1,
-        endurance: prevState.endurance + 1,
-      }))
-    }
-
-    // DECREMENT STRENGTH FUNCTION
-    handleDecrementStrength = () => {
-      // decrement strength if level is greater than 0
-      if ( this.state.buildLevel > 0 && this.state.strength > this.state.initStrength ) {
-        this.setState((prevState) => ({
-          buildLevel: prevState.buildLevel - 1,
-          strength: prevState.strength - 1,
-        }))
-      }
-    }
-  
-    // INCREMENT STRENGTH FUNCTION
-    handleIncrementStrength = () => {
-      // increment strength state
-      this.setState((prevState) => ({
-        buildLevel: prevState.buildLevel + 1,
-        strength: prevState.strength + 1,
-      }))
-    }
-
-    // DECREMENT DEXTERITY FUNCTION
-    handleDecrementDexterity = () => {
-      // decrement dexterity if level is greater than 0
-      if ( this.state.buildLevel > 0 && this.state.dexterity > this.state.initDexterity ) {
-        this.setState((prevState) => ({
-          buildLevel: prevState.buildLevel - 1,
-          dexterity: prevState.dexterity - 1,
-        }))
-      }
-    }
-  
-    // INCREMENT DEXTERITY FUNCTION
-    handleIncrementDexterity = () => {
-      // increment dexterity state
-      this.setState((prevState) => ({
-        buildLevel: prevState.buildLevel + 1,
-        dexterity: prevState.dexterity + 1,
-      }))
-    }
-
-    // DECREMENT RESISTANCE FUNCTION
-    handleDecrementResistance = () => {
-      // decrement resistance if level is greater than 0
-      if ( this.state.buildLevel > 0 && this.state.resistance > this.state.initResistance ) {
-        this.setState((prevState) => ({
-          buildLevel: prevState.buildLevel - 1,
-          resistance: prevState.resistance - 1,
-        }))
-      }
-    }
-  
-    // INCREMENT RESISTANCE FUNCTION
-    handleIncrementResistance = () => {
-      // increment resistance state
-      this.setState((prevState) => ({
-        buildLevel: prevState.buildLevel + 1,
-        resistance: prevState.resistance + 1,
-      }))
-    }
-
-      // DECREMENT INTELLIGENCE FUNCTION
-    handleDecrementIntelligence = () => {
-      // decrement intelligence if level is greater than 0
-      if ( this.state.buildLevel > 0 && this.state.intelligence > this.state.initIntelligence ) {
-        this.setState((prevState) => ({
-          buildLevel: prevState.buildLevel - 1,
-          intelligence: prevState.intelligence - 1,
-        }))
-      }
-    }
-  
-    // INCREMENT INTELLIGENCE FUNCTION
-    handleIncrementIntelligence = () => {
-      // increment intelligence state
-      this.setState((prevState) => ({
-        buildLevel: prevState.buildLevel + 1,
-        intelligence: prevState.intelligence + 1,
-      }))
-    }
-  
-    // DECREMENT FAITH FUNCTION
-    handleDecrementFaith = () => {
-      // decrement faith if level is greater than 0
-      if ( this.state.buildLevel > 0 && this.state.faith > this.state.initFaith ) {
-        this.setState((prevState) => ({
-          buildLevel: prevState.buildLevel - 1,
-          faith: prevState.faith - 1,
-        }))
-      }
-    }
-  
-    // INCREMENT FAITH FUNCTION
-    handleIncrementFaith = () => {
-      // increment faith state
-      this.setState((prevState) => ({
-        buildLevel: prevState.buildLevel + 1,
-        faith: prevState.faith + 1,
-      }))
-    }
-  
-      // DECREMENT HUMANITY FUNCTION
-      handleDecrementHumanity = () => {
-        // decrement humanity if level is greater than 0
-        if ( this.state.humanity > 0 ) {
+      } else {
+        const initKey = `init${attribute.charAt(0).toUpperCase() + attribute.slice(1)}`;
+        if (this.state.buildLevel > 0 && this.state[attribute] > this.state[initKey]) {
           this.setState((prevState) => ({
-            humanity: prevState.humanity - 1,
+            buildLevel: prevState.buildLevel - 1,
+            [attribute]: prevState[attribute] - 1,
           }))
         }
       }
-    
-      // INCREMENT HUMANITY FUNCTION
-      handleIncrementHumanity = () => {
-        // increment humanity state
-        this.setState((prevState) => ({
-          humanity: prevState.humanity + 1,
-        }))
-      }
+      
+    }
   
   render() {
     return (
@@ -348,11 +212,11 @@ class CharacterBuilder extends Component {
             </div>
             <div className='button-row'>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleDecrementVitality}>
+                    onClick={() => this.handleDecrement('vitality')}>
               -
             </button>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleIncrementVitality}>
+                    onClick={() => this.handleIncrement('vitality')}>
               +
             </button>
             </div>
@@ -366,11 +230,11 @@ class CharacterBuilder extends Component {
             </div>
             <div className='button-row'>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleDecrementAttunement}>
+                    onClick={() => this.handleDecrement('attunement')}>
               -
             </button>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleIncrementAttunement}>
+                    onClick={() => this.handleIncrement('attunement')}>
               +
             </button>
             </div>
@@ -384,11 +248,11 @@ class CharacterBuilder extends Component {
             </div>
             <div className='button-row'>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleDecrementEndurance}>
+                    onClick={() => this.handleDecrement('endurance')}>
               -
             </button>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleIncrementEndurance}>
+                    onClick={() => this.handleIncrement('endurance')}>
               +
             </button>
             </div>
@@ -402,11 +266,11 @@ class CharacterBuilder extends Component {
             </div>
             <div className='button-row'>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleDecrementStrength}>
+                    onClick={() => this.handleDecrement('strength')}>
               -
             </button>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleIncrementStrength}>
+                    onClick={() => this.handleIncrement('strength')}>
               +
             </button>
             </div>
@@ -420,11 +284,11 @@ class CharacterBuilder extends Component {
             </div>
             <div className='button-row'>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleDecrementDexterity}>
+                    onClick={() => this.handleDecrement('dexterity')}>
               -
             </button>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleIncrementDexterity}>
+                    onClick={() => this.handleIncrement('dexterity')}>
               +
             </button>
             </div>
@@ -438,11 +302,11 @@ class CharacterBuilder extends Component {
             </div>
             <div className='button-row'>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleDecrementResistance}>
+                    onClick={() => this.handleDecrement('resistance')}>
               -
             </button>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleIncrementResistance}>
+                    onClick={() => this.handleIncrement('resistance')}>
               +
             </button>
             </div>
@@ -456,11 +320,11 @@ class CharacterBuilder extends Component {
             </div>
             <div className='button-row'>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleDecrementIntelligence}>
+                    onClick={() => this.handleDecrement('intelligence')}>
               -
             </button>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleIncrementIntelligence}>
+                    onClick={() => this.handleIncrement('intelligence')}>
               +
             </button>
             </div>
@@ -474,11 +338,11 @@ class CharacterBuilder extends Component {
             </div>
             <div className='button-row'>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleDecrementFaith}>
+                    onClick={() => this.handleDecrement('faith')}>
               -
             </button>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleIncrementFaith}>
+                    onClick={() => this.handleIncrement('faith')}>
               +
             </button>
             </div>
@@ -488,11 +352,11 @@ class CharacterBuilder extends Component {
             <span>Humanity: </span>
             <span className='humanityNumber'>{this.state.humanity}</span>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleDecrementHumanity}>
+                    onClick={() => this.handleDecrement('humanity')}>
               -
             </button>
             <button type="button" className='attributeButton' 
-                    onClick={this.handleIncrementHumanity}>
+                    onClick={() => this.handleIncrement('humanity')}>
               +
             </button>
           </div>
