@@ -94,6 +94,8 @@ class CharacterBuilder extends Component {
       } else {
         this.calculateSoulsToNextLevel();
       }
+
+      this.calculateTotalSouls(this.state.buildLevel);
     }
   }
 
@@ -134,17 +136,19 @@ class CharacterBuilder extends Component {
     window.location.reload()
   }
 
-  // Generic method to increment an attribute
+  // Generic method to increment an attribute to a MAX of 99
   handleIncrement = (attribute) => {
     if (attribute === "humanity") {
       this.setState((prevState) => ({
         humanity: prevState.humanity + 1,
       }))
     } else {
-      this.setState((prevState) => ({
-        buildLevel: prevState.buildLevel + 1,
-        [attribute]: prevState[attribute] + 1,
-      }))
+      if (this.state[attribute] < 99) {
+        this.setState((prevState) => ({
+          buildLevel: prevState.buildLevel + 1,
+          [attribute]: prevState[attribute] + 1,
+        }))
+      }
     }
   }
 
@@ -187,9 +191,7 @@ class CharacterBuilder extends Component {
         11: 847,
         12: 1038,
       }
-
       souls = lowerLevels[buildLevel];
-  
       this.setState({ soulsToNextLevel: souls });
     }
 
@@ -199,6 +201,49 @@ class CharacterBuilder extends Component {
       const calcSouls = Math.round((0.02 * Math.pow((buildLevel+1), 3)) + (3.06 * Math.pow((buildLevel+1), 2)) + (105.6 * (buildLevel+1)) - 895); 
       this.setState({ soulsToNextLevel: calcSouls });
     }
+
+    calculateTotalSouls = (targetLevel) => {
+      const { characterClass } = this.state;
+      const baseLevel = this.classLevelMapping[characterClass];
+      let totalSouls = 0;
+    
+      // Iterate from the base level to the target level
+      for (let level = baseLevel; level < targetLevel; level++) {
+        // Add souls required for each level to totalSouls
+        // You need to implement getSoulsForLevel(level) which returns souls required for a given level
+        totalSouls += this.getSoulsForLevel(level);
+      }
+    
+      // Update the state with the calculated total souls
+      this.setState({ spentSouls: totalSouls });
+    }
+    
+    getSoulsForLevel = (level) => {
+      // Implement the logic based on your game's rules
+      // Use the existing logic in setLowerSoulsLevel and calculateSoulsToNextLevel as a reference
+      let soulsForThisLevel;
+      if (level <= 12) {
+        const lowerLevels = {
+          1: 673,
+          2: 689,
+          3: 706,
+          4: 723,
+          5: 740,
+          6: 757,
+          7: 775,
+          8: 793,
+          9: 811,
+          10: 829,
+          11: 847,
+          12: 1038,
+        }
+        soulsForThisLevel = lowerLevels[level];
+      } else {
+        soulsForThisLevel = Math.round((0.02 * Math.pow((level+1), 3)) + (3.06 * Math.pow((level+1), 2)) + (105.6 * (level+1)) - 895);
+      }
+      return soulsForThisLevel;
+    }
+    
   
   render() {
     return (
