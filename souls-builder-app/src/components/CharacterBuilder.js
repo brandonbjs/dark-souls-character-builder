@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import React, { Component } from "react"
+import { v4 as uuidv4 } from "uuid"
 
 
 class CharacterBuilder extends Component {
@@ -10,20 +10,21 @@ class CharacterBuilder extends Component {
   constructor(props) {
     super(props)
 
-    // Define a mapping of character classes to their initial levels
+    // Define a mapping of initial level values for each class
     this.classLevelMapping = {
       warrior: 4,
-      knight: 8,
-      wanderer: 6,
-      thief: 11,
-      bandit: 7,
+      knight: 5,
+      wanderer: 3,
+      thief: 5,
+      bandit: 4,
       hunter: 4,
-      sorcerer: 14,
-      pyromancer: 4,
-      cleric: 8,
-      deprived: 8,
+      sorcerer: 3,
+      pyromancer: 1,
+      cleric: 2,
+      deprived: 6,
     }
 
+    // Define a mapping of  initial attribute values for each class
     this.classAttributeMapping = {
       warrior: {vitality: 11, attunement: 8, endurance: 12, strength: 13,
          dexterity: 13, resistance: 11, intelligence: 9, faith: 9},
@@ -45,13 +46,12 @@ class CharacterBuilder extends Component {
         dexterity: 8, resistance: 11, intelligence: 8, faith: 14},
       deprived: {vitality: 11, attunement: 11, endurance: 11, strength: 11, 
         dexterity: 11, resistance: 11, intelligence: 11, faith: 11},
-
     }
 
     this.state = {
       buildId: uuidv4(),
-      characterClass: '', 
-      characterGender: '', 
+      characterClass: "", 
+      characterGender: "", 
       buildLevel: 4,
       initVitality: 11,
       initAttunement: 8,
@@ -69,7 +69,31 @@ class CharacterBuilder extends Component {
       resistance: 11,
       intelligence: 9,
       faith: 9,
-      humanity: 0
+      humanity: 0,
+      spentSouls: 0,
+      soulsToNextLevel: 0,
+    }
+  }
+
+  // set initial souls needed for next level with the componentDidMount() 
+  // lifecycle method
+  componentDidMount() {
+    this.setLowerSoulsLevel();
+  }
+
+  /* using the componentDidUpdate() lifecycle method, we track when there has been a change
+   in the build level and we check if it is less than or equal to 12, if it is we call the 
+   setLowerSoulsLevel() method. If build level is 13 or higher, we call calculateSoulsToNextLevel().
+   It must be done this way because the equation used to calculate the souss needed is only 
+   accurate from level 12 and up.
+   */
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.buildLevel !== this.state.buildLevel) {
+      if ( this.state.buildLevel <= 12 ) {
+        this.setLowerSoulsLevel();
+      } else {
+        this.calculateSoulsToNextLevel();
+      }
     }
   }
 
@@ -102,7 +126,7 @@ class CharacterBuilder extends Component {
 
   handleNewBuildClick = () => {
     // Open a new page in another tab
-    window.open('https://brandonbjs.github.io/Dark-Souls-Character-Builder-gh-pages/', '_blank')
+    window.open("https://brandonbjs.github.io/Dark-Souls-Character-Builder-gh-pages/", "_blank")
   }
 
   handleResetClick = () => {
@@ -112,7 +136,7 @@ class CharacterBuilder extends Component {
 
   // Generic method to increment an attribute
   handleIncrement = (attribute) => {
-    if (attribute === 'humanity') {
+    if (attribute === "humanity") {
       this.setState((prevState) => ({
         humanity: prevState.humanity + 1,
       }))
@@ -126,7 +150,7 @@ class CharacterBuilder extends Component {
 
     // Generic method to decrement an attribute
     handleDecrement = (attribute) => {
-      if (attribute === 'humanity' && this.state.humanity > 0) {
+      if (attribute === "humanity" && this.state.humanity > 0) {
         this.setState((prevState) => ({
           humanity: prevState.humanity - 1,
         }))
@@ -140,6 +164,40 @@ class CharacterBuilder extends Component {
         }
       }
       
+    }
+
+    // method to set the souls for LOWER levels (1-12)
+    setLowerSoulsLevel = () => {
+      const { buildLevel } = this.state;
+      let souls;
+
+      // use a switch to deal with levels 1-11 because the equation to calculate
+      // souls for next level is only accurate for level 12 and up.
+      const lowerLevels = {
+        1: 673,
+        2: 689,
+        3: 706,
+        4: 723,
+        5: 740,
+        6: 757,
+        7: 775,
+        8: 793,
+        9: 811,
+        10: 829,
+        11: 847,
+        12: 1038,
+      }
+
+      souls = lowerLevels[buildLevel];
+  
+      this.setState({ soulsToNextLevel: souls });
+    }
+
+    // method to calculate the souls needed for next level (levels greater than 12)
+    calculateSoulsToNextLevel = () => {
+      const { buildLevel } = this.state;
+      const calcSouls = Math.round((0.02 * Math.pow((buildLevel+1), 3)) + (3.06 * Math.pow((buildLevel+1), 2)) + (105.6 * (buildLevel+1)) - 895); 
+      this.setState({ soulsToNextLevel: calcSouls });
     }
   
   render() {
@@ -156,7 +214,7 @@ class CharacterBuilder extends Component {
         <div className="attributes-grid">
           <div className="dropdown">
             <label htmlFor="characterClass">Class</label>
-            <select id="characterClass" className='characterClass'
+            <select id="characterClass" className="characterClass"
              value={this.state.characterClass}
              onChange={this.handleClassChange}>
               <option value="warrior">Warrior</option>
@@ -171,7 +229,7 @@ class CharacterBuilder extends Component {
               <option value="deprived">Deprived</option>
             </select>
 
-            <button type="button" className='newBuildButton' 
+            <button type="button" className="newBuildButton" 
                     onClick={this.handleNewBuildClick}>
                 New Build
             </button>
@@ -180,28 +238,28 @@ class CharacterBuilder extends Component {
 
           <div className="genderDropdown">
             <label htmlFor="characterGender">Gender</label>
-            <select id="characterGender" className='characterGender'
+            <select id="characterGender" className="characterGender"
              value={this.state.characterGender}
              onChange={(e) => this.setState({ characterGender: e.target.value })}>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
 
-            <button type="button" className='resetButton' 
+            <button type="button" className="resetButton" 
                     onClick={this.handleResetClick}>
               Reset
             </button>
           </div>
 
-          <div className='buildLevel'>
+          <div className="buildLevel">
             <span>Level: </span>
-            <span className='levelNumber'>{this.state.buildLevel}</span>
+            <span className="levelNumber">{this.state.buildLevel}</span>
           </div>
 
-          <div className='attributesInfo'>
+          <div className="attributesInfo">
             <span>Attribute</span>
-            <span className='init'>Initial Value</span>
-            <span className='current'>Current</span>
+            <span className="init">Initial Value</span>
+            <span className="current">Current</span>
           </div>
 
           <div className="attribute-row">
@@ -210,13 +268,13 @@ class CharacterBuilder extends Component {
               <span className="initial-vitality">{this.state.initVitality}</span>
               <span className="current-value">{this.state.vitality}</span>
             </div>
-            <div className='button-row'>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleDecrement('vitality')}>
+            <div className="button-row">
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleDecrement("vitality")}>
               -
             </button>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleIncrement('vitality')}>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleIncrement("vitality")}>
               +
             </button>
             </div>
@@ -228,13 +286,13 @@ class CharacterBuilder extends Component {
               <span className="initial-attunement">{this.state.initAttunement}</span>
               <span className="current-value">{this.state.attunement}</span>
             </div>
-            <div className='button-row'>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleDecrement('attunement')}>
+            <div className="button-row">
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleDecrement("attunement")}>
               -
             </button>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleIncrement('attunement')}>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleIncrement("attunement")}>
               +
             </button>
             </div>
@@ -246,13 +304,13 @@ class CharacterBuilder extends Component {
               <span className="initial-vitality">{this.state.initEndurance}</span>
               <span className="current-value">{this.state.endurance}</span>
             </div>
-            <div className='button-row'>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleDecrement('endurance')}>
+            <div className="button-row">
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleDecrement("endurance")}>
               -
             </button>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleIncrement('endurance')}>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleIncrement("endurance")}>
               +
             </button>
             </div>
@@ -264,13 +322,13 @@ class CharacterBuilder extends Component {
               <span className="initial-vitality">{this.state.initStrength}</span>
               <span className="current-value">{this.state.strength}</span>
             </div>
-            <div className='button-row'>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleDecrement('strength')}>
+            <div className="button-row">
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleDecrement("strength")}>
               -
             </button>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleIncrement('strength')}>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleIncrement("strength")}>
               +
             </button>
             </div>
@@ -282,13 +340,13 @@ class CharacterBuilder extends Component {
               <span className="initial-vitality">{this.state.initDexterity}</span>
               <span className="current-value">{this.state.dexterity}</span>
             </div>
-            <div className='button-row'>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleDecrement('dexterity')}>
+            <div className="button-row">
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleDecrement("dexterity")}>
               -
             </button>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleIncrement('dexterity')}>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleIncrement("dexterity")}>
               +
             </button>
             </div>
@@ -300,13 +358,13 @@ class CharacterBuilder extends Component {
               <span className="initial-vitality">{this.state.initResistance}</span>
               <span className="current-value">{this.state.resistance}</span>
             </div>
-            <div className='button-row'>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleDecrement('resistance')}>
+            <div className="button-row">
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleDecrement("resistance")}>
               -
             </button>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleIncrement('resistance')}>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleIncrement("resistance")}>
               +
             </button>
             </div>
@@ -318,13 +376,13 @@ class CharacterBuilder extends Component {
               <span className="initial-vitality">{this.state.initIntelligence}</span>
               <span className="current-value">{this.state.intelligence}</span>
             </div>
-            <div className='button-row'>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleDecrement('intelligence')}>
+            <div className="button-row">
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleDecrement("intelligence")}>
               -
             </button>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleIncrement('intelligence')}>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleIncrement("intelligence")}>
               +
             </button>
             </div>
@@ -336,42 +394,47 @@ class CharacterBuilder extends Component {
               <span className="initial-vitality">{this.state.initFaith}</span>
               <span className="current-value">{this.state.faith}</span>
             </div>
-            <div className='button-row'>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleDecrement('faith')}>
+            <div className="button-row">
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleDecrement("faith")}>
               -
             </button>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleIncrement('faith')}>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleIncrement("faith")}>
               +
             </button>
             </div>
           </div>
 
-          <div className='buildLevel'>
+          <div className="buildLevel">
             <span>Humanity: </span>
-            <span className='humanityNumber'>{this.state.humanity}</span>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleDecrement('humanity')}>
+            <span className="humanityNumber">{this.state.humanity}</span>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleDecrement("humanity")}>
               -
             </button>
-            <button type="button" className='attributeButton' 
-                    onClick={() => this.handleIncrement('humanity')}>
+            <button type="button" className="attributeButton" 
+                    onClick={() => this.handleIncrement("humanity")}>
               +
             </button>
           </div>
 
-          
+          <div className="soulsCounter">
+            <div className="soulsToNextLevel">
+              <span>Souls to Next Level: </span>
+              <span className="soulsToNextLevelNumber">{this.state.soulsToNextLevel}</span>
+            </div>
 
-          
-
-
-    
-
+            <div className="minSoulsReq">
+              <span>Minimum Souls Required: </span>
+              <span className="spentSoulsNumber">{this.state.spentSouls}</span>
+            </div>
+          </div>
         </div>
 
+        {/* items-grid will house fields and inputs for:  */}
         <div className="items-grid">
-          {/* Items components go here */}
+
         </div>
 
         <div className="stats-grid">
