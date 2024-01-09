@@ -4,9 +4,6 @@ import { v4 as uuidv4 } from "uuid"
 
 class CharacterBuilder extends Component {
 
-  
-
-
   constructor(props) {
     super(props)
 
@@ -50,9 +47,10 @@ class CharacterBuilder extends Component {
 
     this.state = {
       buildId: uuidv4(),
-      characterClass: "", 
-      characterGender: "", 
+      characterClass: "warrior", 
+      characterGender: "Male", 
       buildLevel: 4,
+      buildCovenant: "No Covenant",
       initVitality: 11,
       initAttunement: 8,
       initEndurance: 12,
@@ -78,7 +76,9 @@ class CharacterBuilder extends Component {
   // set initial souls needed for next level with the componentDidMount() 
   // lifecycle method
   componentDidMount() {
+    const { buildLevel } = this.state;
     this.setLowerSoulsLevel();
+    this.calculateTotalSouls(buildLevel);
   }
 
   /* using the componentDidUpdate() lifecycle method, we track when there has been a change
@@ -124,6 +124,12 @@ class CharacterBuilder extends Component {
       initFaith: attributes.faith,
       faith: attributes.faith,
     })
+  }
+
+  handleCovenantChange = (e) => {
+    const selectedCovenant = e.target.value;
+
+    this.setState({buildCovenant: selectedCovenant});
   }
 
   handleNewBuildClick = () => {
@@ -258,7 +264,7 @@ class CharacterBuilder extends Component {
         
         <div className="attributes-grid">
           <div className="dropdown">
-            <label htmlFor="characterClass">Class</label>
+            <label htmlFor="characterClass">Class:</label>
             <select id="characterClass" className="characterClass"
              value={this.state.characterClass}
              onChange={this.handleClassChange}>
@@ -282,7 +288,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="genderDropdown">
-            <label htmlFor="characterGender">Gender</label>
+            <label htmlFor="characterGender">Gender:</label>
             <select id="characterGender" className="characterGender"
              value={this.state.characterGender}
              onChange={(e) => this.setState({ characterGender: e.target.value })}>
@@ -474,6 +480,24 @@ class CharacterBuilder extends Component {
               <span>Minimum Souls Required: </span>
               <span className="spentSoulsNumber">{this.state.spentSouls}</span>
             </div>
+          </div>
+          
+          <div className="covenantDropdown">
+            <label htmlFor="characterConvenant">Covenant:</label>
+            <select id="characterCovenant" className="characterCovenant"
+             value={this.state.buildCovenant}
+             onChange={this.handleCovenantChange}>
+              <option value="No Covenant">No Covenant</option>
+              <option value="darkmoon">Blade of the Darkmoon</option>
+              <option value="chaos">Chaos Servant</option>
+              <option value="darkwraith">Darkwraith</option>
+              <option value="hunter">Forest Hunter</option>
+              <option value="gravelord">Gravelord Servant</option>
+              <option value="dragon">Path of the Dragon</option>
+              <option value="guard">Princess's Guard</option>
+              <option value="sunbro">Warrior of Sunlight</option>
+              <option value="white">Way of White</option>
+            </select>
           </div>
         </div>
 

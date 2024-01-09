@@ -72,7 +72,7 @@ body {
 .items-grid {
   border: 1px solid rgb(207, 201, 202);
   background-color: #1a1a1a;
-  height: 57vh;
+  height: 63vh;
   width: 17vw;
   text-align: left;
   padding: 1vh;
@@ -82,6 +82,11 @@ body {
 }
 
 .dropdown {
+  margin-bottom: 1vh;
+}
+
+.covenantDropdown {
+  margin-top: 1vh;
   margin-bottom: 1vh;
 }
 
@@ -215,6 +220,8 @@ button {
 
 .minSoulsReq {
   padding-top: 2vh;
+  padding-bottom: 2vh;
+  border-bottom: 1px solid rgb(207, 201, 202);
 }
 
 .soulsToNextLevelNumber {
@@ -239,6 +246,11 @@ button {
   background-color: #333; /* Dark background color */
   color: #fff; /* White text color */
   border: 1px solid #555; /* Dark border */
+}
+
+.characterCovenant {
+  margin-left: 1vw;
+  width: 8vw;
 }
 
 
