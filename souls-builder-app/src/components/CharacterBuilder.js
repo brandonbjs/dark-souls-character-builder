@@ -70,6 +70,10 @@ class CharacterBuilder extends Component {
       humanity: 0,
       spentSouls: 0,
       soulsToNextLevel: 0,
+      helmets: [],
+      chest: [],
+      hands: [],
+      legs: [], 
     }
   }
 
@@ -79,6 +83,15 @@ class CharacterBuilder extends Component {
     const { buildLevel } = this.state;
     this.setLowerSoulsLevel();
     this.calculateTotalSouls(buildLevel);
+
+    fetch('http://localhost:1234/fetchHelmets')
+        .then(response => response.json())
+        .then(data => {
+            this.setState({ helmets: data });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
   }
 
   /* using the componentDidUpdate() lifecycle method, we track when there has been a change
@@ -252,7 +265,12 @@ class CharacterBuilder extends Component {
     
   
   render() {
-    return (
+    const { helmets, characterClass, characterGender, buildLevel, initVitality, vitality, 
+            initAttunement, attunement, initEndurance, endurance, initStrength, strength,
+            initDexterity, dexterity, initResistance, resistance, initIntelligence, intelligence,
+            initFaith, faith, humanity, soulsToNextLevel, spentSouls, buildCovenant } = this.state;
+    
+      return (
       /* character-builder div encompasses our three columns (attributes-grid,
          items-grid, and stats-grid) and their resprective grids/fields
          
@@ -266,7 +284,7 @@ class CharacterBuilder extends Component {
           <div className="dropdown">
             <label htmlFor="characterClass">Class:</label>
             <select id="characterClass" className="characterClass"
-             value={this.state.characterClass}
+             value={characterClass}
              onChange={this.handleClassChange}>
               <option value="warrior">Warrior</option>
               <option value="knight">Knight</option>
@@ -290,7 +308,7 @@ class CharacterBuilder extends Component {
           <div className="genderDropdown">
             <label htmlFor="characterGender">Gender:</label>
             <select id="characterGender" className="characterGender"
-             value={this.state.characterGender}
+             value={characterGender}
              onChange={(e) => this.setState({ characterGender: e.target.value })}>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -304,7 +322,7 @@ class CharacterBuilder extends Component {
 
           <div className="buildLevel">
             <span>Level: </span>
-            <span className="levelNumber">{this.state.buildLevel}</span>
+            <span className="levelNumber">{buildLevel}</span>
           </div>
 
           <div className="attributesInfo">
@@ -316,8 +334,8 @@ class CharacterBuilder extends Component {
           <div className="attribute-row">
             <div className="attribute-name">Vitality:</div>
             <div className="attribute-values">
-              <span className="initial-vitality">{this.state.initVitality}</span>
-              <span className="current-value">{this.state.vitality}</span>
+              <span className="initial-vitality">{initVitality}</span>
+              <span className="current-value">{vitality}</span>
             </div>
             <div className="button-row">
             <button type="button" className="attributeButton" 
@@ -334,8 +352,8 @@ class CharacterBuilder extends Component {
           <div className="attribute-row">
             <div className="attribute-name">Attunement:</div>
             <div className="attribute-values">
-              <span className="initial-attunement">{this.state.initAttunement}</span>
-              <span className="current-value">{this.state.attunement}</span>
+              <span className="initial-attunement">{initAttunement}</span>
+              <span className="current-value">{attunement}</span>
             </div>
             <div className="button-row">
             <button type="button" className="attributeButton" 
@@ -352,8 +370,8 @@ class CharacterBuilder extends Component {
           <div className="attribute-row">
             <div className="attribute-name">Endurance:</div>
             <div className="attribute-values">
-              <span className="initial-vitality">{this.state.initEndurance}</span>
-              <span className="current-value">{this.state.endurance}</span>
+              <span className="initial-vitality">{initEndurance}</span>
+              <span className="current-value">{endurance}</span>
             </div>
             <div className="button-row">
             <button type="button" className="attributeButton" 
@@ -370,8 +388,8 @@ class CharacterBuilder extends Component {
           <div className="attribute-row">
             <div className="attribute-name">Strength:</div>
             <div className="attribute-values">
-              <span className="initial-vitality">{this.state.initStrength}</span>
-              <span className="current-value">{this.state.strength}</span>
+              <span className="initial-vitality">{initStrength}</span>
+              <span className="current-value">{strength}</span>
             </div>
             <div className="button-row">
             <button type="button" className="attributeButton" 
@@ -388,8 +406,8 @@ class CharacterBuilder extends Component {
           <div className="attribute-row">
             <div className="attribute-name">Dexterity:</div>
             <div className="attribute-values">
-              <span className="initial-vitality">{this.state.initDexterity}</span>
-              <span className="current-value">{this.state.dexterity}</span>
+              <span className="initial-vitality">{initDexterity}</span>
+              <span className="current-value">{dexterity}</span>
             </div>
             <div className="button-row">
             <button type="button" className="attributeButton" 
@@ -406,8 +424,8 @@ class CharacterBuilder extends Component {
           <div className="attribute-row">
             <div className="attribute-name">Resistance:</div>
             <div className="attribute-values">
-              <span className="initial-vitality">{this.state.initResistance}</span>
-              <span className="current-value">{this.state.resistance}</span>
+              <span className="initial-vitality">{initResistance}</span>
+              <span className="current-value">{resistance}</span>
             </div>
             <div className="button-row">
             <button type="button" className="attributeButton" 
@@ -424,8 +442,8 @@ class CharacterBuilder extends Component {
           <div className="attribute-row">
             <div className="attribute-name">Intelligence:</div>
             <div className="attribute-values">
-              <span className="initial-vitality">{this.state.initIntelligence}</span>
-              <span className="current-value">{this.state.intelligence}</span>
+              <span className="initial-vitality">{initIntelligence}</span>
+              <span className="current-value">{intelligence}</span>
             </div>
             <div className="button-row">
             <button type="button" className="attributeButton" 
@@ -442,8 +460,8 @@ class CharacterBuilder extends Component {
           <div className="attribute-row">
             <div className="attribute-name">Faith:</div>
             <div className="attribute-values">
-              <span className="initial-vitality">{this.state.initFaith}</span>
-              <span className="current-value">{this.state.faith}</span>
+              <span className="initial-vitality">{initFaith}</span>
+              <span className="current-value">{faith}</span>
             </div>
             <div className="button-row">
             <button type="button" className="attributeButton" 
@@ -459,7 +477,7 @@ class CharacterBuilder extends Component {
 
           <div className="buildLevel">
             <span>Humanity: </span>
-            <span className="humanityNumber">{this.state.humanity}</span>
+            <span className="humanityNumber">{humanity}</span>
             <button type="button" className="attributeButton" 
                     onClick={() => this.handleDecrement("humanity")}>
               -
@@ -473,19 +491,19 @@ class CharacterBuilder extends Component {
           <div className="soulsCounter">
             <div className="soulsToNextLevel">
               <span>Souls to Next Level: </span>
-              <span className="soulsToNextLevelNumber">{this.state.soulsToNextLevel}</span>
+              <span className="soulsToNextLevelNumber">{soulsToNextLevel}</span>
             </div>
 
             <div className="minSoulsReq">
               <span>Minimum Souls Required: </span>
-              <span className="spentSoulsNumber">{this.state.spentSouls}</span>
+              <span className="spentSoulsNumber">{spentSouls}</span>
             </div>
           </div>
           
           <div className="covenantDropdown">
             <label htmlFor="characterConvenant">Covenant:</label>
             <select id="characterCovenant" className="characterCovenant"
-             value={this.state.buildCovenant}
+             value={buildCovenant}
              onChange={this.handleCovenantChange}>
               <option value="No Covenant">No Covenant</option>
               <option value="darkmoon">Blade of the Darkmoon</option>
@@ -503,6 +521,24 @@ class CharacterBuilder extends Component {
 
         {/* items-grid will house fields and inputs for:  */}
         <div className="items-grid">
+          
+          <div className="armorInfo">
+            <span>Armor:</span>
+          </div>
+
+          <div className="helmetDropdown">
+            <span>Head:</span>
+            <select className="helmetSelect">
+              {helmets.map(helmet => (
+                  <option key={helmet._id} value={helmet._id}> {/* Replace _id with your unique identifier */}
+                      {helmet.name} {/* Replace name with the attribute you want to display */}
+                  </option>
+              ))}
+          </select>
+          </div>
+
+          
+
 
         </div>
 

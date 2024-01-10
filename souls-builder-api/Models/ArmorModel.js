@@ -2,55 +2,43 @@ import mongoose from "mongoose";
 
 const ArmorSchema = mongoose.Schema({
     set: {
-        type: String,
-        required: true
+        type: String
     },
     name: {
-        type: String,
-        required: true
+        type: String
     },
     position: {
-        type: Number,
-        required: true
+        type: Number
     },
     poise: {
-        type: Number,
-        required: true
+        type: Number
     },
     weight: {
-        type: Number,
-        required: true
+        type: Number
     },
     physical: {
-        type: Number,
-        required: true
+        type: Number
     },
     magic: {
-        type: Number,
-        required: true
+        type: Number
     },
     fire: {
-        type: Number,
-        required: true
+        type: Number
     },
     lightning: {
-        type: Number,
-        required: true
+        type: Number
     },
     bleed: {
-        type: Number,
-        required: true
+        type: Number
     },
     poison: {
-        type: Number,
-        required: true
+        type: Number
     },
     curse: {
-        type: Number,
-        required: true
-    },
+        type: Number
+    }
 });
 
-const ArmorModel = mongoose.model("armor", ArmorSchema)
+const ArmorModel = mongoose.model("armorzeros", ArmorSchema)
 
 export { ArmorModel };
