@@ -45,6 +45,8 @@ class CharacterBuilder extends Component {
         dexterity: 11, resistance: 11, intelligence: 11, faith: 11},
     }
 
+    this.attributeGroups = ['atk', 'def', 'effects', 'req', 'scale', 'weightDurability'];
+
     this.state = {
       buildId: uuidv4(),
       characterClass: "warrior", 
@@ -71,9 +73,23 @@ class CharacterBuilder extends Component {
       spentSouls: 0,
       soulsToNextLevel: 0,
       helmets: [],
-      chest: [],
+      chests: [],
       hands: [],
       legs: [], 
+      weapons: [],
+      buildHead: [],
+      buildChest: [],
+      buildHands: [],
+      buildLegs: [],
+      buildLeftHand1: null,
+      buildRightHand1: null,
+      buildLeftHand2: null,
+      buildRightHand2: null,
+      buildLeftHand1Name: null,
+      buildRightHand1Name: null,
+      buildLeftHand2Name: null,
+      buildRightHand2Name: null,
+      currentGroupIndex: 0,
     }
   }
 
@@ -84,14 +100,60 @@ class CharacterBuilder extends Component {
     this.setLowerSoulsLevel();
     this.calculateTotalSouls(buildLevel);
 
+    // initial fetch method to populate the helmets array with helmets from
+    // my MongoDB database.
     fetch('http://localhost:1234/fetchHelmets')
         .then(response => response.json())
         .then(data => {
             this.setState({ helmets: data });
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
+            console.error('Error fetching helmets (in CharacterBuilder.js):', error);
         });
+    
+    // initial fetch method to populate the chests array with chests from
+    // my MongoDB database.
+    fetch('http://localhost:1234/fetchChests')
+    .then(response => response.json())
+    .then(data => {
+        this.setState({ chests: data });
+    })
+    .catch(error => {
+        console.error('Error fetching chests (in CharacterBuilder.js):', error);
+    });
+
+    // initial fetch method to populate the hands array with hands from
+    // my MongoDB database.
+    fetch('http://localhost:1234/fetchHands')
+        .then(response => response.json())
+        .then(data => {
+            this.setState({ hands: data });
+        })
+        .catch(error => {
+            console.error('Error fetching hands (in CharacterBuilder.js):', error);
+        });
+    
+    // initial fetch method to populate the legs array with chests from
+    // my MongoDB database.
+    fetch('http://localhost:1234/fetchLegs')
+    .then(response => response.json())
+    .then(data => {
+        this.setState({ legs: data });
+    })
+    .catch(error => {
+        console.error('Error fetching legs (in CharacterBuilder.js):', error);
+    });
+
+    // initial fetch method to populate the legs array with chests from
+    // my MongoDB database.
+    fetch('http://localhost:1234/fetchWeapons')
+    .then(response => response.json())
+    .then(data => {
+        this.setState({ weapons: data });
+    })
+    .catch(error => {
+        console.error('Error fetching weapons (in CharacterBuilder.js):', error);
+    });
   }
 
   /* using the componentDidUpdate() lifecycle method, we track when there has been a change
@@ -144,6 +206,128 @@ class CharacterBuilder extends Component {
 
     this.setState({buildCovenant: selectedCovenant});
   }
+
+  handleAttributeDivClick = () => {
+    this.setState(prevState => ({
+      currentGroupIndex: (prevState.currentGroupIndex + 1) % this.attributeGroups.length
+    }));
+  }
+
+  renderAttributes = (weapon, group) => {
+    if (group === 'weightDurability') {
+      return (
+        <>
+          <p>Weight: {weapon.weight}</p>
+          <p>Durability: {weapon.durability}</p>
+        </>
+      );
+    } else {
+      return Object.entries(weapon[group]).map(([key, value]) => (
+        <p key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}: {value}</p>
+      ));
+    }
+  }
+
+  handleHeadChange = (e) => {
+    const selectedHead = e.target.value;
+
+    this.setState({buildHead: selectedHead});
+  }
+
+  handleChestChange = (e) => {
+    const selectedChest = e.target.value;
+
+    this.setState({buildChest: selectedChest});
+  }
+
+  handleHandsChange = (e) => {
+    const selectedHands = e.target.value;
+
+    this.setState({buildHands: selectedHands});
+  }
+
+  handleLegsChange = (e) => {
+    const selectedLegs = e.target.value;
+
+    this.setState({buildLegs: selectedLegs});
+  }
+
+  handleLeftHandOneChange = (e) => {
+    const selectedLeftHand1 = e.target.value;
+    this.setState({buildLeftHand1Name: selectedLeftHand1});
+    this.handleWeaponSelection1(selectedLeftHand1);
+    
+  }
+
+  getWeaponByName = (weaponName) => {
+    return this.state.weapons.find(weapon => weapon.name === weaponName);
+  }
+
+  handleWeaponSelection1 = (weaponName) => {
+    const selectedWeapon = this.getWeaponByName(weaponName);
+    if (selectedWeapon) {
+      this.setState({ buildLeftHand1: selectedWeapon });
+    } else {
+      // Handle the case where the weapon is not found
+      console.log("Weapon not found");
+      // Optionally set buildLeftHand1 to null or a default value
+      // this.setState({ buildLeftHand1: null });
+    }
+  };
+
+  handleRightHandOneChange = (e) => {
+    const selectedRightHand1 = e.target.value;
+    this.setState({buildRightHand1Name: selectedRightHand1});
+    this.handleWeaponSelection2(selectedRightHand1);
+  }
+
+  handleWeaponSelection2 = (weaponName) => {
+    const selectedWeapon = this.getWeaponByName(weaponName);
+    if (selectedWeapon) {
+      this.setState({ buildRightHand1: selectedWeapon });
+    } else {
+      // Handle the case where the weapon is not found
+      console.log("Weapon not found");
+      // Optionally set buildLeftHand1 to null or a default value
+      // this.setState({ buildLeftHand1: null });
+    }
+  };
+
+  handleLeftHandTwoChange = (e) => {
+    const selectedLeftHand2 = e.target.value;
+    this.setState({buildLeftHand2Name: selectedLeftHand2});
+    this.handleWeaponSelection3(selectedLeftHand2);
+  }
+
+  handleWeaponSelection3 = (weaponName) => {
+    const selectedWeapon = this.getWeaponByName(weaponName);
+    if (selectedWeapon) {
+      this.setState({ buildLeftHand2: selectedWeapon });
+    } else {
+      // Handle the case where the weapon is not found
+      console.log("Weapon not found");
+      // Optionally set buildLeftHand1 to null or a default value
+      // this.setState({ buildLeftHand1: null });
+    }
+  };
+
+  handleRightHandTwoChange = (e) => {
+    const selectedRightHand2 = e.target.value;
+    this.setState({buildRightHand2Name: selectedRightHand2});
+    this.handleWeaponSelection4(selectedRightHand2);
+  }
+
+  handleWeaponSelection4 = (weaponName) => {
+    const selectedWeapon = this.getWeaponByName(weaponName);
+    if (selectedWeapon) {
+      this.setState({ buildRightHand2: selectedWeapon });
+    } else {
+      // Handle the case where the weapon is not found
+      console.log("Weapon not found");
+      // Optionally set buildLeftHand1 to null or a default value
+      // this.setState({ buildLeftHand1: null });
+    }
+  };
 
   handleNewBuildClick = () => {
     // Open a new page in another tab
@@ -258,21 +442,29 @@ class CharacterBuilder extends Component {
         }
         soulsForThisLevel = lowerLevels[level];
       } else {
-        soulsForThisLevel = Math.round((0.02 * Math.pow((level+1), 3)) + (3.06 * Math.pow((level+1), 2)) + (105.6 * (level+1)) - 895);
+        soulsForThisLevel = Math.round((0.02 * Math.pow((level+1), 3)) + 
+        (3.06 * Math.pow((level+1), 2)) + (105.6 * (level+1)) - 895);
       }
       return soulsForThisLevel;
     }
     
   
   render() {
-    const { helmets, characterClass, characterGender, buildLevel, initVitality, vitality, 
-            initAttunement, attunement, initEndurance, endurance, initStrength, strength,
-            initDexterity, dexterity, initResistance, resistance, initIntelligence, intelligence,
-            initFaith, faith, humanity, soulsToNextLevel, spentSouls, buildCovenant } = this.state;
+    const { helmets, chests, hands, legs, characterClass, characterGender, 
+            buildLevel, initVitality, vitality, initAttunement, attunement, 
+            initEndurance, endurance, initStrength, strength, initDexterity, 
+            dexterity, initResistance, resistance, initIntelligence, intelligence,
+            initFaith, faith, humanity, soulsToNextLevel, spentSouls, 
+            buildCovenant, buildHead, buildChest, buildHands, buildLegs, 
+            weapons, buildLeftHand1, buildRightHand1, buildLeftHand2,
+            buildRightHand2, buildLeftHand1Name, buildRightHand1Name, 
+            buildLeftHand2Name, buildRightHand2Name } = this.state;
     
-      return (
-      /* character-builder div encompasses our three columns (attributes-grid,
-         items-grid, and stats-grid) and their resprective grids/fields
+    const currentGroup = this.attributeGroups[this.state.currentGroupIndex];
+    
+    return (
+    /* character-builder div encompasses our three columns (attributes-grid,
+       items-grid, and stats-grid) and their resprective grids/fields
          
          attributes-grid will house fields and inputs for: class, gender, level, 
          and all attribute points (based on what class is chosen): all starting classes 
@@ -282,7 +474,7 @@ class CharacterBuilder extends Component {
         
         <div className="attributes-grid">
           <div className="dropdown">
-            <label htmlFor="characterClass">Class:</label>
+            <label htmlFor="characterClass">Class</label>
             <select id="characterClass" className="characterClass"
              value={characterClass}
              onChange={this.handleClassChange}>
@@ -306,7 +498,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="genderDropdown">
-            <label htmlFor="characterGender">Gender:</label>
+            <label htmlFor="characterGender">Gender</label>
             <select id="characterGender" className="characterGender"
              value={characterGender}
              onChange={(e) => this.setState({ characterGender: e.target.value })}>
@@ -332,7 +524,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="attribute-row">
-            <div className="attribute-name">Vitality:</div>
+            <div className="attribute-name">Vitality</div>
             <div className="attribute-values">
               <span className="initial-vitality">{initVitality}</span>
               <span className="current-value">{vitality}</span>
@@ -350,7 +542,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="attribute-row">
-            <div className="attribute-name">Attunement:</div>
+            <div className="attribute-name">Attunement</div>
             <div className="attribute-values">
               <span className="initial-attunement">{initAttunement}</span>
               <span className="current-value">{attunement}</span>
@@ -368,7 +560,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="attribute-row">
-            <div className="attribute-name">Endurance:</div>
+            <div className="attribute-name">Endurance</div>
             <div className="attribute-values">
               <span className="initial-vitality">{initEndurance}</span>
               <span className="current-value">{endurance}</span>
@@ -386,7 +578,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="attribute-row">
-            <div className="attribute-name">Strength:</div>
+            <div className="attribute-name">Strength</div>
             <div className="attribute-values">
               <span className="initial-vitality">{initStrength}</span>
               <span className="current-value">{strength}</span>
@@ -404,7 +596,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="attribute-row">
-            <div className="attribute-name">Dexterity:</div>
+            <div className="attribute-name">Dexterity</div>
             <div className="attribute-values">
               <span className="initial-vitality">{initDexterity}</span>
               <span className="current-value">{dexterity}</span>
@@ -422,7 +614,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="attribute-row">
-            <div className="attribute-name">Resistance:</div>
+            <div className="attribute-name">Resistance</div>
             <div className="attribute-values">
               <span className="initial-vitality">{initResistance}</span>
               <span className="current-value">{resistance}</span>
@@ -440,7 +632,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="attribute-row">
-            <div className="attribute-name">Intelligence:</div>
+            <div className="attribute-name">Intelligence</div>
             <div className="attribute-values">
               <span className="initial-vitality">{initIntelligence}</span>
               <span className="current-value">{intelligence}</span>
@@ -458,7 +650,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="attribute-row">
-            <div className="attribute-name">Faith:</div>
+            <div className="attribute-name">Faith</div>
             <div className="attribute-values">
               <span className="initial-vitality">{initFaith}</span>
               <span className="current-value">{faith}</span>
@@ -476,7 +668,7 @@ class CharacterBuilder extends Component {
           </div>
 
           <div className="buildLevel">
-            <span>Humanity: </span>
+            <span>Humanity</span>
             <span className="humanityNumber">{humanity}</span>
             <button type="button" className="attributeButton" 
                     onClick={() => this.handleDecrement("humanity")}>
@@ -519,26 +711,161 @@ class CharacterBuilder extends Component {
           </div>
         </div>
 
-        {/* items-grid will house fields and inputs for:  */}
+        {/* items-grid will house selects and dropdowns for armor, weapons, spells
+        and rings.  */}
         <div className="items-grid">
           
           <div className="armorInfo">
-            <span>Armor:</span>
+            <span>Armor</span>
           </div>
 
-          <div className="helmetDropdown">
-            <span>Head:</span>
-            <select className="helmetSelect">
+          <div className="armorDropdown">
+            <span className="dropdownLabel">Head</span>
+            <select className="itemSelect"
+            value={buildHead}
+            onChange={this.handleHeadChange}>
               {helmets.map(helmet => (
-                  <option key={helmet._id} value={helmet._id}> {/* Replace _id with your unique identifier */}
-                      {helmet.name} {/* Replace name with the attribute you want to display */}
+                  <option key={helmet._id} value={helmet}>
+                      {helmet.name} 
+                  </option>
+              ))}
+          </select>
+          </div>
+
+          <div className="armorDropdown">
+            <span className="dropdownLabel">Chest</span>
+            <select className="itemSelect"
+            value={buildChest}
+            onChange={this.handleChestChange}>
+              {chests.map(chest => (
+                  <option key={chest._id} value={chest}>
+                      {chest.name} 
+                  </option>
+              ))}
+          </select>
+          </div>
+
+          <div className="armorDropdown">
+            <span className="dropdownLabel">Hands</span>
+            <select className="itemSelect"
+            value={buildHands}
+            onChange={this.handleHandsChange}>
+              {hands.map(hand => (
+                  <option key={hand._id} value={hand}>
+                      {hand.name} 
+                  </option>
+              ))}
+          </select>
+          </div>
+
+          <div className="armorDropdown">
+            <span className="dropdownLabel">Legs</span>
+            <select className="itemSelect"
+            value={buildLegs}
+            onChange={this.handleLegsChange}>
+              {legs.map(leg => (
+                  <option key={leg._id} value={leg}>
+                      {leg.name} 
                   </option>
               ))}
           </select>
           </div>
 
           
+          <div className="weaponInfo">
+            <span className="leftHand">Left hand</span>
+            <span className="rightHand">Right hand</span>
+          </div>
+          
+          <div className="weaponsContainer">
+            <div className="leftHandWeapon">
+              <select className="weaponSelect" 
+               value={buildLeftHand1Name} 
+               onChange={this.handleLeftHandOneChange}>
+                  {weapons.map(weapon => (
+                      <option key={weapon._id} value={weapon.name}>
+                          {weapon.name} 
+                      </option>
+                  ))}
+              </select>
+              
+              <div>
+                {buildLeftHand1 && (
+                  <div class="weaponAttributes" id="leftWeaponAttributes"
+                   onClick={this.handleAttributeDivClick}>
+                    {this.renderAttributes(buildLeftHand1, currentGroup)}
+                  </div>
+                )}
+              </div>
 
+            </div>
+
+            <div className="rightHandWeapon">
+              <select className="weaponSelect"
+                value={buildRightHand1Name}
+                onChange={this.handleRightHandOneChange}>
+                  {weapons.map(weapon => (
+                      <option key={weapon._id} value={weapon.name}>
+                          {weapon.name} 
+                      </option>
+                  ))}
+              </select>
+              
+              <div>
+                {buildRightHand1 && (
+                  <div class="weaponAttributes" id="leftWeaponAttributes"
+                   onClick={this.handleAttributeDivClick}>
+                    {this.renderAttributes(buildRightHand1, currentGroup)}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="weaponsContainer">
+            <div className="leftHandWeapon">
+              <select className="weaponSelect" 
+               value={buildLeftHand2Name} 
+               onChange={this.handleLeftHandTwoChange}>
+                  {weapons.map(weapon => (
+                      <option key={weapon._id} value={weapon.name}>
+                          {weapon.name} 
+                      </option>
+                  ))}
+              </select>
+              
+              <div>
+                {buildLeftHand2 && (
+                  <div class="weaponAttributes" id="leftWeaponAttributes"
+                   onClick={this.handleAttributeDivClick}>
+                    {this.renderAttributes(buildLeftHand2, currentGroup)}
+                  </div>
+                )}
+              </div>
+
+            </div>
+
+            <div className="rightHandWeapon">
+              <select className="weaponSelect"
+                value={buildRightHand2Name}
+                onChange={this.handleRightHandTwoChange}>
+                  {weapons.map(weapon => (
+                      <option key={weapon._id} value={weapon.name}>
+                          {weapon.name} 
+                      </option>
+                  ))}
+              </select>
+              
+              <div>
+                {buildRightHand2 && (
+                  <div class="weaponAttributes" id="leftWeaponAttributes"
+                   onClick={this.handleAttributeDivClick}>
+                    {this.renderAttributes(buildRightHand2, currentGroup)}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
 
         </div>
 

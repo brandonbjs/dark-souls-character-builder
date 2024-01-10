@@ -25,6 +25,7 @@ class App extends Component {
             style={{ display: 'block', margin: 'auto' }} 
             width="20%"
             height="10%"/>
+            <span>Animated Bonfire by tRoedder (@https://trmrddr.tumblr.com/)</span>
         </div>
         
       </div>

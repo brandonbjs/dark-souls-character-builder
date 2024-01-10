@@ -61,25 +61,40 @@ body {
 
 .character-builder {
   display: flex;
-  grid-template-columns: 1fr 1fr 1fr; /* Three columns */
-  gap: 3px; /* Adjust the gap between grid items */
+  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+  gap: 3px;
   padding: 10px;
   justify-content: center;
 }
+
 
 .attributes-grid,
 .stats-grid,
 .items-grid {
   border: 1px solid rgb(207, 201, 202);
   background-color: #1a1a1a;
-  height: 63vh;
-  width: 17vw;
+  height: 60vh;
+  width: 20%;
   text-align: left;
   padding: 1vh;
   justify-content: space-between;
   align-items: flex-start; 
   text-align: justify;
 }
+
+/* for smaller screens */
+@media screen and (max-width: 1900px) { /* Adjust breakpoint as needed */
+
+  .attributes-grid,
+  .stats-grid,
+  .items-grid {
+    width: 100%; /* Adjust max-width for smaller screens */
+    height: 115vh;
+    
+  }
+  
+}
+
 
 .dropdown {
   margin-bottom: 1vh;
@@ -131,18 +146,19 @@ button {
 
 .levelNumber {
   width: 25%;
-  padding: 5px;
+  padding: 2px;
   padding-left: 1vw;
   padding-right: 1vw;
   border-radius: 5px;
-  margin-left: 5vw;
+  margin-left: 43%;
   background-color: #333; 
-  color: #fff; 
+  color: #ffffff; 
   border: 1px solid #555; 
 }
 
 .buildLevel {
-  margin-top: 2vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
 .humanityNumber {
@@ -151,7 +167,8 @@ button {
   padding-left: 1vw;
   padding-right: 1vw;
   border-radius: 5px;
-  margin-left: 4vw;
+  margin-left: 40%;
+  margin-right: 11%;
   background-color: #333; 
   color: #fff; 
   border: 1px solid #555; 
@@ -164,35 +181,31 @@ button {
 }
 
 .attribute-row {
-  margin-top: 1vh;
+  margin: 1vh 0;
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .attribute-name {
-  width: 4.5vw; 
+  flex-basis: 30%; /* Adjust as needed */
   text-align: left;
   margin-right: 0.3vw;
 }
 
-.attribute-values {
-  width: 5vw;
+.attribute-values, .current-value {
+  flex-basis: 45%; /* Adjust as needed */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.initial-attunement {
-  margin-right: 0.3vw;
-}
-
 .current-value {
-  display: inline-flex; 
+  display: flex; 
   align-items: center; 
   justify-content: center; 
-  width: 2vw; 
-  padding: 5px;
+  width: 10%; 
+  padding: 3px;
   margin-left: 1.5vw; 
   border-radius: 5px;
   background-color: #333; 
@@ -202,7 +215,8 @@ button {
 }
 
 .attributeButton {
-  width: 2vw;
+  flex-basis: 20%; /* Adjust as needed */
+  width: auto; /* Let the width be determined by the content and container */
 }
 
 .covenantDropdown {
@@ -256,11 +270,11 @@ button {
 }
 
 .init {
-  padding-left: 2.2vw;
+  padding-left: 24%;
 }
 
 .current {
-  padding-left: 1vw;
+  padding-left: 1.5vw;
 }
 
 /* Add a subtle animation on hover */
@@ -279,14 +293,72 @@ button:hover {
   font-size: 0.8em;
 }
 
-.helmetSelect {
-  margin-left: 1vw;
-  width: 10vw;
+
+
+.armorDropdown {
+  display: flex;
+  align-items: center;
+  margin-top: 1vh;
+  width: 100%; 
 }
 
+.dropdownLabel {
+  width: 80px; /* Adjust based on longest label */
+  text-align: left;
+  margin-right: 10px; /* Space between label and dropdown */
+}
 
+.itemSelect {
+  margin-left: 0.5vw;
+  width: 10vw;
+  flex-grow: 1;
+}
 
+.weaponInfo {
+  border-top: 1px solid rgb(207, 201, 202);
+  margin-top: 1vh;
+  padding-top: 1vh;
+  color: #dad386; 
+  font-size: 0.8em;
+}
 
+.leftHand {
+  float: left;
+}
+
+.rightHand {
+  float: right;
+}
+
+.weaponsContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  margin-top: 2vh;
+}
+
+.leftHandWeapon, .rightHandWeapon {
+  width: 100%;
+}
+
+.weaponSelect {
+  width: 100%;
+  
+}
+
+.weaponAttributes {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  height: 50%;
+}
+
+.weaponAttributes:hover {
+  background-color: #40f18a2d;
+}
 
 /*========================================================================================*/
 
