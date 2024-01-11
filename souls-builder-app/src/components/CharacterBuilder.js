@@ -91,7 +91,10 @@ class CharacterBuilder extends Component {
       buildRightHand2Name: null,
       buildRing1Name: "",
       buildRing2Name: "",
-      currentGroupIndex: 0,
+      currentGroupIndex1: 0,
+      currentGroupIndex2: 0,
+      currentGroupIndex3: 0,
+      currentGroupIndex4: 0,
       spellSlots: 0,
     }
   }
@@ -206,20 +209,19 @@ class CharacterBuilder extends Component {
 
     // Add spell slots based on attunement level of build
     const attunement = this.state.attunement;
-    if (attunement >= 10 && attunement <= 11) spellSlots += 1;
-    else if (attunement >= 12 && attunement <= 13) spellSlots += 2;
-    else if (attunement >= 14 && attunement <= 15) spellSlots += 3;
-    else if (attunement >= 16 && attunement <= 18) spellSlots += 4;
-    else if (attunement >= 19 && attunement <= 22) spellSlots += 5;
-    else if (attunement >= 23 && attunement <= 27) spellSlots += 6;
-    else if (attunement >= 28 && attunement <= 33) spellSlots += 7;
-    else if (attunement >= 34 && attunement <= 40) spellSlots += 8;
-    else if (attunement >= 41 && attunement <= 49) spellSlots += 9;
-    else if (attunement >= 50 && attunement <= 99) spellSlots += 10;
+    if (attunement >= 10 && attunement <= 11) spellAttunements += 1;
+    else if (attunement >= 12 && attunement <= 13) spellAttunements += 2;
+    else if (attunement >= 14 && attunement <= 15) spellAttunements += 3;
+    else if (attunement >= 16 && attunement <= 18) spellAttunements += 4;
+    else if (attunement >= 19 && attunement <= 22) spellAttunements += 5;
+    else if (attunement >= 23 && attunement <= 27) spellAttunements += 6;
+    else if (attunement >= 28 && attunement <= 33) spellAttunements += 7;
+    else if (attunement >= 34 && attunement <= 40) spellAttunements += 8;
+    else if (attunement >= 41 && attunement <= 49) spellAttunements += 9;
+    else if (attunement >= 50 && attunement <= 99) spellAttunements += 10;
 
     return spellAttunements;
-}
-
+ }
 
   handleClassChange = (e) => {
     const selectedClass = e.target.value;
@@ -248,19 +250,42 @@ class CharacterBuilder extends Component {
     })
   }
 
+  // handler for when the user changes the select option for Covenant
   handleCovenantChange = (e) => {
     const selectedCovenant = e.target.value;
 
     this.setState({buildCovenant: selectedCovenant});
   }
 
-  handleAttributeDivClick = () => {
+  handleAttributeDiv1Click = () => {
     this.setState(prevState => ({
-      currentGroupIndex: (prevState.currentGroupIndex + 1) % this.attributeGroups.length
+      currentGroupIndex1: (prevState.currentGroupIndex1 + 1) % this.attributeGroups.length
+    }));
+  }
+
+  handleAttributeDiv2Click = () => {
+    this.setState(prevState => ({
+      currentGroupIndex2: (prevState.currentGroupIndex2 + 1) % this.attributeGroups.length
+    }));
+  }
+
+    handleAttributeDiv3Click = () => {
+    this.setState(prevState => ({
+      currentGroupIndex3: (prevState.currentGroupIndex3 + 1) % this.attributeGroups.length
+    }));
+  }
+
+  handleAttributeDiv4Click = () => {
+    this.setState(prevState => ({
+      currentGroupIndex4: (prevState.currentGroupIndex4 + 1) % this.attributeGroups.length
     }));
   }
 
   renderAttributes = (weapon, group) => {
+
+    // Capitalize the first letter of the group name for display
+    const groupName = group.charAt(0).toUpperCase() + group.slice(1);
+
     if (group === 'weightDurability') {
       return (
         <>
@@ -269,9 +294,14 @@ class CharacterBuilder extends Component {
         </>
       );
     } else {
-      return Object.entries(weapon[group]).map(([key, value]) => (
-        <p key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}: {value}</p>
-      ));
+      return (
+        <>
+        <p className="groupNameP">{groupName}</p>
+        {Object.entries(weapon[group]).map(([key, value]) => (
+          <p key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}: {value}</p>
+        ))}
+      </>
+      )
     }
   }
 
@@ -531,7 +561,11 @@ class CharacterBuilder extends Component {
             buildLeftHand2Name, buildRightHand2Name, buildRing1Name, 
             buildRing2Name } = this.state;
     
-    const currentGroup = this.attributeGroups[this.state.currentGroupIndex];
+    const leftHandGroup1 = this.attributeGroups[this.state.currentGroupIndex1];
+    const rightHandGroup1 = this.attributeGroups[this.state.currentGroupIndex2];
+    const leftHandGroup2 = this.attributeGroups[this.state.currentGroupIndex3];
+    const rightHandGroup2 = this.attributeGroups[this.state.currentGroupIndex4];
+
     
     return (
     /* character-builder div encompasses our three columns (attributes-grid,
@@ -967,8 +1001,8 @@ class CharacterBuilder extends Component {
               <div>
                 {buildLeftHand1 && (
                   <div class="weaponAttributes" id="leftWeaponAttributes"
-                   onClick={this.handleAttributeDivClick}>
-                    {this.renderAttributes(buildLeftHand1, currentGroup)}
+                   onClick={this.handleAttributeDiv1Click}>
+                    {this.renderAttributes(buildLeftHand1, leftHandGroup1)}
                   </div>
                 )}
               </div>
@@ -989,8 +1023,8 @@ class CharacterBuilder extends Component {
               <div>
                 {buildRightHand1 && (
                   <div class="weaponAttributes" id="leftWeaponAttributes"
-                   onClick={this.handleAttributeDivClick}>
-                    {this.renderAttributes(buildRightHand1, currentGroup)}
+                   onClick={this.handleAttributeDiv2Click}>
+                    {this.renderAttributes(buildRightHand1, rightHandGroup1)}
                   </div>
                 )}
               </div>
@@ -1012,8 +1046,8 @@ class CharacterBuilder extends Component {
               <div>
                 {buildLeftHand2 && (
                   <div class="weaponAttributes" id="leftWeaponAttributes"
-                   onClick={this.handleAttributeDivClick}>
-                    {this.renderAttributes(buildLeftHand2, currentGroup)}
+                   onClick={this.handleAttributeDiv3Click}>
+                    {this.renderAttributes(buildLeftHand2, leftHandGroup2)}
                   </div>
                 )}
               </div>
@@ -1034,8 +1068,8 @@ class CharacterBuilder extends Component {
               <div>
                 {buildRightHand2 && (
                   <div class="weaponAttributes" id="leftWeaponAttributes"
-                   onClick={this.handleAttributeDivClick}>
-                    {this.renderAttributes(buildRightHand2, currentGroup)}
+                   onClick={this.handleAttributeDiv4Click}>
+                    {this.renderAttributes(buildRightHand2, rightHandGroup2)}
                   </div>
                 )}
               </div>

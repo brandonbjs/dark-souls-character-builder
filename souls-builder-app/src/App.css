@@ -335,6 +335,7 @@ button:hover {
   justify-content: space-around;
   padding: 10px;
   margin-top: 2vh;
+  height: 20%;
 }
 
 .leftHandWeapon, .rightHandWeapon {
@@ -358,6 +359,12 @@ button:hover {
 
 .weaponAttributes:hover {
   background-color: #40f18a2d;
+}
+
+.groupNameP {
+  color: rgb(114, 20, 151);
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 /*========================================================================================*/
