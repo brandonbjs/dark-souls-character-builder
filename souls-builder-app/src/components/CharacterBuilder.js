@@ -77,10 +77,15 @@ class CharacterBuilder extends Component {
       hands: [],
       legs: [], 
       weapons: [],
+      rings: [],
       buildHead: [],
+      buildHeadName: "",
       buildChest: [],
+      buildChestName: "",
       buildHands: [],
+      buildHandsName: "",
       buildLegs: [],
+      buildLegsName: "",
       buildLeftHand1: null,
       buildRightHand1: null,
       buildLeftHand2: null,
@@ -89,13 +94,26 @@ class CharacterBuilder extends Component {
       buildRightHand1Name: null,
       buildLeftHand2Name: null,
       buildRightHand2Name: null,
-      buildRing1Name: "",
-      buildRing2Name: "",
+      buildRing1Name: "No Ring 1",
+      buildRing2Name: "No Ring 2",
+      buildRing1: [],
+      buildRing2: [],
       currentGroupIndex1: 0,
       currentGroupIndex2: 0,
       currentGroupIndex3: 0,
       currentGroupIndex4: 0,
       spellSlots: 0,
+      spells: [],
+      buildSpellName1: "No Spell",
+      buildSpellName2: "No Spell",
+      buildSpellName3: "No Spell",
+      buildSpellName4: "No Spell",
+      buildSpellName5: "No Spell",
+      buildSpellName6: "No Spell",
+      buildSpellName7: "No Spell",
+      buildSpellName8: "No Spell",
+      buildSpellName9: "No Spell",
+      buildSpellName10: "No Spell",
     }
   }
 
@@ -160,6 +178,29 @@ class CharacterBuilder extends Component {
     .catch(error => {
         console.error('Error fetching weapons (in CharacterBuilder.js):', error);
     });
+
+    // initial fetch method to populate the rings array with rings from
+    // my MongoDB database rings collection.
+    fetch('http://localhost:1234/fetchRings')
+    .then(response => response.json())
+    .then(data => {
+        this.setState({ rings: data });
+    })
+    .catch(error => {
+        console.error('Error fetching rings (in CharacterBuilder.js):', error);
+    });
+
+      // initial fetch method to populate the spells array with spells from
+    // my MongoDB database spells collection.
+    fetch('http://localhost:1234/fetchSpells')
+    .then(response => response.json())
+    .then(data => {
+        this.setState({ spells: data });
+    })
+    .catch(error => {
+        console.error('Error fetching spells (in CharacterBuilder.js):', error);
+    });
+    this.calculateSpellSlots();
   }
 
   /* using the componentDidUpdate() lifecycle method, we track when there has been a change
@@ -169,6 +210,7 @@ class CharacterBuilder extends Component {
    accurate from level 12 and up.
    */
   componentDidUpdate(prevProps, prevState) {
+    // if the buildLevel changes due to an attribute change, calculate SoulsToNextLevel and TotalSouls.
     if (prevState.buildLevel !== this.state.buildLevel) {
       if ( this.state.buildLevel <= 12 ) {
         this.setLowerSoulsLevel();
@@ -178,49 +220,40 @@ class CharacterBuilder extends Component {
 
       this.calculateTotalSouls(this.state.buildLevel);
     }
+    
+    // if the character class changes  calculate new spell slots
+    if (prevState.characterClass !== this.state.characterClass) {
+      this.calculateSpellSlots();
+    }
+
+    // if the character attunement changes  calculate new spell slots
+    if (prevState.attunement !== this.state.attunement) {
+      this.calculateSpellSlots();
+    }
   }
 
   calculateSpellSlots = () => {
     let spellAttunements = 0;
 
-    // Assign spell slots based on class
-    switch(this.state.characterClass) {
-        case 'pyromancer':
-          spellAttunements = 2;
-            break;
-        case 'sorcerer':
-          spellAttunements = 3;
-            break;
-        case 'knight':
-        case 'wanderer':
-        case 'thief':
-        case 'cleric':
-        case 'deprived':
-          spellAttunements = 1;
-            break;
-        default:
-          spellAttunements = 0; // For classes that don't get spells
-    }
+    // Add spell slots based on attunement level of build
+    const attunement = this.state.attunement;
+    if (attunement >= 10 && attunement <= 11) spellAttunements = 1;
+    else if (attunement >= 12 && attunement <= 13) spellAttunements = 2;
+    else if (attunement >= 14 && attunement <= 15) spellAttunements = 3;
+    else if (attunement >= 16 && attunement <= 18) spellAttunements = 4;
+    else if (attunement >= 19 && attunement <= 22) spellAttunements = 5;
+    else if (attunement >= 23 && attunement <= 27) spellAttunements = 6;
+    else if (attunement >= 28 && attunement <= 33) spellAttunements = 7;
+    else if (attunement >= 34 && attunement <= 40) spellAttunements = 8;
+    else if (attunement >= 41 && attunement <= 49) spellAttunements = 9;
+    else if (attunement >= 50 && attunement <= 99) spellAttunements = 10;
 
     // Check for additional slots due to rings
     if (this.state.buildRing1Name === "White Seance Ring" || this.state.buildRing2Name === "White Seance Ring") {
       spellAttunements += 1;
     }
 
-    // Add spell slots based on attunement level of build
-    const attunement = this.state.attunement;
-    if (attunement >= 10 && attunement <= 11) spellAttunements += 1;
-    else if (attunement >= 12 && attunement <= 13) spellAttunements += 2;
-    else if (attunement >= 14 && attunement <= 15) spellAttunements += 3;
-    else if (attunement >= 16 && attunement <= 18) spellAttunements += 4;
-    else if (attunement >= 19 && attunement <= 22) spellAttunements += 5;
-    else if (attunement >= 23 && attunement <= 27) spellAttunements += 6;
-    else if (attunement >= 28 && attunement <= 33) spellAttunements += 7;
-    else if (attunement >= 34 && attunement <= 40) spellAttunements += 8;
-    else if (attunement >= 41 && attunement <= 49) spellAttunements += 9;
-    else if (attunement >= 50 && attunement <= 99) spellAttunements += 10;
-
-    return spellAttunements;
+    this.setState({spellSlots: spellAttunements});
  }
 
   handleClassChange = (e) => {
@@ -255,6 +288,23 @@ class CharacterBuilder extends Component {
     const selectedCovenant = e.target.value;
 
     this.setState({buildCovenant: selectedCovenant});
+  }
+
+  handleSpellChange = (index, event) => {
+    const selectedSpellName = event.target.value;
+    const selectedSpell = this.state.spells.find(spell => spell.name === selectedSpellName);
+
+    if (selectedSpell) {
+        const { intelligenceRequirement, faithRequirement } = selectedSpell;
+        const { intelligence, faith } = this.state;
+
+        if ((intelligenceRequirement && intelligence >= intelligenceRequirement) || 
+            (faithRequirement && faith >= faithRequirement)) {
+            this.setState({ [`buildSpellName${index + 1}`]: selectedSpellName });
+        } else {
+            alert(`You do not meet the intelligence or faith requirements for this spell.`);
+        }
+    }
   }
 
   handleAttributeDiv1Click = () => {
@@ -308,50 +358,141 @@ class CharacterBuilder extends Component {
   handleHeadChange = (e) => {
     const selectedHead = e.target.value;
 
-    this.setState({buildHead: selectedHead});
+    this.setState({buildHeadName: selectedHead});
+    this.handleHelmetSelection(selectedHead);
   }
+
+  getHelmetByName = (helmetName) => {
+    return this.state.helmets.find(helmet => helmet.name === helmetName);
+  }
+  
+  handleHelmetSelection = (helmetName) => {
+    const selectedHelmet = this.getHelmetByName(helmetName);
+    if (selectedHelmet) {
+      this.setState({ buildHead: selectedHelmet });
+    } else {
+      // Handle the case where the helmet is not found
+      console.log("Helmet not found");
+    }
+  };
 
   handleChestChange = (e) => {
     const selectedChest = e.target.value;
 
-    this.setState({buildChest: selectedChest});
+    this.setState({buildChestName: selectedChest});
   }
+
+  getChestByName = (chestName) => {
+    return this.state.chests.find(chest => chest.name === chestName);
+  }
+  
+  handleChestSelection = (chestName) => {
+    const selectedChest = this.getChestByName(chestName);
+    if (selectedChest) {
+      this.setState({ buildChest: selectedChest });
+    } else {
+      // Handle the case where the chest is not found
+      console.log("Chest not found");
+    }
+  };
 
   handleHandsChange = (e) => {
     const selectedHands = e.target.value;
 
-    this.setState({buildHands: selectedHands});
+    this.setState({buildHandsName: selectedHands});
+  }
+
+  getHandsByName = (handName) => {
+    return this.state.hands.find(hand => hand.name === handName);
+  }
+  
+  handleHandSelection = (handName) => {
+    const selectedHand = this.getHandsByName(handName);
+    if (selectedHand) {
+      this.setState({ buildHands: selectedHand });
+    } else {
+      // Handle the case where the hands is not found
+      console.log("Hands not found");
+    }
   }
 
   handleLegsChange = (e) => {
     const selectedLegs = e.target.value;
 
-    this.setState({buildLegs: selectedLegs});
+    this.setState({buildLegsName: selectedLegs});
+  }
+
+  getLegsByName = (legName) => {
+    return this.state.legs.find(leg => leg.name === legName);
+  }
+  
+  handleLegsSelection = (legName) => {
+    const selectedLegs = this.getLegsByName(legName);
+    if (selectedLegs) {
+      this.setState({ buildLegs: selectedLegs });
+    } else {
+      // Handle the case where the legs is not found
+      console.log("Legs not found");
+    }
   }
 
   handleRing1Change = (e) => {
-    const selectedRing = e.target.value;
+    const selectedRing1 = e.target.value;
 
     // Check if the selected ring is already selected as the second ring
-    if (selectedRing === this.state.buildRing2Name) {
-        alert("This ring is already selected in the other slot.");
-        return;
-    }
+    if (selectedRing1 === "No Ring") {
+      this.setState({ buildRing1Name: selectedRing1 });
+    } else if (selectedRing1 === this.state.buildRing2Name) {
+      alert("This ring is already selected in the other slot.");
+    } else {
+      this.setState({ buildRing1Name: selectedRing1 });
+      this.handleRingSelection1(selectedRing1);
 
-    this.setState({ buildRing1Name: selectedRing });
+    }
 }
 
   handleRing2Change = (e) => {
-  const selectedRing = e.target.value;
+  const selectedRing2 = e.target.value;
 
-  // Check if the selected ring is already selected as the first ring
-  if (selectedRing === this.state.buildRing1Name) {
-      alert("This ring is already selected in the other slot.");
-      return;
+  // Check if the selected ring is already selected as the second ring
+  if (selectedRing2 === "No Ring") {
+    this.setState({ buildRing2Name: selectedRing2 });
+  } else if (selectedRing2 === this.state.buildRing1Name) {
+    alert("This ring is already selected in the other slot.");
+  } else {
+    this.setState({ buildRing2Name: selectedRing2 });
+    this.handleRingSelection2(selectedRing2);
   }
-
-  this.setState({ buildRing2Name: selectedRing });
 }
+
+getRingByName = (ringName) => {
+  return this.state.rings.find(ring => ring.name === ringName);
+}
+
+handleRingSelection1 = (ringName) => {
+  const selectedRing = this.getRingByName(ringName);
+  if (selectedRing) {
+    this.setState({ buildRing1: selectedRing });
+  } else {
+    // Handle the case where the weapon is not found
+    console.log("Ring not found");
+    // Optionally set buildLeftHand1 to null or a default value
+    // this.setState({ buildLeftHand1: null });
+  }
+};
+
+handleRingSelection2 = (ringName) => {
+  const selectedRing = this.getRingByName(ringName);
+  if (selectedRing) {
+    this.setState({ buildRing2: selectedRing });
+  } else {
+    // Handle the case where the weapon is not found
+    console.log("Ring not found");
+    // Optionally set buildLeftHand1 to null or a default value
+    // this.setState({ buildLeftHand1: null });
+  }
+};
+
   handleLeftHandOneChange = (e) => {
     const selectedLeftHand1 = e.target.value;
     this.setState({buildLeftHand1Name: selectedLeftHand1});
@@ -555,16 +696,19 @@ class CharacterBuilder extends Component {
             initEndurance, endurance, initStrength, strength, initDexterity, 
             dexterity, initResistance, resistance, initIntelligence, intelligence,
             initFaith, faith, humanity, soulsToNextLevel, spentSouls, 
-            buildCovenant, buildHead, buildChest, buildHands, buildLegs, 
-            weapons, buildLeftHand1, buildRightHand1, buildLeftHand2,
+            buildCovenant, weapons, buildLeftHand1, buildRightHand1, buildLeftHand2,
             buildRightHand2, buildLeftHand1Name, buildRightHand1Name, 
-            buildLeftHand2Name, buildRightHand2Name, buildRing1Name, 
-            buildRing2Name } = this.state;
+            buildLeftHand2Name, buildRightHand2Name, buildRing1, 
+            buildRing2, rings, buildRing1Name, buildRing2Name,
+            buildHeadName, buildChestName, buildHandsName, buildLegsName,
+            spells, spellSlots } = this.state;
     
     const leftHandGroup1 = this.attributeGroups[this.state.currentGroupIndex1];
     const rightHandGroup1 = this.attributeGroups[this.state.currentGroupIndex2];
     const leftHandGroup2 = this.attributeGroups[this.state.currentGroupIndex3];
     const rightHandGroup2 = this.attributeGroups[this.state.currentGroupIndex4];
+
+    const initialLevel = this.classLevelMapping[characterClass];
 
     
     return (
@@ -619,6 +763,7 @@ class CharacterBuilder extends Component {
 
           <div className="buildLevel">
             <span>Level: </span>
+            <span className="initialLevelNumber">{initialLevel}</span>
             <span className="levelNumber">{buildLevel}</span>
           </div>
 
@@ -633,6 +778,7 @@ class CharacterBuilder extends Component {
             <div className="attribute-values">
               <span className="initial-vitality">{initVitality}</span>
               <span className="current-value">{vitality}</span>
+
             </div>
             <div className="button-row">
             <button type="button" className="attributeButton" 
@@ -814,6 +960,32 @@ class CharacterBuilder extends Component {
               <option value="white">Way of White</option>
             </select>
           </div>
+
+          <div className="spellsAndInfoContainer">
+            <span className="effectsSpan">Spells</span>
+            <div className="spellSlotsContainer">
+                {Array.from({ length: spellSlots }).map((_, index) => (
+                    <div key={index}>
+                        <select className="spellsDropdown"
+                         value={this.state[`buildSpellName${index + 1}`]}
+                         onChange={(event) => this.handleSpellChange(index, event)}>
+                            <option value="No Spell">No Spell</option>
+                            {spells.map(spell => (
+                                <option key={spell.id} value={spell.name}>
+                                    {spell.spellType === 'sorcery' ? 
+                                        `${spell.name} (Int: ${spell.intelligenceRequirement})` :
+                                    spell.spellType === 'miracle' ? 
+                                        `${spell.name} (Faith: ${spell.faithRequirement})` :
+                                        spell.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                ))}
+            </div>
+          </div>
+          
+        
         </div>
 
         {/* items-grid will house selects and dropdowns for armor, weapons, spells
@@ -827,7 +999,7 @@ class CharacterBuilder extends Component {
           <div className="armorDropdown">
             <span className="dropdownLabel">Head</span>
             <select className="itemSelect"
-            value={buildHead}
+            value={buildHeadName}
             onChange={this.handleHeadChange}>
               {helmets.map(helmet => (
                   <option key={helmet._id} value={helmet.name}>
@@ -840,7 +1012,7 @@ class CharacterBuilder extends Component {
           <div className="armorDropdown">
             <span className="dropdownLabel">Chest</span>
             <select className="itemSelect"
-            value={buildChest}
+            value={buildChestName}
             onChange={this.handleChestChange}>
               {chests.map(chest => (
                   <option key={chest._id} value={chest.name}>
@@ -853,7 +1025,7 @@ class CharacterBuilder extends Component {
           <div className="armorDropdown">
             <span className="dropdownLabel">Hands</span>
             <select className="itemSelect"
-            value={buildHands}
+            value={buildHandsName}
             onChange={this.handleHandsChange}>
               {hands.map(hand => (
                   <option key={hand._id} value={hand.name}>
@@ -866,7 +1038,7 @@ class CharacterBuilder extends Component {
           <div className="armorDropdown">
             <span className="dropdownLabel">Legs</span>
             <select className="itemSelect"
-            value={buildLegs}
+            value={buildLegsName}
             onChange={this.handleLegsChange}>
               {legs.map(leg => (
                   <option key={leg._id} value={leg.name}>
@@ -879,105 +1051,29 @@ class CharacterBuilder extends Component {
           <div className="armorDropdown">
             <span className="dropdownLabel">Ring 1</span>
             <select className="itemSelect"
-            value={buildRing1Name}
-            onChange={this.handleRing1Change}>
-              <option value="noRing1">No Ring</option>
-              <option value="blueTearstone">Blue Tearstone Ring</option>
-              <option value="redTearstone">Red Tearstone Ring</option>
-              <option value="cloranthy">Cloranthy Ring</option>
-              <option value="havels">Havel's Ring</option>
-              <option value="ringOfFavorAndProtection">Ring of Favor and Protection</option>
-              <option value="ringOfTheEvilEye">Ring of the Evil Eye</option>
-              <option value="darkWoodGrain">Dark Wood Grain Ring</option>
-              <option value="silverSerpent">Covetous Silver Serpent Ring</option>
-              <option value="goldSerpent">Covetous Gold Serpent Ring</option>
-              <option value="lingeringDragoncrest">Lingering Dragoncrest Ring</option>
-              <option value="bellowingDragoncrest">Bellowing Dragoncrest Ring</option>
-              <option value="wolf">Wolf Ring</option>
-              <option value="hawk">Hawk Ring</option>
-              <option value="hornet">Hornet Ring</option>
-              <option value="leo">Leo Ring</option>
-              <option value="ringOfTheSunPrincess">Ring of the Sun Princess</option>
-              <option value="duskCrown">Dusk Crown Ring</option>
-              <option value="darkmoonSeance">Darkmoon Seance Ring</option>
-              <option value="whiteSeance">White Seance Ring</option>
-              <option value="tinyBeings">Tiny Being's Ring</option>
-              <option value="ringOfSacrifice">Ring of Sacrifice</option>
-              <option value="rareRingOfSacrifice">Rare Ring of Sacrifice</option>
-              <option value="orangeCharred">Orange Charred Ring</option>
-              <option value="darkmoonBladeCovenant">Darkmoon Blade Covenant Ring</option>
-              <option value="catCovenant">Cat Covenant Ring</option>
-              <option value="slumberingDragoncrest">Slumbering Dragoncrest Ring</option>
-              <option value="ringOfTheSunFirstBorn">Ring of the Sun's First Born</option>
-              <option value="witch">Witch's Ring</option>
-              <option value="ringOfSteelProtection">Ring of Steel Protection</option>
-              <option value="flameStoneplate">Flame Stoneplate Ring</option>
-              <option value="thunderStoneplate">Thunder Stoneplate Ring</option>
-              <option value="spellStoneplate">Spell Stoneplate Ring</option>
-              <option value="poisonbite">Poisonbite Ring</option>
-              <option value="bloodbite">Bloodbite Ring</option>
-              <option value="cursebite">Cursebite Ring</option>
-              <option value="ringOfFog">Ring of Fog</option>
-              <option value="ringOfCondemnation">Ring of Condemnation</option>
-              <option value="ringOfDisplacement">Ring of Displacement</option>
-              <option value="ringOfVengeance">Ring of Vengeance</option>
-              <option value="ringOfRetribution">Ring of Retribution</option>
-              <option value="oldWitch">Old Witch's Ring</option>
-              <option value="ringOfBlades">Ring of Blades</option>
-              <option value="ashen">Ashen Ring</option>
-          </select>
+              value={buildRing1Name}
+              onChange={this.handleRing1Change}>
+                <option value="No Ring">No Ring</option>
+                {rings.map(ring => (
+                  <option key={ring._id} value={ring.name}>
+                      {ring.name} 
+                  </option>
+                ))}
+            </select>
           </div>
 
           <div className="armorDropdown">
             <span className="dropdownLabel">Ring 2</span>
             <select className="itemSelect"
-            value={buildRing2Name}
-            onChange={this.handleRing2Change}>
-              <option value="noRing2">No Ring</option>
-              <option value="blueTearstone">Blue Tearstone Ring</option>
-              <option value="redTearstone">Red Tearstone Ring</option>
-              <option value="cloranthy">Cloranthy Ring</option>
-              <option value="havels">Havel's Ring</option>
-              <option value="ringOfFavorAndProtection">Ring of Favor and Protection</option>
-              <option value="ringOfTheEvilEye">Ring of the Evil Eye</option>
-              <option value="darkWoodGrain">Dark Wood Grain Ring</option>
-              <option value="silverSerpent">Covetous Silver Serpent Ring</option>
-              <option value="goldSerpent">Covetous Gold Serpent Ring</option>
-              <option value="lingeringDragoncrest">Lingering Dragoncrest Ring</option>
-              <option value="bellowingDragoncrest">Bellowing Dragoncrest Ring</option>
-              <option value="wolf">Wolf Ring</option>
-              <option value="hawk">Hawk Ring</option>
-              <option value="hornet">Hornet Ring</option>
-              <option value="leo">Leo Ring</option>
-              <option value="ringOfTheSunPrincess">Ring of the Sun Princess</option>
-              <option value="duskCrown">Dusk Crown Ring</option>
-              <option value="darkmoonSeance">Darkmoon Seance Ring</option>
-              <option value="whiteSeance">White Seance Ring</option>
-              <option value="tinyBeings">Tiny Being's Ring</option>
-              <option value="ringOfSacrifice">Ring of Sacrifice</option>
-              <option value="rareRingOfSacrifice">Rare Ring of Sacrifice</option>
-              <option value="orangeCharred">Orange Charred Ring</option>
-              <option value="darkmoonBladeCovenant">Darkmoon Blade Covenant Ring</option>
-              <option value="catCovenant">Cat Covenant Ring</option>
-              <option value="slumberingDragoncrest">Slumbering Dragoncrest Ring</option>
-              <option value="ringOfTheSunFirstBorn">Ring of the Sun's First Born</option>
-              <option value="witch">Witch's Ring</option>
-              <option value="ringOfSteelProtection">Ring of Steel Protection</option>
-              <option value="flameStoneplate">Flame Stoneplate Ring</option>
-              <option value="thunderStoneplate">Thunder Stoneplate Ring</option>
-              <option value="spellStoneplate">Spell Stoneplate Ring</option>
-              <option value="poisonbite">Poisonbite Ring</option>
-              <option value="bloodbite">Bloodbite Ring</option>
-              <option value="cursebite">Cursebite Ring</option>
-              <option value="ringOfFog">Ring of Fog</option>
-              <option value="ringOfCondemnation">Ring of Condemnation</option>
-              <option value="ringOfDisplacement">Ring of Displacement</option>
-              <option value="ringOfVengeance">Ring of Vengeance</option>
-              <option value="ringOfRetribution">Ring of Retribution</option>
-              <option value="oldWitch">Old Witch's Ring</option>
-              <option value="ringOfBlades">Ring of Blades</option>
-              <option value="ashen">Ashen Ring</option>
-          </select>
+              value={buildRing2Name}
+              onChange={this.handleRing2Change}>
+                <option value="No Ring">No Ring</option>
+                {rings.map(ring => (
+                  <option key={ring._id} value={ring.name}>
+                      {ring.name} 
+                  </option>
+                ))}
+            </select>
           </div>
 
           
@@ -1076,8 +1172,25 @@ class CharacterBuilder extends Component {
             </div>
           </div>
 
-          <div className="spells">
-
+          <div className="effectsContainer">
+            <div className="effectsDiv">
+              <span className="effectsSpan">Effects</span>
+              {buildRing1 && (
+                <div className="effect">
+                  <p>{buildRing1.effect}</p>
+                </div>
+              )}
+              {buildRing2 && (
+                <div className="effect">
+                  <p>{buildRing2.effect}</p>
+                </div>
+              )}
+              {buildHeadName === "Crown of Dusk" && (
+                <div className="effect">
+                  <p>Boosts Sorceries, Miracles and Pyromancies damage by 20%, but reduces Magic defence by 30%.</p>
+                </div>
+              )}
+            </div>
           </div>
 
         </div>

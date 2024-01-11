@@ -1,7 +1,7 @@
 import express from "express"; 
 import cors from "cors";
 import "./connect.js";
-import { fetchChests, fetchHelmets, fetchHands, fetchLegs, fetchWeapons, fetchWeapon } from "./Services/CharBuilderServices.js";
+import { fetchChests, fetchHelmets, fetchHands, fetchLegs, fetchWeapons, fetchRings, fetchSpells } from "./Services/CharBuilderServices.js";
 
 const app = express(); 
 
@@ -105,25 +105,43 @@ async function fetchWeaponsEndpoint(request,response){
 
 app.get('/fetchWeapons', fetchWeaponsEndpoint);
 
-//R - fetchWeaponEndpoint
+//R - fetchRingsEndpoint
 //API method: GET
 //try
     //status code: 200
     //data: [{},{},.....]
 //catch
     //status code: 500
-    //error: "Error getting weapon from DB"
-    async function fetchWeaponEndpoint(request,response){
-        try {
-            const { weaponName } = request.query;
-            const weapon = await fetchWeapon(weaponName);
-            return response.status(200).json(weapon);
-        } catch (error) {
-            return response.status(500).send({ error: "Error getting weapon from DB", details: error.message })
-        }
-    };
-    
-    app.get('/fetchWeapon', fetchWeaponEndpoint);
+    //error: "Error getting weapons from DB"
+async function fetchRingsEndpoint(request,response){
+    try {
+        const rings = await fetchRings();
+        return response.status(200).json(rings);
+    } catch (error) {
+        return response.status(500).send({ error: "Error getting rings from DB", details: error.message })
+    }
+};
+
+app.get('/fetchRings', fetchRingsEndpoint);
+
+//R - fetchSpellsEndpoint
+//API method: GET
+//try
+    //status code: 200
+    //data: [{},{},.....]
+//catch
+    //status code: 500
+    //error: "Error getting weapons from DB"
+async function fetchSpellsEndpoint(request,response){
+    try {
+        const spells = await fetchSpells();
+        return response.status(200).json(spells);
+    } catch (error) {
+        return response.status(500).send({ error: "Error getting spells from DB", details: error.message })
+    }
+};
+
+app.get('/fetchSpells', fetchSpellsEndpoint);
 
 //sets variable PORT to the port number we are using, 1234
 let PORT = 1234;

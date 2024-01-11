@@ -1,0 +1,558 @@
+[
+    {
+        "name": "Soul Arrow",
+        "description": "Fires a magical projectile. Excellent starting spell which does very good damage against most enemies in the early game areas.",
+        "uses": 30,
+        "slots": 1,
+        "intelligenceRequirement": 10,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Great Soul Arrow",
+        "description": "Stronger soul arrow, same cast time as soul arrow, fewer uses.",
+        "uses": 20,
+        "slots": 1,
+        "intelligenceRequirement": 14,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Heavy Soul Arrow",
+        "description": "Stronger than greater soul arrow, longer casting time.",
+        "uses": 12,
+        "slots": 1,
+        "intelligenceRequirement": 12,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Great Heavy Soul Arrow",
+        "description": "Stronger than heavy soul arrow, fewer uses. Has a slow cast time, but deals a tremendous amount of damage, even against bosses.",
+        "uses": 8,
+        "slots": 1,
+        "intelligenceRequirement": 16,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Homing Soulmass",
+        "description": "Fires multiple, homing magic projectiles.Can be successfully cast without an initial lock on. Multiple soul arrows will hover above the player. Each individual soul arrow will seek the closest target, in the direction the player is facing, when in range. Because the spell can be cast in advance, it has a unique advantage in that, if timed correctly, it can be cast in synchronicity with other attacks.",
+        "uses": 10,
+        "slots": 1,
+        "intelligenceRequirement": 18,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Homing Crystal Soulmass",
+        "description": "Fires multiple, homing crystal projectiles.Can be successfully cast without an initial 'lock on'. Multiple crystal arrows will hover above the player. Each individual soul arrow will seek the closest target, in the direction the player is facing, when in range.",
+        "uses": 10,
+        "slots": 1,
+        "intelligenceRequirement": 24,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Soul Spear",
+        "description": "Fire piercing soul spear.",
+        "uses": 4,
+        "slots": 1,
+        "intelligenceRequirement": 36,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Crystal Soul Spear",
+        "description": "Fire an even more powerful, piercing ranged attack.",
+        "uses": 4,
+        "slots": 1,
+        "intelligenceRequirement": 44,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "White Dragon Breath",
+        "description": "A straight line of crystals pop out of the ground in front of you, shooting towards your target. One advantage of this spell is that it will take out large groups of enemies if they are lined up one behind the other. It has a medium cast time, but once it fires, it will take out anything in its path. 20 casts make this a great high level replacement for the soul arrow at high levels, as it's not as useful on most bosses.",
+        "uses": 20,
+        "slots": 1,
+        "intelligenceRequirement": 50,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Magic Weapon",
+        "description": "Enhances the right-hand weapon. Weapon must be standard, crystal, or raw. Some Dragon and Unique weapons can be enchanted too. Adds 0.8x your Magic Adjustment stat (NOT Intelligence) magic damage to your weapon.",
+        "uses": 5,
+        "slots": 1,
+        "intelligenceRequirement": 10,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Great Magic Weapon",
+        "description": "Enhances the right-hand weapon.Weapon must be standard, crystal, or raw. Some Dragon and Unique weapons can be enchanted too. Adds 1.1x your Magic Adjustment stat (NOT Intelligence) magic damage to your weapon.",
+        "uses": 3,
+        "slots": 1,
+        "intelligenceRequirement": 15,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Crystal Magic Weapon",
+        "description": "Enhances and crystallizes right-hand weapon. Weapon must be standard, crystal, or raw. Some Dragon and Unique weapons can be enchanted too. Adds 1.4x your Magic Adjustment stat (NOT Intelligence) as magic damage to your weapon.",
+        "uses": 3,
+        "slots": 1,
+        "intelligenceRequirement": 25,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Magic Shield",
+        "description": "Reinforces the equipped shield or weapon able to block in the left hand with magic. Works on all types of shields (even unique or upgraded to any path) and on all weapons able to block while on the left hand (even unique or upgraded to any path). Halves stamina used on hit deflection (only on shields) and improves the weapon's or shield's magic resistance by 30% (by up to a maximum of 90%). Lasts 15 seconds, 5 casts.",
+        "uses": 5,
+        "slots": 1,
+        "intelligenceRequirement": 10,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Strong Magic Shield",
+        "description": "Reinforces the equipped shield or weapon able to block in the left hand with a stronger magic effect. Works on all types of shields (even unique or upgraded to any path) and on all weapons able to block while on the left hand (even unique or upgraded to any path). Reduces the stamina used to deflect a hit considerably (only on shields) and improves all the resistances of the shield or weapon enchanted to 100%. Lasts 15 seconds, 3 casts.",
+        "uses": 3,
+        "slots": 1,
+        "intelligenceRequirement": 15,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Aural Decoy",
+        "description": "Lures enemies away by creating a sound originating in the distance.",
+        "uses": 20,
+        "slots": 1,
+        "intelligenceRequirement": 10,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Hush",
+        "description": "Masks all noises of caster.",
+        "uses": 6,
+        "slots": 1,
+        "intelligenceRequirement": 15,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Fall Control",
+        "description": "Reduces damage and noise from fall. However, terminal falls will still kill you even with this active.",
+        "uses": 10,
+        "slots": 1,
+        "intelligenceRequirement": 15,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Hidden Weapon",
+        "description": "Turns your right hand weapon invisible. Weapon must be standard, crystal, or raw. Some Dragon and Unique weapons can be enchanted too.",
+        "uses": 3,
+        "slots": 1,
+        "intelligenceRequirement": 14,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Hidden Body",
+        "description": "Masks your presence, making detection harder.",
+        "uses": 3,
+        "slots": 1,
+        "intelligenceRequirement": 14,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Repair",
+        "description": "Repairs weapons and armor",
+        "uses": 1,
+        "slots": 1,
+        "intelligenceRequirement": 14,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Cast Light",
+        "description": "Cast a bright light upon surroundings, and lasts 5 minutes. Particularly useful for Tomb of Giants",
+        "uses": 3,
+        "slots": 1,
+        "intelligenceRequirement": 14,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Chameleon",
+        "description": "Generally, the object you become is something common to the area you are in. Could be a vase, or a box, etc. Some strategy must be used, and the most effective is to place yourself in a cluster of similar objects. Once cast, you can move slowly and position yourself. If done properly, an enemy will walk by you and never know you're there. Cannot run when using, any other action breaks the effect.",
+        "uses": 11,
+        "slots": 1,
+        "intelligenceRequirement": 14,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Remedy",
+        "description": "Removes poison/toxic/bleeding build up, and cures poison/toxic status.",
+        "uses": 4,
+        "slots": 1,
+        "intelligenceRequirement": 16,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Resist Curse",
+        "description": "Removes curse build up.",
+        "uses": 4,
+        "slots": 1,
+        "intelligenceRequirement": 16,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Dark Orb",
+        "description": "After a brief charge, fires a large shot at your target.",
+        "uses": 12,
+        "slots": 1,
+        "intelligenceRequirement": 16,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Dark Bead",
+        "description": "Fires a large amount of small dark orbs that fan outwards—very fast cast time. Excellent against large bosses.",
+        "uses": 6,
+        "slots": 1,
+        "intelligenceRequirement": 16,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Dark Fog",
+        "description": "Creates a fog that inflicts poison. The fog is created at the location of the locked target.",
+        "uses": 2,
+        "slots": 1,
+        "intelligenceRequirement": 18,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Pursuers",
+        "description": "Slow moving dark soul mass, fires and homes in on target when in range. Slower moving than homing soul mass but has much better homing capabilities.",
+        "uses": 3,
+        "slots": 2,
+        "intelligenceRequirement": 32,
+        "spellType": "sorcery"
+    },
+    {
+        "name": "Heal",
+        "description": "Heals a moderate amount of the casters HP, depending on faith.",
+        "uses": 5,
+        "slots": 1,
+        "faithRequirement": 12,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Great Heal Excerpt",
+        "description": "Cut down version of Great Heal. Heals large amount of HP to the caster. (NOTE: This spell does not affect allies as the erroneous load screen info would have you believe.)",
+        "uses": 1,
+        "slots": 1,
+        "faithRequirement": 14,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Great Heal",
+        "description": "Heals a large amount of the casters HP, depending on faith.",
+        "uses": 3,
+        "slots": 1,
+        "faithRequirement": 24,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Soothing Sunlight",
+        "description": "Heals large amount of HP to the caster and nearby allies. Scales with faith. Must be part of the Princess's Guard to use.",
+        "uses": 3,
+        "slots": 2,
+        "faithRequirement": 48,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Replenishment",
+        "description": "Gradually restores HP over time for a short duration.",
+        "uses": 2,
+        "slots": 1,
+        "faithRequirement": 16,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Bountiful Sunlight",
+        "description": "Gradually restores HP over time for a short duration to you and nearby allies. Must be part of the Princess's Guard to use.",
+        "uses": 2,
+        "slots": 2,
+        "faithRequirement": 36,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Force",
+        "description": "AoE effect that does no damage but knocks back most surrounding enemies Must be very close to cause knockdown Can deflect sorceries such as Homing Soulmass.",
+        "uses": 21,
+        "slots": 1,
+        "faithRequirement": 12,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Wrath of the Gods",
+        "description": "A fast casting force spell that deals high damage in a bubble around you. One of the most powerful offensive miracles in the game. Can deflect sorceries.",
+        "uses": 3,
+        "slots": 1,
+        "faithRequirement": 28,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Emit Force",
+        "description": "Shoots a large ball of force energy to explode on the target causing damage to the target and close surrounding enemies. Can deflect sorceries.",
+        "uses": 6,
+        "slots": 1,
+        "faithRequirement": 18,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Magic Barrier",
+        "description": "Reduces incoming magic damage for a short duration. (70%)?",
+        "uses": 4,
+        "slots": 1,
+        "faithRequirement": 14,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Great Magic Barrier",
+        "description": "Reduces more incoming magic damage for a short duration. (90%)?",
+        "uses": 2,
+        "slots": 1,
+        "faithRequirement": 24,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Homeward",
+        "description": "Transports you back to the last used bonfire.",
+        "uses": 1,
+        "slots": 1,
+        "faithRequirement": 18,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Seek Guidance",
+        "description": "The Seek Guidance miracle allows the player to see more messages on the ground as well as their positive and negative ratings. Additional developer messages, providing hints, can also be seen in some areas.",
+        "uses": 5,
+        "slots": 1,
+        "faithRequirement": 12,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Karmic Justice",
+        "description": "Karmic Justice is a self-buff that lasts for 1 minute. If the player takes successive hits in PHYSICAL damage (meaning melee and non-magical), the spell explodes, dealing massive damage to all nearby enemies and knocking them all down. A very effective miracle for players who wear cloth armor with no poise. If they get stunlocked by a combo, this spell can save you from certain death.",
+        "uses": 4,
+        "slots": 1,
+        "faithRequirement": 20,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Vow of Silence",
+        "description": "An AoE silence around you that stops all casting in the area, including your own, for about 25 seconds. Does not scale with faith.",
+        "uses": 2,
+        "slots": 2,
+        "faithRequirement": 30,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Tranquil Walk of Peace",
+        "description": "Applies a debuff to nearby enemies which slows movement speed, that lasts for about 10 seconds.",
+        "uses": 5,
+        "slots": 1,
+        "faithRequirement": 18,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Lightning Spear",
+        "description": "A powerful spear of light that inflicts lightning damage. Scales with faith. Can be thrown into bodies of water to cause AoE. (Puddles, lakes,etc.)",
+        "uses": 10,
+        "slots": 1,
+        "faithRequirement": 20,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Great Lightning Spear",
+        "description": "A larger, more powerful spear of light that inflicts lightning damage. Scales with faith. Can be thrown into water to cause AoE. (Puddles, lakes,etc.)",
+        "uses": 10,
+        "slots": 1,
+        "faithRequirement": 20,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Sunlight Spear",
+        "description": "A very powerful version of the lightning spear. Fewer charges but a lot more damage. Scales with faith. Can be thrown into water to cause AoE. (Puddles, lakes,etc.) Must remain part of Warriors of Sunlight to use.",
+        "uses": 5,
+        "slots": 2,
+        "faithRequirement": 50,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Sunlight Blade",
+        "description": "Coats right hand weapon in lightning. Adds 1.8x your talisman's Magic Adjustment value as Lightning Damage.",
+        "uses": 1,
+        "slots": 1,
+        "faithRequirement": 30,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Darkmoon Blade",
+        "description": "Boosts right hand weapon with rays of Darkmoon. Adds 1.8x your talisman's Magic Adjustment value as Magic Damage at Covenant Rank 0. Scaling increases by 0.1x for each rank to a maximum of 2.1x at Covenant Rank 3. Must be member of Darkmoon covenant to use.",
+        "uses": 1,
+        "slots": 1,
+        "faithRequirement": 30,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Gravelord Sword Dance",
+        "description": "AoE miracle similar to Gravelord Nito's scream sword attack. Several swords will pierce the ground impaling enemies in the area. Miracle is very effective when used in close quarters such as hallways or bridges as several swords may impale the same enemy.",
+        "uses": 40,
+        "slots": 1,
+        "faithRequirement": 0,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Gravelord Greatsword Dance",
+        "description": "Upgraded version of Gravelord Sword Dance miracle. Area of effect is expanded and increased damage.",
+        "uses": 40,
+        "slots": 1,
+        "faithRequirement": 0,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Escape Death",
+        "description": "Escape Death is a self-buff that prevents the user from losing souls and humanity after death. The miracle will not work if the user has two other self-buffs active (i.e. having both the Green Blossom stamina regen effect and the Transient Curse's effect will prevent the use of this miracle). Upon death, the message Magic Revived appears in green lettering identical to the Ring Revival message produced when a player dies with a Ring of Sacrifice equipped.",
+        "uses": 1,
+        "slots": 1,
+        "faithRequirement": 0,
+        "spellType": "miracle"
+    },
+    {
+        "name": "Fireball",
+        "description": "Standard pyromancy of the Great Swamp. Hurl fireball.",
+        "uses": 8,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Fire Orb",
+        "description": "Pyromancy which improves upon Fireball. Hurl fire orb.",
+        "uses": 6,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Great Fireball",
+        "description": "Ultimate fireball pyromancy. Hurl giant fireball.",
+        "uses": 4,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Great Chaos Fireball",
+        "description": "Hurl giant chaos fireball, leaving a large amount of temporary lava",
+        "uses": 4,
+        "slots": 2,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Firestorm",
+        "description": "Primal pyromancy taught by Quelana of Izalith. Erect fire pillars in vicinity. Note: Uses 17 uses per cast.",
+        "uses": 20,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Fire Tempest",
+        "description": "Primal pyromancy of Quelana of Izalith. Erect giant fire pillars in vicinity.",
+        "uses": 20,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Chaos Storm",
+        "description": "Erect localized chaos fire pillars which leave blobs of temporary lava. Note: Like firestorm and leaves a little lava behind.",
+        "uses": 20,
+        "slots": 2,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Combustion",
+        "description": "Elementary pyromancy. Create powerful flame in hand. Note: Good 'melee' range spell, very quick too.",
+        "uses": 16,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Great Combustion",
+        "description": "Pyromancy which improves upon Combustion. Create powerful, giant flame in hand. Note: Very good melee range spell.",
+        "uses": 8,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Fire Surge",
+        "description": "Pyromancy foreign to the Great Swamp. Create a surge of flame from palm of hand. Note: Rapid fire spell you can cast while moving.",
+        "uses": 80,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Fire Whip",
+        "description": "Primal pyromancy taught by Quelana of Izalith. Sweep foes with fire whip. Note: Uses 21 uses per cast. Note:Hits twice/cast",
+        "uses": 80,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Chaos Fire Whip",
+        "description": "Sweep foes with chaos fire whip with lava traces Note: Leaves lava behind for a bit. Follows same mechanics as Fire Whip.",
+        "uses": 80,
+        "slots": 2,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Poison Mist",
+        "description": "Breathes out a cone of poison mist that fills the surrounding area causing poison status.",
+        "uses": 3,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Toxic Mist",
+        "description": "Breathes out a cone of toxic mist that fills the surrounding area causing toxic status.",
+        "uses": 1,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Acid Surge",
+        "description": "Pyromancy foreign to the Great Swamp. Emit acid which corrodes weapons and armor damaging their durability. Does not affect user.",
+        "uses": 2,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Flash Sweat",
+        "description": "Covers the player in water, reduces fire damage.",
+        "uses": 3,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Iron Flesh",
+        "description": "Self-buff, raises defenses and poise. Note: User becomes heavy and unable to move freely: can only walk, can't run, sprint, roll, or jump.",
+        "uses": 3,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Power Within",
+        "description": "Increases Attack and Defense but gradually drains HP",
+        "uses": 1,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Undead Rapport",
+        "description": "Advanced pyromancy of Quelana of Izalith. Charm undead and gain temporary allies. Melee ranged support spell with about 2 second cast time.",
+        "uses": 7,
+        "slots": 1,
+        "spellType": "pyromancy"
+    },
+    {
+        "name": "Black Flame",
+        "description": "Similar to Great Combustion. Melee-range pyromancy. Main difference with Great Combustion is that when Black Flame is blocked, it consumes a much higher amount of stamina than Great Combustion, making this pyromancy great for breaking guards.",
+        "uses": 8,
+        "slots": 1,
+        "spellType": "pyromancy"
+    }
+]

@@ -1,0 +1,280 @@
+[{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4825"
+  },
+  "name": "Tiny Being's Ring",
+  "effect": "Increases max health by 5%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4826"
+  },
+  "name": "Cloranthy Ring",
+  "effect": "Increases stamina regeneration by 20%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4827"
+  },
+  "name": "Havel's Ring",
+  "effect": "Increases max equipment load by 50%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4828"
+  },
+  "name": "Ring of Steel Protection",
+  "effect": "Increases physical defense by 50 points"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4829"
+  },
+  "name": "Flame Stoneplate Ring",
+  "effect": "Increases fire defense by 50 points"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e482a"
+  },
+  "name": "Spell Stoneplate Ring",
+  "effect": "Increases magic defense by 50 points"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e482b"
+  },
+  "name": "Thunder Stoneplate Ring",
+  "effect": "Increases lightning defense by 50 points"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e482c"
+  },
+  "name": "Speckled Stoneplate Ring",
+  "effect": "Increases magic, fire, and lightning defense by 25 points each"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e482d"
+  },
+  "name": "Bloodbite Ring",
+  "effect": "Increases bleed resistance by 400%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e482e"
+  },
+  "name": "Poisonbite Ring",
+  "effect": "Increases poison resistance by 400%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e482f"
+  },
+  "name": "Cursebite Ring",
+  "effect": "Increases curse resistance by 400%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4830"
+  },
+  "name": "Red Tearstone Ring",
+  "effect": "Increases attack by 50% when health is below 20%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4831"
+  },
+  "name": "Blue Tearstone Ring",
+  "effect": "Increases defense by 50% when health is below 20%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4832"
+  },
+  "name": "Ring of Sacrifice",
+  "effect": "Lose nothing upon death, ring breaks when used"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4833"
+  },
+  "name": "Rare Ring of Sacrifice",
+  "effect": "Lose nothing upon death, negates death caused by curse, ring breaks when used"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4834"
+  },
+  "name": "Bellowing Dragoncrest Ring",
+  "effect": "Increases magic damage by 20-26% depending on spell"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4835"
+  },
+  "name": "Lingering Dragoncrest Ring",
+  "effect": "Increases magic effect length by 50%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4836"
+  },
+  "name": "Slumbering Dragoncrest Ring",
+  "effect": "Wearer makes no sound"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4837"
+  },
+  "name": "Dusk Crown Ring",
+  "effect": "Increases sorcery castings by 50%, reduces maximum HP by 50%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4838"
+  },
+  "name": "White Seance Ring",
+  "effect": "Increases attunement slots by 1"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4839"
+  },
+  "name": "Darkmoon Seance Ring",
+  "effect": "Increases attunement slots by 1, grants entrance to Darkmoon Blades covenant"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e483a"
+  },
+  "name": "Ring of the Sun's Firstborn",
+  "effect": "Increases miracle power by 20%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e483b"
+  },
+  "name": "Darkmoon Blade Covenant Ring",
+  "effect": "Allows Gwyndolin to summon player to invade other players' Dark Anor Londo"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e483c"
+  },
+  "name": "Ring of the Sun Princess",
+  "effect": "Boosts miracle synergy"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e483d"
+  },
+  "name": "Leo Ring",
+  "effect": "Increases counter damage by 40%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e483e"
+  },
+  "name": "Wolf Ring",
+  "effect": "Increases poise by 40 points"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e483f"
+  },
+  "name": "Hawk Ring",
+  "effect": "Increases bow range by 50%, enhances zooming with bows and binoculars"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4840"
+  },
+  "name": "Hornet Ring",
+  "effect": "Increases critical attack by 30%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4841"
+  },
+  "name": "East Wood Grain Ring",
+  "effect": "Reduces weapon durability loss"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4842"
+  },
+  "name": "Dark Wood Grain Ring",
+  "effect": "Changes rolling action to a faster and wider one, works when equip load is under 25%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4843"
+  },
+  "name": "Rusted Iron Ring",
+  "effect": "Negates environmental effects on movement"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4844"
+  },
+  "name": "Covetous Gold Serpent Ring",
+  "effect": "Increases item discovery by 200 points"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4845"
+  },
+  "name": "Covetous Silver Serpent Ring",
+  "effect": "Increases souls absorbed for each kill by 20%"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4846"
+  },
+  "name": "Covenant of Artorias",
+  "effect": "Allows entering The Abyss"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4847"
+  },
+  "name": "Orange Charred Ring",
+  "effect": "Reduces lava damage, adds fire element to kick motion"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4848"
+  },
+  "name": "Old Witch's Ring",
+  "effect": "Allows talking to Quelaag's Sister"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e4849"
+  },
+  "name": "Cat Covenant Ring",
+  "effect": "Allows Alvina to summon player to protect Darkroot Garden"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e484a"
+  },
+  "name": "Ring of Fog",
+  "effect": "Turns the player transparent"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e484b"
+  },
+  "name": "Ring of Favor and Protection",
+  "effect": "Increases HP, stamina, and equip load by 20%, breaks when removed"
+},
+{
+  "_id": {
+    "$oid": "659f540c7cbabde7be8e484c"
+  },
+  "name": "Ring of the Evil Eye",
+  "effect": "Absorbs 30 HP from every fallen enemy"
+}]

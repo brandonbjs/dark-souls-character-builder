@@ -5,7 +5,6 @@
 
 /* Reset default margin and padding for better consistency */
 body, h1, h2, p, ul {
-  color: #dd0f0f;
   margin: 0;
   padding: 0;
 }
@@ -73,7 +72,7 @@ body {
 .items-grid {
   border: 1px solid rgb(207, 201, 202);
   background-color: #1a1a1a;
-  height: 60vh;
+  height: auto;
   width: 20%;
   text-align: left;
   padding: 1vh;
@@ -83,16 +82,13 @@ body {
 }
 
 /* for smaller screens */
-@media screen and (max-width: 1900px) { /* Adjust breakpoint as needed */
-
+@media screen and (max-width: 1900px) { 
   .attributes-grid,
   .stats-grid,
   .items-grid {
-    width: 100%; /* Adjust max-width for smaller screens */
-    height: 115vh;
-    
+    width: 100%; 
+    height: 100%;
   }
-  
 }
 
 
@@ -150,15 +146,21 @@ button {
   padding-left: 1vw;
   padding-right: 1vw;
   border-radius: 5px;
-  margin-left: 43%;
+  margin-left: 18%;
   background-color: #333; 
   color: #ffffff; 
   border: 1px solid #555; 
 }
 
+.initialLevelNumber {
+  margin-left: 30%;
+  color: #dd0f0f;
+}
+
 .buildLevel {
   margin-top: 1vh;
   margin-bottom: 1vh;
+  color: #dd0f0f;
 }
 
 .humanityNumber {
@@ -167,8 +169,8 @@ button {
   padding-left: 1vw;
   padding-right: 1vw;
   border-radius: 5px;
-  margin-left: 40%;
-  margin-right: 11%;
+  margin-left: 46%;
+  margin-right: 5%;
   background-color: #333; 
   color: #fff; 
   border: 1px solid #555; 
@@ -191,13 +193,15 @@ button {
   flex-basis: 30%; /* Adjust as needed */
   text-align: left;
   margin-right: 0.3vw;
+  color: #dd0f0f;
 }
 
 .attribute-values, .current-value {
   flex-basis: 45%; /* Adjust as needed */
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
+  color: #dd0f0f;
 }
 
 .current-value {
@@ -206,7 +210,7 @@ button {
   justify-content: center; 
   width: 10%; 
   padding: 3px;
-  margin-left: 1.5vw; 
+  margin-left: 2.5vw; 
   border-radius: 5px;
   background-color: #333; 
   color: #fff; 
@@ -247,7 +251,7 @@ button {
   padding-left: 1vw;
   padding-right: 1vw;
   border-radius: 5px;
-  margin-left: 5vw;
+  margin-left: 28%;
   background-color: #333; 
   color: #fff; 
   border: 1px solid #555; 
@@ -259,7 +263,7 @@ button {
   padding-left: 1vw;
   padding-right: 1vw;
   border-radius: 5px;
-  margin-left: 3.4vw;
+  margin-left: 22%;
   background-color: #333; 
   border: 1px solid #555; 
 }
@@ -274,7 +278,7 @@ button {
 }
 
 .current {
-  padding-left: 1.5vw;
+  padding-left: 15%;
 }
 
 /* Add a subtle animation on hover */
@@ -300,6 +304,7 @@ button:hover {
   align-items: center;
   margin-top: 1vh;
   width: 100%; 
+  color: #dd0f0f;
 }
 
 .dropdownLabel {
@@ -335,7 +340,7 @@ button:hover {
   justify-content: space-around;
   padding: 10px;
   margin-top: 2vh;
-  height: 20%;
+  height: auto;
 }
 
 .leftHandWeapon, .rightHandWeapon {
@@ -354,17 +359,50 @@ button:hover {
   margin: 10px;
   border-radius: 5px;
   background-color: #f2f2f2;
-  height: 50%;
+  height: auto;
 }
 
 .weaponAttributes:hover {
-  background-color: #40f18a2d;
+  background-color: #ddec02fa;
 }
 
 .groupNameP {
   color: rgb(114, 20, 151);
   font-weight: bold;
   text-decoration: underline;
+}
+
+.spellSlotsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.spellsDropdown {
+  width: 100%; /* Adjust this as needed */
+}
+
+.effectsContainer {
+  border-top: 1px solid rgb(207, 201, 202);
+  margin-top: 1vh;
+  padding-top: 1vh;
+}
+
+.effect {
+  color: #dad386;
+}
+
+.effectsSpan {
+  color: #dad386; 
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.spellsAndInfoContainer {
+  border-top: 1px solid rgb(207, 201, 202);
+  margin-top: 2.5vh;
+  padding-top: 1vh;
 }
 
 /*========================================================================================*/
