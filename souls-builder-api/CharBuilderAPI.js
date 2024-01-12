@@ -1,7 +1,7 @@
 import express from "express"; 
 import cors from "cors";
 import "./connect.js";
-import { fetchChests, fetchHelmets, fetchHands, fetchLegs, fetchWeapons, fetchRings, fetchSpells } from "./Services/CharBuilderServices.js";
+import { fetchChests, fetchHelmets, fetchHands, fetchLegs, fetchWeapons, fetchRings, fetchSpells, fetchItems } from "./Services/CharBuilderServices.js";
 
 const app = express(); 
 
@@ -142,6 +142,25 @@ async function fetchSpellsEndpoint(request,response){
 };
 
 app.get('/fetchSpells', fetchSpellsEndpoint);
+
+//R - fetchItemsEndpoint
+//API method: GET
+//try
+    //status code: 200
+    //data: [{},{},.....]
+//catch
+    //status code: 500
+    //error: "Error getting weapons from DB"
+async function fetchItemsEndpoint(request,response){
+    try {
+        const items = await fetchItems();
+        return response.status(200).json(items);
+    } catch (error) {
+        return response.status(500).send({ error: "Error getting items from DB", details: error.message })
+    }
+};
+
+app.get('/fetchItems', fetchItemsEndpoint);
 
 //sets variable PORT to the port number we are using, 1234
 let PORT = 1234;

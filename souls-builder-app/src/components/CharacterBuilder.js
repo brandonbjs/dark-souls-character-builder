@@ -57,7 +57,7 @@ class CharacterBuilder extends Component {
       71: 1683, 72: 1692, 73: 1700, 74: 1709, 75: 1717, 76: 1725, 77: 1734, 78: 1742, 79: 1750, 80: 1758,
       81: 1767, 82: 1775, 83: 1783, 84: 1791, 85: 1799, 86: 1807, 87: 1814, 88: 1822, 89: 1830, 90: 1837,
       91: 1845, 92: 1852, 93: 1860, 94: 1867, 95: 1874, 96: 1881, 97: 1888, 98: 1894, 99: 1900,
-    };
+    }
 
     // define mapping for HP depending on vitality stat. **STAT GAIN IS NOT LINEAR**
     this.enduranceToStamina = {
@@ -71,9 +71,24 @@ class CharacterBuilder extends Component {
       78: 160, 79: 160, 80: 160, 81: 160, 82: 160, 83: 160, 84: 160, 85: 160, 86: 160, 87: 160, 
       88: 160, 89: 160, 90: 160, 91: 160, 92: 160, 93: 160, 94: 160, 95: 160, 96: 160, 97: 160, 
       98: 160, 99: 160,
-    };
+    }
 
-    this.attributeGroups = ['atk', 'def', 'effects', 'req', 'scale', 'weightDurability', ];
+    // define mapping for humanity to item discovery values 
+    this.humanityToItemDiscovery = {
+      0: 100, 1: 150, 2: 158, 3: 165, 4: 173, 5: 180, 6: 186, 7: 192, 8: 198, 9: 204,
+      10: 210, 11: 210, 12: 210, 13: 210, 14: 210, 15: 210, 16: 210, 17: 210, 18: 210,
+      19: 210, 20: 210, 21: 210, 22: 210, 23: 210, 24: 210, 25: 210, 26: 210, 27: 210,
+      28: 210, 29: 210, 30: 210, 31: 210, 32: 210, 33: 210, 34: 210, 35: 210, 36: 210,
+      37: 210, 38: 210, 39: 210, 40: 210, 41: 210, 42: 210, 43: 210, 44: 210, 45: 210, 
+      46: 210, 47: 210, 48: 210, 49: 210, 50: 210, 51: 210, 52: 210, 53: 210, 54: 210, 
+      55: 210, 56: 210, 57: 210, 58: 210, 59: 210, 60: 210, 61: 210, 62: 210, 63: 210, 
+      64: 210, 65: 210, 66: 210, 67: 210, 68: 210, 69: 210, 70: 210, 71: 210, 72: 210, 
+      73: 210, 74: 210, 75: 210, 76: 210, 77: 210, 78: 210, 79: 210, 80: 210, 81: 210, 
+      82: 210, 83: 210, 84: 210, 85: 210, 86: 210, 87: 210, 88: 210, 89: 210, 90: 210, 
+      91: 210, 92: 210, 93: 210, 94: 210, 95: 210, 96: 210, 97: 210, 98: 210, 99: 210,
+    }
+
+    this.attributeGroups = ['atk', 'def', 'effects', 'req', 'scale', 'weightDurability', ]
 
     this.state = {
       buildId: uuidv4(),
@@ -155,103 +170,126 @@ class CharacterBuilder extends Component {
       is20PercentPenaltyApplied: false,
       is30PercentPenaltyApplied: false,
       buildPoise: 0,
+      isWolfRingApplied: false,
+      buildItemDiscovery: 100,
+      isCovetousGoldSerpentRingApplied: false,
+      isSymbolOfAvariceApplied: false,
+      buildPhysicalDef: 0,
+      buildItemName1: "No Item",
+      buildItemName2: "No Item",
+      buildItemName3: "No Item",
+      buildItemName4: "No Item",
+      buildItemName5: "No Item",
+      items: [],
     }
   }
 
   // set initial souls needed for next level with the componentDidMount() 
   // lifecycle method
   componentDidMount() {
-    const { buildLevel } = this.state;
-    this.setLowerSoulsLevel();
-    this.calculateTotalSouls(buildLevel);
+    const { buildLevel } = this.state
+    this.setLowerSoulsLevel()
+    this.calculateTotalSouls(buildLevel)
 
     // initial fetch method to populate the helmets array with helmets from
     // my MongoDB database.
     fetch('http://localhost:1234/fetchHelmets')
         .then(response => response.json())
         .then(data => {
-            this.setState({ helmets: data });
+            this.setState({ helmets: data })
         })
         .catch(error => {
-            console.error('Error fetching helmets (in CharacterBuilder.js):', error);
-        });
+            console.error('Error fetching helmets (in CharacterBuilder.js):', error)
+        })
     
     // initial fetch method to populate the chests array with chests from
     // my MongoDB database.
     fetch('http://localhost:1234/fetchChests')
     .then(response => response.json())
     .then(data => {
-        this.setState({ chests: data });
+        this.setState({ chests: data })
     })
     .catch(error => {
-        console.error('Error fetching chests (in CharacterBuilder.js):', error);
-    });
+        console.error('Error fetching chests (in CharacterBuilder.js):', error)
+    })
 
     // initial fetch method to populate the hands array with hands from
     // my MongoDB database.
     fetch('http://localhost:1234/fetchHands')
         .then(response => response.json())
         .then(data => {
-            this.setState({ hands: data });
+            this.setState({ hands: data })
         })
         .catch(error => {
-            console.error('Error fetching hands (in CharacterBuilder.js):', error);
-        });
+            console.error('Error fetching hands (in CharacterBuilder.js):', error)
+        })
     
     // initial fetch method to populate the legs array with chests from
     // my MongoDB database.
     fetch('http://localhost:1234/fetchLegs')
     .then(response => response.json())
     .then(data => {
-        this.setState({ legs: data });
+        this.setState({ legs: data })
     })
     .catch(error => {
-        console.error('Error fetching legs (in CharacterBuilder.js):', error);
-    });
+        console.error('Error fetching legs (in CharacterBuilder.js):', error)
+    })
 
     // initial fetch method to populate the legs array with chests from
     // my MongoDB database.
     fetch('http://localhost:1234/fetchWeapons')
     .then(response => response.json())
     .then(data => {
-        this.setState({ weapons: data });
+        this.setState({ weapons: data })
     })
     .catch(error => {
-        console.error('Error fetching weapons (in CharacterBuilder.js):', error);
-    });
+        console.error('Error fetching weapons (in CharacterBuilder.js):', error)
+    })
 
     // initial fetch method to populate the rings array with rings from
     // my MongoDB database rings collection.
     fetch('http://localhost:1234/fetchRings')
     .then(response => response.json())
     .then(data => {
-        this.setState({ rings: data });
+        this.setState({ rings: data })
     })
     .catch(error => {
-        console.error('Error fetching rings (in CharacterBuilder.js):', error);
-    });
+        console.error('Error fetching rings (in CharacterBuilder.js):', error)
+    })
 
-      // initial fetch method to populate the spells array with spells from
+    // initial fetch method to populate the spells array with spells from
     // my MongoDB database spells collection.
     fetch('http://localhost:1234/fetchSpells')
     .then(response => response.json())
     .then(data => {
-        this.setState({ spells: data });
+        this.setState({ spells: data })
     })
     .catch(error => {
-        console.error('Error fetching spells (in CharacterBuilder.js):', error);
-    });
-    this.calculateSpellSlots();
+        console.error('Error fetching spells (in CharacterBuilder.js):', error)
+    })
 
-    this.calculateHP(this.state.vitality);
+    // initial fetch method to populate the items array with items from
+    // my MongoDB database items collection.
+    fetch('http://localhost:1234/fetchItems')
+    .then(response => response.json())
+    .then(data => {
+        this.setState({ items: data })
+    })
+    .catch(error => {
+        console.error('Error fetching items (in CharacterBuilder.js):', error)
+    })
 
-    this.calculateStamina(this.state.endurance);
+    this.calculateSpellSlots()
 
-    this.calculateTotalEquipLoad(this.state.endurance);
+    this.calculateHP(this.state.vitality)
+
+    this.calculateStamina(this.state.endurance)
+
+    this.calculateTotalEquipLoad(this.state.endurance)
     
-    this.calculateEquipLoad();
+    this.calculateEquipLoad()
 
-    this.calculateEncumbrance();
+    this.calculateEncumbrance()
 
   }
 
@@ -265,211 +303,228 @@ class CharacterBuilder extends Component {
     // if the buildLevel changes due to an attribute change, calculate SoulsToNextLevel and TotalSouls.
     if (prevState.buildLevel !== this.state.buildLevel) {
       if ( this.state.buildLevel <= 12 ) {
-        this.setLowerSoulsLevel();
+        this.setLowerSoulsLevel()
       } else {
-        this.calculateSoulsToNextLevel();
+        this.calculateSoulsToNextLevel()
       }
 
-      this.calculateTotalSouls(this.state.buildLevel);
+      this.calculateTotalSouls(this.state.buildLevel)
     }
     
     // if the character class changes  calculate new spell slots
     if (prevState.characterClass !== this.state.characterClass) {
-      this.calculateSpellSlots();
+      this.calculateSpellSlots()
     }
 
     // if the character attunement changes  calculate new spell slots
     if (prevState.attunement !== this.state.attunement) {
-      this.calculateSpellSlots();
+      this.calculateSpellSlots()
     }
 
     // if the character vitality changes  calculate new HP
     if (prevState.vitality !== this.state.vitality) {
-      this.calculateHP(this.state.vitality);
+      this.calculateHP(this.state.vitality)
     }
 
     // if the character endurance changes calculate new stamina
     if (prevState.endurance !== this.state.endurance) {
-      this.calculateStamina(this.state.endurance);
-      this.calculateTotalEquipLoad(this.state.endurance);
-      this.calculateEncumbrance();
+      this.calculateStamina(this.state.endurance)
+      this.calculateTotalEquipLoad(this.state.endurance)
+      this.calculateEncumbrance()
+    }
+
+    // if the character endurance changes calculate new stamina
+    if (prevState.humanity !== this.state.humanity) {
+      this.calculateItemDiscovery(this.state.humanity);
     }
 
     // if the character ring 1 changes calculate new stamina
     if (prevState.buildRing1Name !== this.state.buildRing1Name) {
-      this.calculateStamina(this.state.endurance);
-      this.calculateHP(this.state.vitality);
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
-      this.calculateTotalEquipLoad(this.state.endurance);
+      this.calculateStamina(this.state.endurance)
+      this.calculateHP(this.state.vitality)
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculateTotalEquipLoad(this.state.endurance)
+      this.calculatePoise()
+      this.calculateItemDiscovery(this.state.humanity);
+      this.calculateSpellSlots();
     }
 
     // if the character ring 2 changes calculate new stamina
     if (prevState.buildRing2Name !== this.state.buildRing2Name) {
-      this.calculateStamina(this.state.endurance);
-      this.calculateHP(this.state.vitality);
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
-      this.calculateTotalEquipLoad(this.state.endurance);
+      this.calculateStamina(this.state.endurance)
+      this.calculateHP(this.state.vitality)
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculateTotalEquipLoad(this.state.endurance)
+      this.calculatePoise()
+      this.calculateItemDiscovery(this.state.humanity);
+      this.calculateSpellSlots();
     }
 
     // if the character head changes calculate new related stats
     if (prevState.buildHeadName !== this.state.buildHeadName) {
-      this.calculateHP(this.state.vitality);
-      this.calculateTotalEquipLoad(this.state.endurance);
-      this.calculateEquipLoad();
-      this.calculateEncumbrance();
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
-      this.calculatePoise();
+      this.calculateHP(this.state.vitality)
+      this.calculateTotalEquipLoad(this.state.endurance)
+      this.calculateEquipLoad()
+      this.calculateEncumbrance()
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculatePoise()
+      this.calculateItemDiscovery(this.state.humanity);
     }
 
     // if the character chest changes calculate new equip load
     if (prevState.buildChestName !== this.state.buildChestName) {
-      this.calculateEquipLoad();
-      this.calculateEncumbrance();
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
-      this.calculatePoise();
+      this.calculateEquipLoad()
+      this.calculateEncumbrance()
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculatePoise()
     }
 
     // if the character hands changes calculate new equip load
     if (prevState.buildHandsName !== this.state.buildHandsName) {
-      this.calculateEquipLoad();
-      this.calculateEncumbrance();
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
-      this.calculatePoise();
+      this.calculateEquipLoad()
+      this.calculateEncumbrance()
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculatePoise()
     }
 
     // if the character legs changes calculate new equip load
     if (prevState.buildLegsName !== this.state.buildLegsName) {
-      this.calculateEquipLoad();
-      this.calculateEncumbrance();
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
-      this.calculatePoise();
+      this.calculateEquipLoad()
+      this.calculateEncumbrance()
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculatePoise()
     }
 
     // if the character left hand 1 weapon changes calculate new equip load
     if (prevState.buildLeftHand1Name !== this.state.buildLeftHand1Name) {
-      this.calculateEquipLoad();
-      this.calculateEncumbrance();
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculateEquipLoad()
+      this.calculateEncumbrance()
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
     }
 
     // if the character left hand 2 weapon changes calculate new equip load
     if (prevState.buildLeftHand2Name !== this.state.buildLeftHand2Name) {
-      this.calculateEquipLoad();
-      this.calculateEncumbrance();
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculateEquipLoad()
+      this.calculateEncumbrance()
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
     }
 
     // if the character right hand 1 weapon changes calculate new equip load
     if (prevState.buildRightHand1Name !== this.state.buildRightHand1Name) {
-      this.calculateEquipLoad();
-      this.calculateEncumbrance();
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculateEquipLoad()
+      this.calculateEncumbrance()
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
     }
 
     // if the character right hand 2 weapon changes calculate new equip load
     if (prevState.buildRightHand2Name !== this.state.buildRightHand2Name) {
-      this.calculateEquipLoad();
-      this.calculateEncumbrance();
-      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculateEquipLoad()
+      this.calculateEncumbrance()
+      this.calculateStaminaRecovery(this.state.buildEncumbrance)
     }
 
     // if the buildEquipLoad changes (BECAUSE ANOTHER ITEM WAS ADDED) then
     // we need to recalculate the encumbrance
     if (prevState.buildEquipLoad !== this.state.buildEquipLoad) {
-      this.calculateEncumbrance();
+      this.calculateEncumbrance()
     }
 
     
   }
 
   calculateSpellSlots = () => {
-    let spellAttunements = 0;
+    let spellAttunements = 0
 
     // Add spell slots based on attunement level of build
-    const attunement = this.state.attunement;
-    if (attunement >= 10 && attunement <= 11) spellAttunements = 1;
-    else if (attunement >= 12 && attunement <= 13) spellAttunements = 2;
-    else if (attunement >= 14 && attunement <= 15) spellAttunements = 3;
-    else if (attunement >= 16 && attunement <= 18) spellAttunements = 4;
-    else if (attunement >= 19 && attunement <= 22) spellAttunements = 5;
-    else if (attunement >= 23 && attunement <= 27) spellAttunements = 6;
-    else if (attunement >= 28 && attunement <= 33) spellAttunements = 7;
-    else if (attunement >= 34 && attunement <= 40) spellAttunements = 8;
-    else if (attunement >= 41 && attunement <= 49) spellAttunements = 9;
-    else if (attunement >= 50 && attunement <= 99) spellAttunements = 10;
+    const attunement = this.state.attunement
+    if (attunement >= 10 && attunement <= 11) spellAttunements = 1
+    else if (attunement >= 12 && attunement <= 13) spellAttunements = 2
+    else if (attunement >= 14 && attunement <= 15) spellAttunements = 3
+    else if (attunement >= 16 && attunement <= 18) spellAttunements = 4
+    else if (attunement >= 19 && attunement <= 22) spellAttunements = 5
+    else if (attunement >= 23 && attunement <= 27) spellAttunements = 6
+    else if (attunement >= 28 && attunement <= 33) spellAttunements = 7
+    else if (attunement >= 34 && attunement <= 40) spellAttunements = 8
+    else if (attunement >= 41 && attunement <= 49) spellAttunements = 9
+    else if (attunement >= 50 && attunement <= 99) spellAttunements = 10
 
     // Check for additional slots due to rings
     if (this.state.buildRing1Name === "White Seance Ring" || this.state.buildRing2Name === "White Seance Ring") {
-      spellAttunements += 1;
+      spellAttunements += 1
     }
 
-    this.setState({spellSlots: spellAttunements});
+    // Check for additional slots due to rings
+    if (this.state.buildRing1Name === "Darkmoon Seance Ring" || this.state.buildRing2Name === "Darkmoon Seance Ring") {
+      spellAttunements += 1
+    }
+
+    this.setState({spellSlots: spellAttunements})
  }
 
  // method to calculate the total HP of the build from the vitality stat and other items
   calculateHP = (vitality) => {
-    let buildHealth = this.vitalityToHP[vitality];
+    let buildHealth = this.vitalityToHP[vitality]
 
     // Check for "Mask of the Mother" and apply a 10% increase
     if (this.state.buildHeadName === "Mask of the Mother") {
-      buildHealth *= 1.10; // Increase by 10%
+      buildHealth *= 1.10 // Increase by 10%
     }
 
     // Check for "Ring of Favor and Protection" in either ring slot and apply a 20% increase
     if (this.state.buildRing1Name === "Ring of Favor and Protection" || this.state.buildRing2Name === "Ring of Favor and Protection") {
-      buildHealth *= 1.20; // Increase by 20%
+      buildHealth *= 1.20 // Increase by 20%
     }
 
     // Check for "Tiny Being's Ring" in either ring slot and apply a 5% increase
     if (this.state.buildRing1Name === "Tiny Being's Ring" || this.state.buildRing2Name === "Tiny Being's Ring") {
-      buildHealth *= 1.05; // Increase by 5%
+      buildHealth *= 1.05 // Increase by 5%
     }
 
-    buildHealth = Math.round(buildHealth);
+    buildHealth = Math.round(buildHealth)
 
-    this.setState({ buildHP: buildHealth });
+    this.setState({ buildHP: buildHealth })
   }
 
   // method to calculate the total stamina of the build from the endurance stat and other items
   calculateStamina = (endurance) => {
-    let buildStam = this.enduranceToStamina[endurance];
+    let buildStam = this.enduranceToStamina[endurance]
 
     // Check for "Ring of Favor and Protection" in either ring slot and apply a 20% increase
     if (this.state.buildRing1Name === "Ring of Favor and Protection" || this.state.buildRing2Name === "Ring of Favor and Protection") {
-      buildStam *= 1.20; // Increase by 20%
+      buildStam *= 1.20 // Increase by 20%
     }
 
-    buildStam = Math.round(buildStam);
+    buildStam = Math.round(buildStam)
 
-    this.setState({ buildStamina: buildStam });
+    this.setState({ buildStamina: buildStam })
   }
 
   // method to calculate the total equip load of the build from the endurance stat and other items
   calculateTotalEquipLoad = (endurance) => {
-    let totalEquipLoad = 0.0;
+    let totalEquipLoad = 0.0
   
     if (endurance >= 8 && endurance < 99) {
-      totalEquipLoad = 40.0 + endurance; // Starts from 48 at endurance 8 and increases linearly
+      totalEquipLoad = 40.0 + endurance // Starts from 48 at endurance 8 and increases linearly
     }
   
     if (endurance === 99) {
-      totalEquipLoad = 149.0; // Caps at 149 for endurance values over 99
+      totalEquipLoad = 149.0 // Caps at 149 for endurance values over 99
     }
   
     // Existing checks for rings and other modifiers
     if (this.state.buildRing1Name === "Ring of Favor and Protection" || this.state.buildRing2Name === "Ring of Favor and Protection") {
-      totalEquipLoad *= 1.20; // Increase by 20%
+      totalEquipLoad *= 1.20 // Increase by 20%
     }
   
     if (this.state.buildRing1Name === "Havel's Ring" || this.state.buildRing2Name === "Havel's Ring") {
-      totalEquipLoad *= 1.50; // Increase by 50%
+      totalEquipLoad *= 1.50 // Increase by 50%
     }
   
     if (this.state.buildHeadName === "Mask of the Father" || this.state.buildHeadName === "Mask of the Father") {
-      totalEquipLoad *= 1.05; // Increase by 5%
+      totalEquipLoad *= 1.05 // Increase by 5%
     }
   
-    this.setState({ buildTotalEquipLoad: totalEquipLoad });
+    this.setState({ buildTotalEquipLoad: totalEquipLoad })
   }
   
 
@@ -477,84 +532,84 @@ class CharacterBuilder extends Component {
   calculateEquipLoad = () => {
     const { buildHead, buildChest, buildHands, buildLegs, 
             buildLeftHand1, buildLeftHand2, 
-            buildRightHand1, buildRightHand2 } = this.state;
+            buildRightHand1, buildRightHand2 } = this.state
   
-    let equipLoad = 0;
+    let equipLoad = 0
   
     const addWeight = item => {
       // Check if item is not null and has a valid numeric weight
       if (item && !isNaN(item.weight)) {
-        equipLoad += Number(item.weight);
+        equipLoad += Number(item.weight)
       }
-    };
+    }
   
-    addWeight(buildHead);
-    addWeight(buildChest);
-    addWeight(buildHands);
-    addWeight(buildLegs);
-    addWeight(buildLeftHand1);
-    addWeight(buildLeftHand2);
-    addWeight(buildRightHand1);
-    addWeight(buildRightHand2);
+    addWeight(buildHead)
+    addWeight(buildChest)
+    addWeight(buildHands)
+    addWeight(buildLegs)
+    addWeight(buildLeftHand1)
+    addWeight(buildLeftHand2)
+    addWeight(buildRightHand1)
+    addWeight(buildRightHand2)
 
     // Rounding to one decimal place
-    equipLoad = parseFloat(equipLoad.toFixed(1)); 
+    equipLoad = parseFloat(equipLoad.toFixed(1)) 
   
-    this.setState({ buildEquipLoad: equipLoad });
+    this.setState({ buildEquipLoad: equipLoad })
   }
 
   calculateEncumbrance = () => {
-    const { buildEquipLoad, buildTotalEquipLoad } = this.state;
+    const { buildEquipLoad, buildTotalEquipLoad } = this.state
   
-    let encumbrance = 0;
-    let tempBuildRollType = "";
+    let encumbrance = 0
+    let tempBuildRollType = ""
   
     if (buildEquipLoad !== 0 ) {
-      encumbrance = (buildEquipLoad / buildTotalEquipLoad) * 100;
-      encumbrance = parseFloat(encumbrance.toFixed(1)); 
+      encumbrance = (buildEquipLoad / buildTotalEquipLoad) * 100
+      encumbrance = parseFloat(encumbrance.toFixed(1)) 
     } else {
-      encumbrance = 0;
+      encumbrance = 0
     }
 
-    if (encumbrance >= 0 && encumbrance <= 24.9) tempBuildRollType = "Fast";
-    else if (encumbrance >= 25.0 && encumbrance <= 49.9) tempBuildRollType = "Medium";
-    else if (encumbrance >= 50.0 ) tempBuildRollType = "Fat";
+    if (encumbrance >= 0 && encumbrance <= 24.9) tempBuildRollType = "Fast"
+    else if (encumbrance >= 25.0 && encumbrance <= 49.9) tempBuildRollType = "Medium"
+    else if (encumbrance >= 50.0 ) tempBuildRollType = "Fat"
   
-    this.setState({ buildRollType: tempBuildRollType });
-    this.setState({ buildEncumbrance: encumbrance });
+    this.setState({ buildRollType: tempBuildRollType })
+    this.setState({ buildEncumbrance: encumbrance })
   }
 
   calculateStaminaRecovery = (currentBuildEncumbrance) => {
     const { buildRing1Name, buildRing2Name, buildHeadName, buildStaminaRecovery, 
       buildLeftHand1Name, buildLeftHand2Name, buildRightHand1Name, 
       buildRightHand2Name, isCloranthyRingApplied, isMaskOfChildApplied,
-      is30PercentPenaltyApplied, is20PercentPenaltyApplied } = this.state;
+      is30PercentPenaltyApplied, is20PercentPenaltyApplied } = this.state
 
-    let newBuildStaminaRecovery = buildStaminaRecovery;
+    let newBuildStaminaRecovery = buildStaminaRecovery
 
     // Handle Cloranthy Ring logic
     if (buildRing1Name === "Cloranthy Ring" || buildRing2Name === "Cloranthy Ring") {
     if (!isCloranthyRingApplied) {
-      newBuildStaminaRecovery += 20; // Apply bonus
-      this.setState({ isCloranthyRingApplied: true });
+      newBuildStaminaRecovery += 20 // Apply bonus
+      this.setState({ isCloranthyRingApplied: true })
     }
     } else {
     if (isCloranthyRingApplied) {
-      newBuildStaminaRecovery -= 20; // Remove bonus
-      this.setState({ isCloranthyRingApplied: false });
+      newBuildStaminaRecovery -= 20 // Remove bonus
+      this.setState({ isCloranthyRingApplied: false })
     }
     }
 
     // Handle Mask of the Child logic
     if (buildHeadName === "Mask of the Child") {
     if (!isMaskOfChildApplied) {
-      newBuildStaminaRecovery += 10; // Apply bonus
-      this.setState({ isMaskOfChildApplied: true });
+      newBuildStaminaRecovery += 10 // Apply bonus
+      this.setState({ isMaskOfChildApplied: true })
     }
     } else {
     if (isMaskOfChildApplied) {
-      newBuildStaminaRecovery -= 10; // Remove bonus
-      this.setState({ isMaskOfChildApplied: false });
+      newBuildStaminaRecovery -= 10 // Remove bonus
+      this.setState({ isMaskOfChildApplied: false })
     }
     }
   
@@ -562,50 +617,81 @@ class CharacterBuilder extends Component {
     let grassCrestShieldCount = 0;
     [buildLeftHand1Name, buildLeftHand2Name, buildRightHand1Name, buildRightHand2Name].forEach(name => {
       if (name === "Grass Crest Shield") {
-        grassCrestShieldCount++;
+        grassCrestShieldCount++
       }
-    });
+    })
   
     // Apply increase for Grass Crest Shield, capped at +20
     if (grassCrestShieldCount < 3 && grassCrestShieldCount !== 0) {
-      newBuildStaminaRecovery += 10;
+      newBuildStaminaRecovery += 10
     }
 
    // Encumbrance-based stamina recovery penalty
    if (currentBuildEncumbrance >= 50 && currentBuildEncumbrance < 100 && !is20PercentPenaltyApplied) {
-    newBuildStaminaRecovery *= 0.80; // Reduce by 20%
-    this.setState({ is20PercentPenaltyApplied: true, is30PercentPenaltyApplied: false });
+    newBuildStaminaRecovery *= 0.80 // Reduce by 20%
+    this.setState({ is20PercentPenaltyApplied: true, is30PercentPenaltyApplied: false })
   } else if (currentBuildEncumbrance >= 100 && !is30PercentPenaltyApplied) {
-    newBuildStaminaRecovery *= 0.70; // Reduce by 30%
-    this.setState({ is30PercentPenaltyApplied: true, is20PercentPenaltyApplied: false });
+    newBuildStaminaRecovery *= 0.70 // Reduce by 30%
+    this.setState({ is30PercentPenaltyApplied: true, is20PercentPenaltyApplied: false })
   } else if (currentBuildEncumbrance < 50) {
     // Reset to original stamina recovery if penalties were applied
     if (is20PercentPenaltyApplied || is30PercentPenaltyApplied) {
-      newBuildStaminaRecovery = 45;
+      newBuildStaminaRecovery = 45
     }
-    this.setState({ is20PercentPenaltyApplied: false, is30PercentPenaltyApplied: false });
+    this.setState({ is20PercentPenaltyApplied: false, is30PercentPenaltyApplied: false })
   }
 
-  newBuildStaminaRecovery = parseFloat(newBuildStaminaRecovery.toFixed(1));
+  newBuildStaminaRecovery = parseFloat(newBuildStaminaRecovery.toFixed(1))
 
-  this.setState({ buildStaminaRecovery: newBuildStaminaRecovery });
+  this.setState({ buildStaminaRecovery: newBuildStaminaRecovery })
   }
 
   // calculate the poise for the build based on the total of all the armor poise stats
   calculatePoise = () => {
-    const { buildHead, buildChest, buildHands, buildLegs } = this.state;
+    const { buildHead, buildChest, buildHands, buildLegs, 
+            buildRing1Name, buildRing2Name, isWolfRingApplied } = this.state
 
     // Using the || operator to default to 0 if the value is null or 0
-    const totalPoise = (buildHead.poise || 0) + (buildChest.poise || 0) + (buildHands.poise || 0) + (buildLegs.poise || 0);
+    let totalPoise = (buildHead.poise || 0) + (buildChest.poise || 0) + (buildHands.poise || 0) + (buildLegs.poise || 0)
 
-    this.setState({ buildPoise: totalPoise });
-  };
-  
-  
+    if (buildRing1Name === "Wolf Ring" || buildRing2Name === "Wolf Ring") {
+      if (!isWolfRingApplied) {
+        totalPoise += 40 // Apply bonus
+        this.setState({ isWolfRingApplied: true })
+      }} else if (buildRing1Name !== "Wolf Ring" || buildRing2Name !== "Wolf Ring") {
+        this.setState({ isWolfRingApplied: false })
+      }
 
+    this.setState({ buildPoise: totalPoise })
+  }
+
+  // calculate the total item discovery based on humanity and a special ring or helmet
+  calculateItemDiscovery = (humanity) => {
+    const { buildRing1Name, buildRing2Name, buildHeadName } = this.state;
+  
+    // Calculate base item discovery based on humanity
+    let totalItemDiscovery = this.humanityToItemDiscovery[humanity];
+  
+    // Check for special items and apply/remove bonus
+    const hasCovetousGoldSerpentRing = buildRing1Name === "Covetous Gold Serpent Ring" || buildRing2Name === "Covetous Gold Serpent Ring";
+    const hasSymbolOfAvarice = buildHeadName === "Symbol of Avarice";
+  
+    // Apply the bonus if any of the special items is equipped
+    if (hasCovetousGoldSerpentRing || hasSymbolOfAvarice) {
+      totalItemDiscovery = Math.min(totalItemDiscovery + 200, 410);
+    }
+  
+    // Update state with the calculated values
+    this.setState({ 
+      buildItemDiscovery: totalItemDiscovery,
+      isCovetousGoldSerpentRingApplied: hasCovetousGoldSerpentRing,
+      isSymbolOfAvariceApplied: hasSymbolOfAvarice
+    });
+  }
+  
   handleClassChange = (e) => {
-    const selectedClass = e.target.value;
-    const attributes = this.classAttributeMapping[selectedClass];
+    const selectedClass = e.target.value
+    const attributes = this.classAttributeMapping[selectedClass]
 
     // Update the buildLevel based on the selected character class
     this.setState({
@@ -632,40 +718,40 @@ class CharacterBuilder extends Component {
 
   // handler for when the user changes the select option for Covenant
   handleCovenantChange = (e) => {
-    const selectedCovenant = e.target.value;
+    const selectedCovenant = e.target.value
 
-    this.setState({buildCovenant: selectedCovenant});
+    this.setState({buildCovenant: selectedCovenant})
   }
 
   handleSpellChange = (index, event) => {
-    const selectedSpellName = event.target.value;
-    const selectedSpell = this.state.spells.find(spell => spell.name === selectedSpellName);
+    const selectedSpellName = event.target.value
+    const selectedSpell = this.state.spells.find(spell => spell.name === selectedSpellName)
   
     if (selectedSpell) {
-        const { intelligenceRequirement, faithRequirement, slots, spellType } = selectedSpell;
-        const { intelligence, faith, spellSlots, usedSpellSlots } = this.state;
+        const { intelligenceRequirement, faithRequirement, slots, spellType } = selectedSpell
+        const { intelligence, faith, spellSlots, usedSpellSlots } = this.state
     
         // Calculate new used slots if this spell is selected
-        const newUsedSpellSlots = usedSpellSlots - (this.state[`buildSpellName${index + 1}`] !== "No Spell" ? this.state.spells.find(spell => spell.name === this.state[`buildSpellName${index + 1}`]).slots : 0) + slots;
+        const newUsedSpellSlots = usedSpellSlots - (this.state[`buildSpellName${index + 1}`] !== "No Spell" ? this.state.spells.find(spell => spell.name === this.state[`buildSpellName${index + 1}`]).slots : 0) + slots
 
         // Check if selecting this spell exceeds the spell slot limit
         if (newUsedSpellSlots > spellSlots) {
-            alert(`Selecting this spell will exceed your available spell slots.`);
-            return;
+            alert(`Selecting this spell will exceed your available spell slots.`)
+            return
         }
     
         // Check for sorcery or miracle and their requirements
         if ((spellType === 'sorcery' && intelligence < intelligenceRequirement) || 
             (spellType === 'miracle' && faith < faithRequirement)) {
-            alert(`You do not meet the intelligence or faith requirements for this spell.`);
-            return;
+            alert(`You do not meet the intelligence or faith requirements for this spell.`)
+            return
         }
     
         // Update the spell and usedSpellSlots
         this.setState({ 
             [`buildSpellName${index + 1}`]: selectedSpellName,
             usedSpellSlots: newUsedSpellSlots
-        });
+        })
     }
   }
 
@@ -673,31 +759,31 @@ class CharacterBuilder extends Component {
   handleAttributeDiv1Click = () => {
     this.setState(prevState => ({
       currentGroupIndex1: (prevState.currentGroupIndex1 + 1) % this.attributeGroups.length
-    }));
+    }))
   }
 
   handleAttributeDiv2Click = () => {
     this.setState(prevState => ({
       currentGroupIndex2: (prevState.currentGroupIndex2 + 1) % this.attributeGroups.length
-    }));
+    }))
   }
 
     handleAttributeDiv3Click = () => {
     this.setState(prevState => ({
       currentGroupIndex3: (prevState.currentGroupIndex3 + 1) % this.attributeGroups.length
-    }));
+    }))
   }
 
   handleAttributeDiv4Click = () => {
     this.setState(prevState => ({
       currentGroupIndex4: (prevState.currentGroupIndex4 + 1) % this.attributeGroups.length
-    }));
+    }))
   }
 
   renderAttributes = (weapon, group) => {
 
     // Capitalize the first letter of the group name for display
-    const groupName = group.charAt(0).toUpperCase() + group.slice(1);
+    const groupName = group.charAt(0).toUpperCase() + group.slice(1)
 
     if (group === 'weightDurability') {
       return (
@@ -705,7 +791,7 @@ class CharacterBuilder extends Component {
           <p>Weight: {weapon.weight}</p>
           <p>Durability: {weapon.durability}</p>
         </>
-      );
+      )
     } else {
       return (
         <>
@@ -719,210 +805,236 @@ class CharacterBuilder extends Component {
   }
 
   handleHeadChange = (e) => {
-    const selectedHead = e.target.value;
+    const selectedHead = e.target.value
 
-    this.setState({buildHeadName: selectedHead});
-    this.handleHelmetSelection(selectedHead);
+    this.setState({buildHeadName: selectedHead})
+    this.handleHelmetSelection(selectedHead)
   }
 
   getHelmetByName = (helmetName) => {
-    return this.state.helmets.find(helmet => helmet.name === helmetName);
+    return this.state.helmets.find(helmet => helmet.name === helmetName)
   }
   
   handleHelmetSelection = (helmetName) => {
-    const selectedHelmet = this.getHelmetByName(helmetName);
+    const selectedHelmet = this.getHelmetByName(helmetName)
     if (selectedHelmet) {
-      this.setState({ buildHead: selectedHelmet });
+      this.setState({ buildHead: selectedHelmet })
     } else {
       // Handle the case where the helmet is not found
-      console.log("Helmet not found");
+      console.log("Helmet not found")
     }
-  };
+  }
 
   handleChestChange = (e) => {
-    const selectedChest = e.target.value;
+    const selectedChest = e.target.value
 
-    this.setState({buildChestName: selectedChest});
-    this.handleChestSelection(selectedChest);
+    this.setState({buildChestName: selectedChest})
+    this.handleChestSelection(selectedChest)
   }
 
   getChestByName = (chestName) => {
-    return this.state.chests.find(chest => chest.name === chestName);
+    return this.state.chests.find(chest => chest.name === chestName)
   }
   
   handleChestSelection = (chestName) => {
-    const selectedChest = this.getChestByName(chestName);
+    const selectedChest = this.getChestByName(chestName)
     if (selectedChest) {
-      this.setState({ buildChest: selectedChest });
+      this.setState({ buildChest: selectedChest })
     } else {
       // Handle the case where the chest is not found
-      console.log("Chest not found");
+      console.log("Chest not found")
     }
-  };
+  }
 
   handleHandsChange = (e) => {
-    const selectedHands = e.target.value;
+    const selectedHands = e.target.value
 
-    this.setState({buildHandsName: selectedHands});
-    this.handleHandSelection(selectedHands);
+    this.setState({buildHandsName: selectedHands})
+    this.handleHandSelection(selectedHands)
   }
 
   getHandsByName = (handName) => {
-    return this.state.hands.find(hand => hand.name === handName);
+    return this.state.hands.find(hand => hand.name === handName)
   }
   
   handleHandSelection = (handName) => {
-    const selectedHand = this.getHandsByName(handName);
+    const selectedHand = this.getHandsByName(handName)
     if (selectedHand) {
-      this.setState({ buildHands: selectedHand });
+      this.setState({ buildHands: selectedHand })
     } else {
       // Handle the case where the hands is not found
-      console.log("Hands not found");
+      console.log("Hands not found")
     }
   }
 
   handleLegsChange = (e) => {
-    const selectedLegs = e.target.value;
+    const selectedLegs = e.target.value
 
-    this.setState({buildLegsName: selectedLegs});
-    this.handleLegsSelection(selectedLegs);
+    this.setState({buildLegsName: selectedLegs})
+    this.handleLegsSelection(selectedLegs)
   }
 
   getLegsByName = (legName) => {
-    return this.state.legs.find(leg => leg.name === legName);
+    return this.state.legs.find(leg => leg.name === legName)
   }
   
   handleLegsSelection = (legName) => {
-    const selectedLegs = this.getLegsByName(legName);
+    const selectedLegs = this.getLegsByName(legName)
     if (selectedLegs) {
-      this.setState({ buildLegs: selectedLegs });
+      this.setState({ buildLegs: selectedLegs })
     } else {
       // Handle the case where the legs is not found
-      console.log("Legs not found");
+      console.log("Legs not found")
     }
   }
 
   handleRing1Change = (e) => {
-    const selectedRing1 = e.target.value;
+    const selectedRing1 = e.target.value
 
     // Check if the selected ring is already selected as the second ring
     if (selectedRing1 === "No Ring") {
-      this.setState({ buildRing1Name: selectedRing1 });
+      this.setState({ buildRing1Name: selectedRing1 })
     } else if (selectedRing1 === this.state.buildRing2Name) {
-      alert("This ring is already selected in the other slot.");
+      alert("This ring is already selected in the other slot.")
     } else {
-      this.setState({ buildRing1Name: selectedRing1 });
-      this.handleRingSelection1(selectedRing1);
+      this.setState({ buildRing1Name: selectedRing1 })
+      this.handleRingSelection1(selectedRing1)
 
     }
 }
 
   handleRing2Change = (e) => {
-  const selectedRing2 = e.target.value;
+  const selectedRing2 = e.target.value
 
   // Check if the selected ring is already selected as the second ring
   if (selectedRing2 === "No Ring") {
-    this.setState({ buildRing2Name: selectedRing2 });
+    this.setState({ buildRing2Name: selectedRing2 })
     } else if (selectedRing2 === this.state.buildRing1Name) {
-      alert("This ring is already selected in the other slot.");
+      alert("This ring is already selected in the other slot.")
     } else {
-      this.setState({ buildRing2Name: selectedRing2 });
-      this.handleRingSelection2(selectedRing2);
+      this.setState({ buildRing2Name: selectedRing2 })
+      this.handleRingSelection2(selectedRing2)
   }
   }
 
   getRingByName = (ringName) => {
-    return this.state.rings.find(ring => ring.name === ringName);
+    return this.state.rings.find(ring => ring.name === ringName)
   }
 
   handleRingSelection1 = (ringName) => {
-    const selectedRing = this.getRingByName(ringName);
+    const selectedRing = this.getRingByName(ringName)
     if (selectedRing) {
-      this.setState({ buildRing1: selectedRing });
+      this.setState({ buildRing1: selectedRing })
     } else {
       // Handle the case where the weapon is not found
-      console.log("Ring not found");
+      console.log("Ring not found")
     }
   }
 
   handleRingSelection2 = (ringName) => {
-    const selectedRing = this.getRingByName(ringName);
+    const selectedRing = this.getRingByName(ringName)
     if (selectedRing) {
-      this.setState({ buildRing2: selectedRing });
+      this.setState({ buildRing2: selectedRing })
     } else {
       // Handle the case where the weapon is not found
-      console.log("Ring not found");
+      console.log("Ring not found")
     }
   }
 
   getWeaponByName = (weaponName) => {
-    return this.state.weapons.find(weapon => weapon.name === weaponName);
+    return this.state.weapons.find(weapon => weapon.name === weaponName)
   }
 
   handleLeftHandOneChange = (e) => {
-    const selectedLeftHand1 = e.target.value;
-    this.setState({buildLeftHand1Name: selectedLeftHand1});
-    this.handleWeaponSelection1(selectedLeftHand1);
+    const selectedLeftHand1 = e.target.value
+    this.setState({buildLeftHand1Name: selectedLeftHand1})
+    this.handleWeaponSelection1(selectedLeftHand1)
     
   }
 
   handleWeaponSelection1 = (weaponName) => {
-    const selectedWeapon = this.getWeaponByName(weaponName);
+    const selectedWeapon = this.getWeaponByName(weaponName)
     if (selectedWeapon) {
-      this.setState({ buildLeftHand1: selectedWeapon });
+      this.setState({ buildLeftHand1: selectedWeapon })
     } else {
       // Handle the case where the weapon is not found
-      console.log("Weapon not found");
+      console.log("Weapon not found")
     }
   }
 
   handleRightHandOneChange = (e) => {
-    const selectedRightHand1 = e.target.value;
-    this.setState({buildRightHand1Name: selectedRightHand1});
-    this.handleWeaponSelection2(selectedRightHand1);
+    const selectedRightHand1 = e.target.value
+    this.setState({buildRightHand1Name: selectedRightHand1})
+    this.handleWeaponSelection2(selectedRightHand1)
   }
 
   handleWeaponSelection2 = (weaponName) => {
-    const selectedWeapon = this.getWeaponByName(weaponName);
+    const selectedWeapon = this.getWeaponByName(weaponName)
     if (selectedWeapon) {
-      this.setState({ buildRightHand1: selectedWeapon });
+      this.setState({ buildRightHand1: selectedWeapon })
     } else {
       // Handle the case where the weapon is not found
-      console.log("Weapon not found");
+      console.log("Weapon not found")
     }
-  };
+  }
 
   handleLeftHandTwoChange = (e) => {
-    const selectedLeftHand2 = e.target.value;
-    this.setState({buildLeftHand2Name: selectedLeftHand2});
-    this.handleWeaponSelection3(selectedLeftHand2);
+    const selectedLeftHand2 = e.target.value
+    this.setState({buildLeftHand2Name: selectedLeftHand2})
+    this.handleWeaponSelection3(selectedLeftHand2)
   }
 
   handleWeaponSelection3 = (weaponName) => {
-    const selectedWeapon = this.getWeaponByName(weaponName);
+    const selectedWeapon = this.getWeaponByName(weaponName)
     if (selectedWeapon) {
-      this.setState({ buildLeftHand2: selectedWeapon });
+      this.setState({ buildLeftHand2: selectedWeapon })
     } else {
       // Handle the case where the weapon is not found
-      console.log("Weapon not found");
+      console.log("Weapon not found")
     }
-  };
+  }
 
   handleRightHandTwoChange = (e) => {
-    const selectedRightHand2 = e.target.value;
-    this.setState({buildRightHand2Name: selectedRightHand2});
-    this.handleWeaponSelection4(selectedRightHand2);
+    const selectedRightHand2 = e.target.value
+    this.setState({buildRightHand2Name: selectedRightHand2})
+    this.handleWeaponSelection4(selectedRightHand2)
   }
 
   handleWeaponSelection4 = (weaponName) => {
-    const selectedWeapon = this.getWeaponByName(weaponName);
+    const selectedWeapon = this.getWeaponByName(weaponName)
     if (selectedWeapon) {
-      this.setState({ buildRightHand2: selectedWeapon });
+      this.setState({ buildRightHand2: selectedWeapon })
     } else {
       // Handle the case where the weapon is not found
-      console.log("Weapon not found");
+      console.log("Weapon not found")
     }
-  };
+  }
+
+
+  handleItemChange1 = (e) => {
+    const selectedItem1 = e.target.value
+    this.setState({buildItemName1: selectedItem1})
+  }
+
+  handleItemChange2 = (e) => {
+    const selectedItem2 = e.target.value
+    this.setState({buildItemName2: selectedItem2})
+  }
+
+  handleItemChange3 = (e) => {
+    const selectedItem3 = e.target.value
+    this.setState({buildItemName3: selectedItem3})
+  }
+
+  handleItemChange4 = (e) => {
+    const selectedItem4 = e.target.value
+    this.setState({buildItemName4: selectedItem4})
+  }
+
+  handleItemChange5 = (e) => {
+    const selectedItem5 = e.target.value
+    this.setState({buildItemName5: selectedItem5})
+  }
 
   handleNewBuildClick = () => {
     // Open a new page in another tab
@@ -957,7 +1069,7 @@ class CharacterBuilder extends Component {
           humanity: prevState.humanity - 1,
         }))
       } else {
-        const initKey = `init${attribute.charAt(0).toUpperCase() + attribute.slice(1)}`;
+        const initKey = `init${attribute.charAt(0).toUpperCase() + attribute.slice(1)}`
         if (this.state.buildLevel > 0 && this.state[attribute] > this.state[initKey]) {
           this.setState((prevState) => ({
             buildLevel: prevState.buildLevel - 1,
@@ -970,8 +1082,8 @@ class CharacterBuilder extends Component {
 
     // method to set the souls for LOWER levels (1-12)
     setLowerSoulsLevel = () => {
-      const { buildLevel } = this.state;
-      let souls;
+      const { buildLevel } = this.state
+      let souls
 
       // use a switch to deal with levels 1-11 because the equation to calculate
       // souls for next level is only accurate for level 12 and up.
@@ -989,36 +1101,36 @@ class CharacterBuilder extends Component {
         11: 847,
         12: 1038,
       }
-      souls = lowerLevels[buildLevel];
-      this.setState({ soulsToNextLevel: souls });
+      souls = lowerLevels[buildLevel]
+      this.setState({ soulsToNextLevel: souls })
     }
 
     // method to calculate the souls needed for next level (levels greater than 12)
     calculateSoulsToNextLevel = () => {
-      const { buildLevel } = this.state;
-      const calcSouls = Math.round((0.02 * Math.pow((buildLevel+1), 3)) + (3.06 * Math.pow((buildLevel+1), 2)) + (105.6 * (buildLevel+1)) - 895); 
-      this.setState({ soulsToNextLevel: calcSouls });
+      const { buildLevel } = this.state
+      const calcSouls = Math.round((0.02 * Math.pow((buildLevel+1), 3)) + (3.06 * Math.pow((buildLevel+1), 2)) + (105.6 * (buildLevel+1)) - 895) 
+      this.setState({ soulsToNextLevel: calcSouls })
     }
 
     calculateTotalSouls = (targetLevel) => {
-      const { characterClass } = this.state;
-      const baseLevel = this.classLevelMapping[characterClass];
-      let totalSouls = 0;
+      const { characterClass } = this.state
+      const baseLevel = this.classLevelMapping[characterClass]
+      let totalSouls = 0
     
       // Iterate from the base level to the target level
       for (let level = baseLevel; level < targetLevel; level++) {
         // Add souls required for each level to totalSouls
         // You need to implement getSoulsForLevel(level) which returns souls required for a given level
-        totalSouls += this.getSoulsForLevel(level);
+        totalSouls += this.getSoulsForLevel(level)
       }
     
       // Update the state with the calculated total souls
-      this.setState({ spentSouls: totalSouls });
+      this.setState({ spentSouls: totalSouls })
     }
     
     getSoulsForLevel = (level) => {
       
-      let soulsForThisLevel;
+      let soulsForThisLevel
       if (level <= 12) {
         const lowerLevels = {
           1: 673,
@@ -1034,12 +1146,12 @@ class CharacterBuilder extends Component {
           11: 847,
           12: 1038,
         }
-        soulsForThisLevel = lowerLevels[level];
+        soulsForThisLevel = lowerLevels[level]
       } else {
         soulsForThisLevel = Math.round((0.02 * Math.pow((level+1), 3)) + 
-        (3.06 * Math.pow((level+1), 2)) + (105.6 * (level+1)) - 895);
+        (3.06 * Math.pow((level+1), 2)) + (105.6 * (level+1)) - 895)
       }
-      return soulsForThisLevel;
+      return soulsForThisLevel
     }
     
   
@@ -1056,23 +1168,25 @@ class CharacterBuilder extends Component {
             buildHeadName, buildChestName, buildHandsName, buildLegsName,
             spells, spellSlots, buildHP, buildStamina, buildTotalEquipLoad,
             buildEquipLoad, buildEncumbrance, buildRollType, 
-            buildStaminaRecovery, buildPoise } = this.state;
+            buildStaminaRecovery, buildPoise, buildItemDiscovery,
+            buildItemName1, buildItemName2, buildItemName3, buildItemName4,
+            buildItemName5, items } = this.state
     
-    const leftHandGroup1 = this.attributeGroups[this.state.currentGroupIndex1];
-    const rightHandGroup1 = this.attributeGroups[this.state.currentGroupIndex2];
-    const leftHandGroup2 = this.attributeGroups[this.state.currentGroupIndex3];
-    const rightHandGroup2 = this.attributeGroups[this.state.currentGroupIndex4];
+    const leftHandGroup1 = this.attributeGroups[this.state.currentGroupIndex1]
+    const rightHandGroup1 = this.attributeGroups[this.state.currentGroupIndex2]
+    const leftHandGroup2 = this.attributeGroups[this.state.currentGroupIndex3]
+    const rightHandGroup2 = this.attributeGroups[this.state.currentGroupIndex4]
 
-    const initialLevel = this.classLevelMapping[characterClass];
+    const initialLevel = this.classLevelMapping[characterClass]
 
-    let colorClass;
+    let colorClass
 
     if (buildEncumbrance < 25) {
-      colorClass = 'green-text';
+      colorClass = 'green-text'
     } else if (buildEncumbrance >= 25 && buildEncumbrance < 50) {
-      colorClass = 'blue-text';
+      colorClass = 'blue-text'
     } else if (buildEncumbrance >= 50) {
-      colorClass = 'red-text';
+      colorClass = 'red-text'
     }
 
     
@@ -1371,7 +1485,7 @@ class CharacterBuilder extends Component {
                       {helmet.name} 
                   </option>
               ))}
-          </select>
+            </select>
           </div>
 
           <div className="armorDropdown">
@@ -1590,45 +1704,159 @@ class CharacterBuilder extends Component {
         </div>
 
         <div className="stats-grid">
-          <div className="stat-row">
-            <div className="stat-name">HP</div>
-            <div className="stat-value">{buildHP}</div>
+          
+          <div className="char-stats">
+            <div className="stat-row">
+              <div className="stat-name">HP</div>
+              <div className="stat-value">{buildHP}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Stamina</div>
+              <div className="stat-value">{buildStamina}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Stamina Regen</div>
+              <div className="stat-value">{buildStaminaRecovery}/sec</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Equip Load</div>
+              
+              <div className={`weight-value ${colorClass}`}>{buildEquipLoad} / {buildTotalEquipLoad} - {buildEncumbrance}%</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Roll Type</div>
+              <div className={`weight-value ${colorClass}`}>{buildRollType}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Poise</div>
+              <div className="stat-value">{buildPoise}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Item Discovery</div>
+              <div className="stat-value">{buildItemDiscovery}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Attunement Slots</div>
+              <div className="stat-value">{spellSlots}</div>
+            </div>
           </div>
 
-          <div className="stat-row">
-            <div className="stat-name">Stamina</div>
-            <div className="stat-value">{buildStamina}</div>
+          <div className="char-defense">
+            <div className="armorInfo">
+              <span>Defense</span>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Physical</div>
+              <div className="stat-value">{}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Magic</div>
+              <div className="stat-value">{}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Flame</div>
+              <div className="stat-value">{}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Lightning</div>
+              
+              <div className="stat-value">{}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Bleed</div>
+              <div className="stat-value">{}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Poison</div>
+              <div className="stat-value">{}</div>
+            </div>
+
+            <div className="stat-row">
+              <div className="stat-name">Curse</div>
+              <div className="stat-value">{}</div>
+            </div>
+
           </div>
 
-          <div className="stat-row">
-            <div className="stat-name">Stamina Regen</div>
-            <div className="stat-value">{buildStaminaRecovery}/sec</div>
-          </div>
+          <div className="char-items">
 
-          <div className="stat-row">
-            <div className="stat-name">Equip Load</div>
+            <div className="armorInfo">
+              <span>Items</span>
+            </div>
             
-            <div className={`weight-value ${colorClass}`}>{buildEquipLoad} / {buildTotalEquipLoad} - {buildEncumbrance}%</div>
-          </div>
+            <div className="armorDropdown">
+              <select className="itemSelect"
+              value={buildItemName1}
+              onChange={this.handleItemChange1}>
+                {items.map(item => (
+                    <option key={item._id} value={item.name}>
+                        {item.name} 
+                    </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="stat-row">
-            <div className="stat-name">Roll Type</div>
-            <div className={`weight-value ${colorClass}`}>{buildRollType}</div>
-          </div>
+            <div className="armorDropdown">
+              <select className="itemSelect"
+              value={buildItemName2}
+              onChange={this.handleItemChange2}>
+                {items.map(item => (
+                    <option key={item._id} value={item.name}>
+                        {item.name} 
+                    </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="stat-row">
-            <div className="stat-name">Poise</div>
-            <div className="stat-value">{buildPoise}</div>
-          </div>
+            <div className="armorDropdown">
+              <select className="itemSelect"
+              value={buildItemName3}
+              onChange={this.handleItemChange3}>
+                {items.map(item => (
+                    <option key={item._id} value={item.name}>
+                        {item.name} 
+                    </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="stat-row">
-            <div className="stat-name">Item Discovery</div>
-            <div className="stat-value">{}</div>
-          </div>
+            <div className="armorDropdown">
+              <select className="itemSelect"
+              value={buildItemName4}
+              onChange={this.handleItemChange4}>
+                {items.map(item => (
+                    <option key={item._id} value={item.name}>
+                        {item.name} 
+                    </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="stat-row">
-            <div className="stat-name">Attunement Slots</div>
-            <div className="stat-value">{}</div>
+            <div className="armorDropdown">
+              <select className="itemSelect"
+              value={buildItemName5}
+              onChange={this.handleItemChange5}>
+                {items.map(item => (
+                    <option key={item._id} value={item.name}>
+                        {item.name} 
+                    </option>
+                ))}
+              </select>
+            </div>
+            
           </div>
 
 

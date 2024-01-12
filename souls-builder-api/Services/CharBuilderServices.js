@@ -2,6 +2,7 @@ import { ArmorModel } from "../Models/ArmorModel.js";
 import { WeaponModel } from "../Models/WeaponModel.js";
 import { RingModel } from "../Models/RingModel.js";
 import { SpellModel } from "../Models/SpellModel.js";
+import { ItemModel } from "../Models/ItemModel.js";
 
 // This is our fetchChests service function that is invoked
 // by the fetchChestsEndpoint() function. It uses the mongoDB
@@ -60,4 +61,12 @@ const fetchSpells = async () => {
     return allSpells
 }
 
-export { fetchChests, fetchHelmets, fetchHands, fetchLegs, fetchWeapons, fetchRings, fetchSpells }
+// This is our fetchItems service function that is invoked
+// by the fetchItemsEndpoint() function. It uses the mongoDB
+// find() method to find all items in my database items collection
+const fetchItems = async () => {
+    const allItems = await ItemModel.find({})
+    return allItems
+}
+
+export { fetchChests, fetchHelmets, fetchHands, fetchLegs, fetchWeapons, fetchRings, fetchSpells, fetchItems }

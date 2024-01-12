@@ -180,6 +180,7 @@ button {
   margin-top: 1vh;
   color: #dad386; 
   font-size: 0.8em;
+  text-decoration: underline;
 }
 
 .attribute-row {
@@ -275,10 +276,12 @@ button {
 
 .init {
   padding-left: 24%;
+  text-decoration: underline;
 }
 
 .current {
   padding-left: 15%;
+  text-decoration: underline;
 }
 
 /* Add a subtle animation on hover */
@@ -295,6 +298,8 @@ button:hover {
 .armorInfo {
   color: #dad386; 
   font-size: 0.8em;
+  margin-bottom: 1vh;
+  text-decoration: underline;
 }
 
 
@@ -329,10 +334,12 @@ button:hover {
 
 .leftHand {
   float: left;
+  text-decoration: underline;
 }
 
 .rightHand {
   float: right;
+  text-decoration: underline;
 }
 
 .weaponsContainer {
@@ -443,6 +450,22 @@ button:hover {
 
 .red-text {
   color: rgb(255, 0, 0);; /* Replace with actual color code */
+}
+
+.char-stats {
+  border-bottom: 1px solid rgb(207, 201, 202);
+  margin-bottom: 1vh;
+  padding-bottom: 1vh;
+}
+
+.char-defense {
+  border-bottom: 1px solid rgb(207, 201, 202);
+  margin-bottom: 1vh;
+  padding-bottom: 1vh;
+}
+
+.bonfire {
+  color: #d10909;
 }
 
 
