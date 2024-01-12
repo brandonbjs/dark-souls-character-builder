@@ -6,42 +6,43 @@ const WeaponSchema = mongoose.Schema({
         required: true
     },
     atk: {
-        physical: { type: Number, required: true },
-        magic: { type: Number, required: true },
-        fire: { type: Number, required: true },
-        lightning: { type: Number, required: true },
-        bonus: { type: Number, required: true }
+        physical: { type: Number },
+        magic: { type: Number },
+        fire: { type: Number },
+        lightning: { type: Number },
+        bonus: { type: Number }
     },
     def: {
-        physical: { type: Number, required: true },
-        magic: { type: Number, required: true },
-        fire: { type: Number, required: true },
-        lightning: { type: Number, required: true },
-        stab: { type: Number, required: true }
+        physical: { type: Number },
+        magic: { type: Number },
+        fire: { type: Number },
+        lightning: { type: Number },
+        stab: { type: Number }
     },
     effects: {
-        poison: { type: String, required: true },
-        bleed: { type: String, required: true },
-        divine: { type: String, required: true },
-        occult: { type: String, required: true }
+        poison: { type: String },
+        bleed: { type: String },
+        divine: { type: String },
+        occult: { type: String }
     },
     req: {
-        strength: { type: Number, required: true },
-        dexterity: { type: Number, required: true },
-        intelligence: { type: Number, required: true },
-        faith: { type: Number, required: true }
+        strength: { type: Number },
+        dexterity: { type: Number },
+        intelligence: { type: Number },
+        faith: { type: Number }
     },
     scale: {
-        strength: { type: String, required: true },
-        dexterity: { type: String, required: true },
-        intelligence: { type: String, required: true },
-        faith: { type: String, required: true }
+        strength: { type: String },
+        dexterity: { type: String },
+        intelligence: { type: String },
+        faith: { type: String }
     },
-    durability: { type: Number, required: true },
-    weight: { type: Number, required: true },
+    type: {type: String },
+    durability: { type: Number },
+    weight: { type: Number },
     attackTypes: [String],
     obtained: [String],
-    aotaOnly: { type: Boolean, required: true }
+    aotaOnly: { type: Boolean }
 });
 
 const WeaponModel = mongoose.model("weapons", WeaponSchema)

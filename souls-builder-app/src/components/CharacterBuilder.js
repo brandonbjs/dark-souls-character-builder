@@ -73,7 +73,7 @@ class CharacterBuilder extends Component {
       98: 160, 99: 160,
     };
 
-    this.attributeGroups = ['atk', 'def', 'effects', 'req', 'scale', 'weightDurability'];
+    this.attributeGroups = ['atk', 'def', 'effects', 'req', 'scale', 'weightDurability', ];
 
     this.state = {
       buildId: uuidv4(),
@@ -107,21 +107,21 @@ class CharacterBuilder extends Component {
       weapons: [],
       rings: [],
       buildHead: [],
-      buildHeadName: "",
+      buildHeadName: "No Head 1",
       buildChest: [],
-      buildChestName: "",
+      buildChestName: "No Chest",
       buildHands: [],
-      buildHandsName: "",
+      buildHandsName: "No Hands",
       buildLegs: [],
-      buildLegsName: "",
+      buildLegsName: "No Legs",
       buildLeftHand1: null,
       buildRightHand1: null,
       buildLeftHand2: null,
       buildRightHand2: null,
-      buildLeftHand1Name: null,
-      buildRightHand1Name: null,
-      buildLeftHand2Name: null,
-      buildRightHand2Name: null,
+      buildLeftHand1Name: "No LH1",
+      buildRightHand1Name: "No RH1",
+      buildLeftHand2Name: "No LH2",
+      buildRightHand2Name: "No RH2",
       buildRing1Name: "No Ring 1",
       buildRing2Name: "No Ring 2",
       buildRing1: [],
@@ -144,7 +144,17 @@ class CharacterBuilder extends Component {
       buildSpellName9: "No Spell",
       buildSpellName10: "No Spell",
       buildHP: 0,
-      buildStamina: 0
+      buildStamina: 0,
+      buildEquipLoad: 0,
+      buildTotalEquipLoad: 0,
+      buildEncumbrance: 0,
+      buildRollType: "Fast",
+      buildStaminaRecovery: 45,
+      isCloranthyRingApplied: false,
+      isMaskOfChildApplied: false,
+      is20PercentPenaltyApplied: false,
+      is30PercentPenaltyApplied: false,
+      buildPoise: 0,
     }
   }
 
@@ -236,6 +246,13 @@ class CharacterBuilder extends Component {
     this.calculateHP(this.state.vitality);
 
     this.calculateStamina(this.state.endurance);
+
+    this.calculateTotalEquipLoad(this.state.endurance);
+    
+    this.calculateEquipLoad();
+
+    this.calculateEncumbrance();
+
   }
 
   /* using the componentDidUpdate() lifecycle method, we track when there has been a change
@@ -271,35 +288,98 @@ class CharacterBuilder extends Component {
       this.calculateHP(this.state.vitality);
     }
 
-    // if the character ring 1 changes calculate new HP
-    if (prevState.buildRing1Name !== this.state.buildRing1Name) {
-      this.calculateHP(this.state.vitality);
-    }
-
-    // if the character ring 2 changes calculate new HP
-    if (prevState.buildRing2Name !== this.state.buildRing2Name) {
-      this.calculateHP(this.state.vitality);
-    }
-
-    // if the character head changes calculate new HP
-    if (prevState.buildHeadName !== this.state.buildHeadName) {
-      this.calculateHP(this.state.vitality);
-    }
-
     // if the character endurance changes calculate new stamina
     if (prevState.endurance !== this.state.endurance) {
       this.calculateStamina(this.state.endurance);
+      this.calculateTotalEquipLoad(this.state.endurance);
+      this.calculateEncumbrance();
     }
 
     // if the character ring 1 changes calculate new stamina
     if (prevState.buildRing1Name !== this.state.buildRing1Name) {
       this.calculateStamina(this.state.endurance);
+      this.calculateHP(this.state.vitality);
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculateTotalEquipLoad(this.state.endurance);
     }
 
     // if the character ring 2 changes calculate new stamina
     if (prevState.buildRing2Name !== this.state.buildRing2Name) {
       this.calculateStamina(this.state.endurance);
+      this.calculateHP(this.state.vitality);
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculateTotalEquipLoad(this.state.endurance);
     }
+
+    // if the character head changes calculate new related stats
+    if (prevState.buildHeadName !== this.state.buildHeadName) {
+      this.calculateHP(this.state.vitality);
+      this.calculateTotalEquipLoad(this.state.endurance);
+      this.calculateEquipLoad();
+      this.calculateEncumbrance();
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculatePoise();
+    }
+
+    // if the character chest changes calculate new equip load
+    if (prevState.buildChestName !== this.state.buildChestName) {
+      this.calculateEquipLoad();
+      this.calculateEncumbrance();
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculatePoise();
+    }
+
+    // if the character hands changes calculate new equip load
+    if (prevState.buildHandsName !== this.state.buildHandsName) {
+      this.calculateEquipLoad();
+      this.calculateEncumbrance();
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculatePoise();
+    }
+
+    // if the character legs changes calculate new equip load
+    if (prevState.buildLegsName !== this.state.buildLegsName) {
+      this.calculateEquipLoad();
+      this.calculateEncumbrance();
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+      this.calculatePoise();
+    }
+
+    // if the character left hand 1 weapon changes calculate new equip load
+    if (prevState.buildLeftHand1Name !== this.state.buildLeftHand1Name) {
+      this.calculateEquipLoad();
+      this.calculateEncumbrance();
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+    }
+
+    // if the character left hand 2 weapon changes calculate new equip load
+    if (prevState.buildLeftHand2Name !== this.state.buildLeftHand2Name) {
+      this.calculateEquipLoad();
+      this.calculateEncumbrance();
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+    }
+
+    // if the character right hand 1 weapon changes calculate new equip load
+    if (prevState.buildRightHand1Name !== this.state.buildRightHand1Name) {
+      this.calculateEquipLoad();
+      this.calculateEncumbrance();
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+    }
+
+    // if the character right hand 2 weapon changes calculate new equip load
+    if (prevState.buildRightHand2Name !== this.state.buildRightHand2Name) {
+      this.calculateEquipLoad();
+      this.calculateEncumbrance();
+      this.calculateStaminaRecovery(this.state.buildEncumbrance);
+    }
+
+    // if the buildEquipLoad changes (BECAUSE ANOTHER ITEM WAS ADDED) then
+    // we need to recalculate the encumbrance
+    if (prevState.buildEquipLoad !== this.state.buildEquipLoad) {
+      this.calculateEncumbrance();
+    }
+
+    
   }
 
   calculateSpellSlots = () => {
@@ -364,6 +444,164 @@ class CharacterBuilder extends Component {
     this.setState({ buildStamina: buildStam });
   }
 
+  // method to calculate the total equip load of the build from the endurance stat and other items
+  calculateTotalEquipLoad = (endurance) => {
+    let totalEquipLoad = 0.0;
+  
+    if (endurance >= 8 && endurance < 99) {
+      totalEquipLoad = 40.0 + endurance; // Starts from 48 at endurance 8 and increases linearly
+    }
+  
+    if (endurance === 99) {
+      totalEquipLoad = 149.0; // Caps at 149 for endurance values over 99
+    }
+  
+    // Existing checks for rings and other modifiers
+    if (this.state.buildRing1Name === "Ring of Favor and Protection" || this.state.buildRing2Name === "Ring of Favor and Protection") {
+      totalEquipLoad *= 1.20; // Increase by 20%
+    }
+  
+    if (this.state.buildRing1Name === "Havel's Ring" || this.state.buildRing2Name === "Havel's Ring") {
+      totalEquipLoad *= 1.50; // Increase by 50%
+    }
+  
+    if (this.state.buildHeadName === "Mask of the Father" || this.state.buildHeadName === "Mask of the Father") {
+      totalEquipLoad *= 1.05; // Increase by 5%
+    }
+  
+    this.setState({ buildTotalEquipLoad: totalEquipLoad });
+  }
+  
+
+  // method to calculate the equip load of the build from the weight of items
+  calculateEquipLoad = () => {
+    const { buildHead, buildChest, buildHands, buildLegs, 
+            buildLeftHand1, buildLeftHand2, 
+            buildRightHand1, buildRightHand2 } = this.state;
+  
+    let equipLoad = 0;
+  
+    const addWeight = item => {
+      // Check if item is not null and has a valid numeric weight
+      if (item && !isNaN(item.weight)) {
+        equipLoad += Number(item.weight);
+      }
+    };
+  
+    addWeight(buildHead);
+    addWeight(buildChest);
+    addWeight(buildHands);
+    addWeight(buildLegs);
+    addWeight(buildLeftHand1);
+    addWeight(buildLeftHand2);
+    addWeight(buildRightHand1);
+    addWeight(buildRightHand2);
+
+    // Rounding to one decimal place
+    equipLoad = parseFloat(equipLoad.toFixed(1)); 
+  
+    this.setState({ buildEquipLoad: equipLoad });
+  }
+
+  calculateEncumbrance = () => {
+    const { buildEquipLoad, buildTotalEquipLoad } = this.state;
+  
+    let encumbrance = 0;
+    let tempBuildRollType = "";
+  
+    if (buildEquipLoad !== 0 ) {
+      encumbrance = (buildEquipLoad / buildTotalEquipLoad) * 100;
+      encumbrance = parseFloat(encumbrance.toFixed(1)); 
+    } else {
+      encumbrance = 0;
+    }
+
+    if (encumbrance >= 0 && encumbrance <= 24.9) tempBuildRollType = "Fast";
+    else if (encumbrance >= 25.0 && encumbrance <= 49.9) tempBuildRollType = "Medium";
+    else if (encumbrance >= 50.0 ) tempBuildRollType = "Fat";
+  
+    this.setState({ buildRollType: tempBuildRollType });
+    this.setState({ buildEncumbrance: encumbrance });
+  }
+
+  calculateStaminaRecovery = (currentBuildEncumbrance) => {
+    const { buildRing1Name, buildRing2Name, buildHeadName, buildStaminaRecovery, 
+      buildLeftHand1Name, buildLeftHand2Name, buildRightHand1Name, 
+      buildRightHand2Name, isCloranthyRingApplied, isMaskOfChildApplied,
+      is30PercentPenaltyApplied, is20PercentPenaltyApplied } = this.state;
+
+    let newBuildStaminaRecovery = buildStaminaRecovery;
+
+    // Handle Cloranthy Ring logic
+    if (buildRing1Name === "Cloranthy Ring" || buildRing2Name === "Cloranthy Ring") {
+    if (!isCloranthyRingApplied) {
+      newBuildStaminaRecovery += 20; // Apply bonus
+      this.setState({ isCloranthyRingApplied: true });
+    }
+    } else {
+    if (isCloranthyRingApplied) {
+      newBuildStaminaRecovery -= 20; // Remove bonus
+      this.setState({ isCloranthyRingApplied: false });
+    }
+    }
+
+    // Handle Mask of the Child logic
+    if (buildHeadName === "Mask of the Child") {
+    if (!isMaskOfChildApplied) {
+      newBuildStaminaRecovery += 10; // Apply bonus
+      this.setState({ isMaskOfChildApplied: true });
+    }
+    } else {
+    if (isMaskOfChildApplied) {
+      newBuildStaminaRecovery -= 10; // Remove bonus
+      this.setState({ isMaskOfChildApplied: false });
+    }
+    }
+  
+    // Count the number of Grass Crest Shields equipped 
+    let grassCrestShieldCount = 0;
+    [buildLeftHand1Name, buildLeftHand2Name, buildRightHand1Name, buildRightHand2Name].forEach(name => {
+      if (name === "Grass Crest Shield") {
+        grassCrestShieldCount++;
+      }
+    });
+  
+    // Apply increase for Grass Crest Shield, capped at +20
+    if (grassCrestShieldCount < 3 && grassCrestShieldCount !== 0) {
+      newBuildStaminaRecovery += 10;
+    }
+
+   // Encumbrance-based stamina recovery penalty
+   if (currentBuildEncumbrance >= 50 && currentBuildEncumbrance < 100 && !is20PercentPenaltyApplied) {
+    newBuildStaminaRecovery *= 0.80; // Reduce by 20%
+    this.setState({ is20PercentPenaltyApplied: true, is30PercentPenaltyApplied: false });
+  } else if (currentBuildEncumbrance >= 100 && !is30PercentPenaltyApplied) {
+    newBuildStaminaRecovery *= 0.70; // Reduce by 30%
+    this.setState({ is30PercentPenaltyApplied: true, is20PercentPenaltyApplied: false });
+  } else if (currentBuildEncumbrance < 50) {
+    // Reset to original stamina recovery if penalties were applied
+    if (is20PercentPenaltyApplied || is30PercentPenaltyApplied) {
+      newBuildStaminaRecovery = 45;
+    }
+    this.setState({ is20PercentPenaltyApplied: false, is30PercentPenaltyApplied: false });
+  }
+
+  newBuildStaminaRecovery = parseFloat(newBuildStaminaRecovery.toFixed(1));
+
+  this.setState({ buildStaminaRecovery: newBuildStaminaRecovery });
+  }
+
+  // calculate the poise for the build based on the total of all the armor poise stats
+  calculatePoise = () => {
+    const { buildHead, buildChest, buildHands, buildLegs } = this.state;
+
+    // Using the || operator to default to 0 if the value is null or 0
+    const totalPoise = (buildHead.poise || 0) + (buildChest.poise || 0) + (buildHands.poise || 0) + (buildLegs.poise || 0);
+
+    this.setState({ buildPoise: totalPoise });
+  };
+  
+  
 
   handleClassChange = (e) => {
     const selectedClass = e.target.value;
@@ -505,6 +743,7 @@ class CharacterBuilder extends Component {
     const selectedChest = e.target.value;
 
     this.setState({buildChestName: selectedChest});
+    this.handleChestSelection(selectedChest);
   }
 
   getChestByName = (chestName) => {
@@ -525,6 +764,7 @@ class CharacterBuilder extends Component {
     const selectedHands = e.target.value;
 
     this.setState({buildHandsName: selectedHands});
+    this.handleHandSelection(selectedHands);
   }
 
   getHandsByName = (handName) => {
@@ -545,6 +785,7 @@ class CharacterBuilder extends Component {
     const selectedLegs = e.target.value;
 
     this.setState({buildLegsName: selectedLegs});
+    this.handleLegsSelection(selectedLegs);
   }
 
   getLegsByName = (legName) => {
@@ -582,51 +823,47 @@ class CharacterBuilder extends Component {
   // Check if the selected ring is already selected as the second ring
   if (selectedRing2 === "No Ring") {
     this.setState({ buildRing2Name: selectedRing2 });
-  } else if (selectedRing2 === this.state.buildRing1Name) {
-    alert("This ring is already selected in the other slot.");
-  } else {
-    this.setState({ buildRing2Name: selectedRing2 });
-    this.handleRingSelection2(selectedRing2);
+    } else if (selectedRing2 === this.state.buildRing1Name) {
+      alert("This ring is already selected in the other slot.");
+    } else {
+      this.setState({ buildRing2Name: selectedRing2 });
+      this.handleRingSelection2(selectedRing2);
   }
-}
-
-getRingByName = (ringName) => {
-  return this.state.rings.find(ring => ring.name === ringName);
-}
-
-handleRingSelection1 = (ringName) => {
-  const selectedRing = this.getRingByName(ringName);
-  if (selectedRing) {
-    this.setState({ buildRing1: selectedRing });
-  } else {
-    // Handle the case where the weapon is not found
-    console.log("Ring not found");
-    // Optionally set buildLeftHand1 to null or a default value
-    // this.setState({ buildLeftHand1: null });
   }
-};
 
-handleRingSelection2 = (ringName) => {
-  const selectedRing = this.getRingByName(ringName);
-  if (selectedRing) {
-    this.setState({ buildRing2: selectedRing });
-  } else {
-    // Handle the case where the weapon is not found
-    console.log("Ring not found");
-    // Optionally set buildLeftHand1 to null or a default value
-    // this.setState({ buildLeftHand1: null });
+  getRingByName = (ringName) => {
+    return this.state.rings.find(ring => ring.name === ringName);
   }
-};
+
+  handleRingSelection1 = (ringName) => {
+    const selectedRing = this.getRingByName(ringName);
+    if (selectedRing) {
+      this.setState({ buildRing1: selectedRing });
+    } else {
+      // Handle the case where the weapon is not found
+      console.log("Ring not found");
+    }
+  }
+
+  handleRingSelection2 = (ringName) => {
+    const selectedRing = this.getRingByName(ringName);
+    if (selectedRing) {
+      this.setState({ buildRing2: selectedRing });
+    } else {
+      // Handle the case where the weapon is not found
+      console.log("Ring not found");
+    }
+  }
+
+  getWeaponByName = (weaponName) => {
+    return this.state.weapons.find(weapon => weapon.name === weaponName);
+  }
 
   handleLeftHandOneChange = (e) => {
     const selectedLeftHand1 = e.target.value;
     this.setState({buildLeftHand1Name: selectedLeftHand1});
     this.handleWeaponSelection1(selectedLeftHand1);
     
-  }
-
-  getWeaponByName = (weaponName) => {
-    return this.state.weapons.find(weapon => weapon.name === weaponName);
   }
 
   handleWeaponSelection1 = (weaponName) => {
@@ -636,10 +873,8 @@ handleRingSelection2 = (ringName) => {
     } else {
       // Handle the case where the weapon is not found
       console.log("Weapon not found");
-      // Optionally set buildLeftHand1 to null or a default value
-      // this.setState({ buildLeftHand1: null });
     }
-  };
+  }
 
   handleRightHandOneChange = (e) => {
     const selectedRightHand1 = e.target.value;
@@ -654,8 +889,6 @@ handleRingSelection2 = (ringName) => {
     } else {
       // Handle the case where the weapon is not found
       console.log("Weapon not found");
-      // Optionally set buildLeftHand1 to null or a default value
-      // this.setState({ buildLeftHand1: null });
     }
   };
 
@@ -672,8 +905,6 @@ handleRingSelection2 = (ringName) => {
     } else {
       // Handle the case where the weapon is not found
       console.log("Weapon not found");
-      // Optionally set buildLeftHand1 to null or a default value
-      // this.setState({ buildLeftHand1: null });
     }
   };
 
@@ -690,8 +921,6 @@ handleRingSelection2 = (ringName) => {
     } else {
       // Handle the case where the weapon is not found
       console.log("Weapon not found");
-      // Optionally set buildLeftHand1 to null or a default value
-      // this.setState({ buildLeftHand1: null });
     }
   };
 
@@ -788,8 +1017,7 @@ handleRingSelection2 = (ringName) => {
     }
     
     getSoulsForLevel = (level) => {
-      // Implement the logic based on your game's rules
-      // Use the existing logic in setLowerSoulsLevel and calculateSoulsToNextLevel as a reference
+      
       let soulsForThisLevel;
       if (level <= 12) {
         const lowerLevels = {
@@ -826,7 +1054,9 @@ handleRingSelection2 = (ringName) => {
             buildLeftHand2Name, buildRightHand2Name, buildRing1, 
             buildRing2, rings, buildRing1Name, buildRing2Name,
             buildHeadName, buildChestName, buildHandsName, buildLegsName,
-            spells, spellSlots, buildHP, buildStamina } = this.state;
+            spells, spellSlots, buildHP, buildStamina, buildTotalEquipLoad,
+            buildEquipLoad, buildEncumbrance, buildRollType, 
+            buildStaminaRecovery, buildPoise } = this.state;
     
     const leftHandGroup1 = this.attributeGroups[this.state.currentGroupIndex1];
     const rightHandGroup1 = this.attributeGroups[this.state.currentGroupIndex2];
@@ -834,6 +1064,16 @@ handleRingSelection2 = (ringName) => {
     const rightHandGroup2 = this.attributeGroups[this.state.currentGroupIndex4];
 
     const initialLevel = this.classLevelMapping[characterClass];
+
+    let colorClass;
+
+    if (buildEncumbrance < 25) {
+      colorClass = 'green-text';
+    } else if (buildEncumbrance >= 25 && buildEncumbrance < 50) {
+      colorClass = 'blue-text';
+    } else if (buildEncumbrance >= 50) {
+      colorClass = 'red-text';
+    }
 
     
     return (
@@ -1300,27 +1540,50 @@ handleRingSelection2 = (ringName) => {
           <div className="effectsContainer">
             <div className="effectsDiv">
               <span className="effectsSpan">Effects</span>
-              {buildRing1 && (
+              {(buildRing1 && buildRing1Name !== "No Ring") && (
                 <div className="effect">
-                  <p>{buildRing1.effect}</p>
+                  <p>{buildRing1.name} {buildRing1.effect}</p>
                 </div>
               )}
-              {buildRing2 && (
+              {(buildRing2 && buildRing2Name !== "No Ring") && (
                 <div className="effect">
-                  <p>{buildRing2.effect}</p>
+                  <p>{buildRing2.name} {buildRing2.effect}</p>
                 </div>
               )}
               {buildHeadName === "Crown of Dusk" && (
                 <div className="effect">
-                  <p>Boosts Sorceries, Miracles and Pyromancies damage by 20%, but reduces Magic defence by 30%.</p>
+                  <p>Crown of Dusk: Boosts Sorceries, Miracles and Pyromancies damage by 20%, but reduces Magic defence by 30%.</p>
                 </div>
               )}
               {buildHeadName === "Mask of the Mother" && (
                 <div className="effect">
-                  <p>One of the three masks of the Pinwheel, the necromancer who stole the power of the Gravelord, 
-                    and reigns over the Catacombs. This mask, belonging to the kindly mother, slightly raises HP."</p>
+                  <p>Mask of the Mother: One of the three masks of the Pinwheel, the necromancer who stole the power of the Gravelord, 
+                    and reigns over the Catacombs. This mask, belonging to the kindly mother, slightly raises HP.</p>
                 </div>
               )}
+              {buildHeadName === "Mask of the Father" && (
+                <div className="effect">
+                  <p>Mask of the Father: One of the three masks of the Pinwheel, the necromancer who stole the power of the Gravelord, 
+                    and reigns over the Catacombs. This mask, belonging to the valiant father, slightly raises equipment load.</p>
+                </div>
+              )}
+              {buildHeadName === "Mask of the Child" && (
+                <div className="effect">
+                  <p>One of the three masks of the Pinwheel, the necromancer who stole the power of the Gravelord, and 
+                    reigns over the Catacombs. This mask, belonging to the naive child, slightly raises stamina recovery speed.</p>
+                </div>
+              )}
+              {(
+                buildLeftHand1Name === "Grass Crest Shield" ||
+                buildLeftHand2Name === "Grass Crest Shield" ||
+                buildRightHand1Name === "Grass Crest Shield" ||
+                buildRightHand2Name === "Grass Crest Shield"
+              ) && (
+                <div className="effect">
+                  <p>Grass Crest Shield: Old medium metal shield of unknown origin. The grass crest is lightly imbued with magic, which slightly speeds stamina recovery.</p>
+                </div>
+              )}
+
             </div>
           </div>
 
@@ -1338,18 +1601,24 @@ handleRingSelection2 = (ringName) => {
           </div>
 
           <div className="stat-row">
-            <div className="stat-name">Equip Load</div>
-            <div className="stat-value">{}</div>
+            <div className="stat-name">Stamina Regen</div>
+            <div className="stat-value">{buildStaminaRecovery}/sec</div>
           </div>
 
           <div className="stat-row">
-            <div className="stat-name">Weight left / Roll</div>
-            <div className="stat-value">{}</div>
+            <div className="stat-name">Equip Load</div>
+            
+            <div className={`weight-value ${colorClass}`}>{buildEquipLoad} / {buildTotalEquipLoad} - {buildEncumbrance}%</div>
+          </div>
+
+          <div className="stat-row">
+            <div className="stat-name">Roll Type</div>
+            <div className={`weight-value ${colorClass}`}>{buildRollType}</div>
           </div>
 
           <div className="stat-row">
             <div className="stat-name">Poise</div>
-            <div className="stat-value">{}</div>
+            <div className="stat-value">{buildPoise}</div>
           </div>
 
           <div className="stat-row">
@@ -1359,11 +1628,6 @@ handleRingSelection2 = (ringName) => {
 
           <div className="stat-row">
             <div className="stat-name">Attunement Slots</div>
-            <div className="stat-value">{}</div>
-          </div>
-
-          <div className="stat-row">
-            <div className="stat-name">Stamina Regen</div>
             <div className="stat-value">{}</div>
           </div>
 

@@ -1,0 +1,1679 @@
+[
+    {
+        "name": "Balder Shield",
+        "type": "Medium Shield",
+        "weight": 4.0,
+        "durability": 220,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 12,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 66,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 20,
+            "fire": 60,
+            "lightning": 50,
+            "stab": 63
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Black Iron Greatshield",
+        "type": "Greatshield",
+        "weight": 16.0,
+        "durability": 230,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 34,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 80,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 40,
+            "fire": 90,
+            "lightning": 50,
+            "stab": 71
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Black Knight Shield",
+        "type": "Medium Shield",
+        "weight": 6.0,
+        "durability": 250,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 16,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 68,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 25,
+            "fire": 95,
+            "lightning": 65,
+            "stab": 62
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Bloodshield",
+        "type": "Medium Shield",
+        "weight": 3.0,
+        "durability": 240,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 62,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 30,
+            "fire": 70,
+            "lightning": 50,
+            "stab": 53
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Bonewheel Shield",
+        "type": "Greatshield",
+        "weight": 12.0,
+        "durability": 200,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 30,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 80,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 90,
+            "magic": 30,
+            "fire": 30,
+            "lightning": 51,
+            "stab": 66
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Buckler",
+        "type": "Small Shield",
+        "weight": 1.5,
+        "durability": 140,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 7,
+            "dexterity": 13,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 55,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 76,
+            "magic": 32,
+            "fire": 65,
+            "lightning": 53,
+            "stab": 40
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Caduceus Kite Shield",
+        "type": "Medium Shield",
+        "weight": 3.0,
+        "durability": 250,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 64,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 30,
+            "fire": 70,
+            "lightning": 50,
+            "stab": 58
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Caduceus Round Shield",
+        "type": "Small Shield",
+        "weight": 1.0,
+        "durability": 180,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 6,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 50,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 85,
+            "magic": 65,
+            "fire": 30,
+            "lightning": 65,
+            "stab": 40
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Cleansing Greatshield",
+        "type": "Greatshield",
+        "weight": 14.5,
+        "durability": 300,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 31,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 75,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 0
+        },
+        "def": {
+            "physical": 80,
+            "magic": 80,
+            "fire": 80,
+            "lightning": 70,
+            "stab": 77
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Cracked Round Shield",
+        "type": "Small Shield",
+        "weight": 1.0,
+        "durability": 60,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 6,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 46,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 65,
+            "magic": 55,
+            "fire": 10,
+            "lightning": 45,
+            "stab": 30
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Crest Shield",
+        "type": "Medium Shield",
+        "weight": 3.0,
+        "durability": 300,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 62,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 80,
+            "fire": 55,
+            "lightning": 45,
+            "stab": 55
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Crystal Ring Shield",
+        "type": "Small Shield",
+        "weight": 3.0,
+        "durability": 120,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": null,
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 0,
+            "magic": 100,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 70,
+            "magic": 90,
+            "fire": 70,
+            "lightning": 40,
+            "stab": 40
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Crystal Shield",
+        "type": "Medium Shield",
+        "weight": 5.0,
+        "durability": 250,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 14,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 70,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 60,
+            "fire": 80,
+            "lightning": 80,
+            "stab": 60
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Dragon Crest Shield",
+        "type": "Medium Shield",
+        "weight": 3.0,
+        "durability": 300,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 62,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 20,
+            "fire": 85,
+            "lightning": 45,
+            "stab": 55
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Eagle Shield",
+        "type": "Greatshield",
+        "weight": 6.0,
+        "durability": 300,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 16,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 62,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 95,
+            "magic": 55,
+            "fire": 45,
+            "lightning": 75,
+            "stab": 70
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "East-West Shield",
+        "type": "Medium Shield",
+        "weight": 1.0,
+        "durability": 160,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 6,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 52,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 88,
+            "magic": 40,
+            "fire": 30,
+            "lightning": 65,
+            "stab": 44
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Effigy Shield",
+        "type": "Small Shield",
+        "weight": 3.0,
+        "durability": 180,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 16
+        },
+        "scale": {
+            "strength": null,
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 60,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 90,
+            "magic": 40,
+            "fire": 70,
+            "lightning": 90,
+            "stab": 45
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Gargoyle's Shield",
+        "type": "Medium Shield",
+        "weight": 4.0,
+        "durability": 300,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 12,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 62,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 85,
+            "magic": 40,
+            "fire": 75,
+            "lightning": 70,
+            "stab": 56
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Giant Shield",
+        "type": "Greatshield",
+        "weight": 18.0,
+        "durability": 300,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 36,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 80,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 60,
+            "fire": 75,
+            "lightning": 75,
+            "stab": 68
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Grass Crest Shield",
+        "type": "Medium Shield",
+        "weight": 3.0,
+        "durability": 200,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 62,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 95,
+            "magic": 42,
+            "fire": 70,
+            "lightning": 50,
+            "stab": 51
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Greatshield of Artorias",
+        "type": "Greatshield",
+        "weight": 16.0,
+        "durability": 600,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 34,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 80,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 0
+        },
+        "def": {
+            "physical": 100,
+            "magic": 50,
+            "fire": 80,
+            "lightning": 40,
+            "stab": 88
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Havel's Greatshield",
+        "type": "Greatshield",
+        "weight": 26.0,
+        "durability": 500,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 50,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 84,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 90,
+            "fire": 80,
+            "lightning": 80,
+            "stab": 84
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Heater Shield",
+        "type": "Medium Shield",
+        "weight": 2.0,
+        "durability": 250,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 8,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 60,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 30,
+            "fire": 70,
+            "lightning": 50,
+            "stab": 55
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Hollow Soldier Shield",
+        "type": "Medium Shield",
+        "weight": 3.5,
+        "durability": 250,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 11,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 66,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 30,
+            "fire": 65,
+            "lightning": 50,
+            "stab": 56
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Iron Round Shield",
+        "type": "Medium Shield",
+        "weight": 5.0,
+        "durability": 280,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 14,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 68,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 30,
+            "fire": 72,
+            "lightning": 46,
+            "stab": 55
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Knight Shield",
+        "type": "Medium Shield",
+        "weight": 5.5,
+        "durability": 200,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 68,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 30,
+            "fire": 60,
+            "lightning": 40,
+            "stab": 56
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Large Leather Shield",
+        "type": "Medium Shield",
+        "weight": 1.5,
+        "durability": 200,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 7,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 46,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 91,
+            "magic": 35,
+            "fire": 60,
+            "lightning": 60,
+            "stab": 52
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Leather Shield",
+        "type": "Small Shield",
+        "weight": 1.0,
+        "durability": 200,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 6,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 42,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 85,
+            "magic": 35,
+            "fire": 60,
+            "lightning": 60,
+            "stab": 45
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Pierce Shield",
+        "type": "Medium Shield",
+        "weight": 3.5,
+        "durability": 180,
+        "attackTypes": "Thrust",
+        "req": {
+            "strength": 11,
+            "dexterity": 14,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": "C",
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 82,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 95,
+            "magic": 30,
+            "fire": 70,
+            "lightning": 34,
+            "stab": 49
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Plank Shield",
+        "type": "Small Shield",
+        "weight": 1.5,
+        "durability": 120,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 7,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 52,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 75,
+            "magic": 40,
+            "fire": 20,
+            "lightning": 55,
+            "stab": 45
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Red & White Round Shield",
+        "type": "Small Shield",
+        "weight": 1.0,
+        "durability": 180,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 6,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 50,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 85,
+            "magic": 65,
+            "fire": 30,
+            "lightning": 65,
+            "stab": 40
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Sanctus",
+        "type": "Medium Shield",
+        "weight": 3.0,
+        "durability": 410,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 18
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 62,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 95,
+            "magic": 40,
+            "fire": 70,
+            "lightning": 50,
+            "stab": 51
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Silver Knight Shield",
+        "type": "Medium Shield",
+        "weight": 5.0,
+        "durability": 250,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 14,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 66,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 40,
+            "fire": 75,
+            "lightning": 65,
+            "stab": 64
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Small Leather Shield",
+        "type": "Small Shield",
+        "weight": 0.5,
+        "durability": 200,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 5,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 40,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 80,
+            "magic": 35,
+            "fire": 60,
+            "lightning": 60,
+            "stab": 40
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Spider Shield",
+        "type": "Medium Shield",
+        "weight": 3.0,
+        "durability": 230,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 62,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 30,
+            "fire": 72,
+            "lightning": 48,
+            "stab": 56
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Spiked Shield",
+        "type": "Medium Shield",
+        "weight": 3.0,
+        "durability": 160,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 12,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": "C",
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 78,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 90,
+            "magic": 28,
+            "fire": 69,
+            "lightning": 40,
+            "stab": 48
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Stone Greatshield",
+        "type": "Greatshield",
+        "weight": 20.0,
+        "durability": 400,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 38,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 82,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 80,
+            "fire": 75,
+            "lightning": 65,
+            "stab": 80
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Sunlight Shield",
+        "type": "Medium Shield",
+        "weight": 4.0,
+        "durability": 280,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 12,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 64,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 30,
+            "fire": 75,
+            "lightning": 50,
+            "stab": 57
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Target Shield",
+        "type": "Small Shield",
+        "weight": 2.0,
+        "durability": 150,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 8,
+            "dexterity": 11,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 56,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 78,
+            "magic": 30,
+            "fire": 65,
+            "lightning": 50,
+            "stab": 45
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Tower Kite Shield",
+        "type": "Medium Shield",
+        "weight": 3.0,
+        "durability": 250,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 10,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 64,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 30,
+            "fire": 70,
+            "lightning": 50,
+            "stab": 58
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Tower Shield",
+        "type": "Greatshield",
+        "weight": 13.0,
+        "durability": 300,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 30,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 80,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 100,
+            "magic": 40,
+            "fire": 75,
+            "lightning": 50,
+            "stab": 72
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Warrior's Round Shield",
+        "type": "Small Shield",
+        "weight": 1.0,
+        "durability": 180,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 6,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 50,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 85,
+            "magic": 65,
+            "fire": 30,
+            "lightning": 65,
+            "stab": 40
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    },
+    {
+        "name": "Wooden Shield",
+        "type": "Medium Shield",
+        "weight": 1.5,
+        "durability": 160,
+        "attackTypes": "Strike",
+        "req": {
+            "strength": 7,
+            "dexterity": 0,
+            "intelligence": 0,
+            "faith": 0
+        },
+        "scale": {
+            "strength": "D",
+            "dexterity": null,
+            "intelligence": null,
+            "faith": null
+        },
+        "atk": {
+            "physical": 54,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 100
+        },
+        "def": {
+            "physical": 93,
+            "magic": 40,
+            "fire": 30,
+            "lightning": 65,
+            "stab": 52
+        },
+        "effects": {
+            "poison": null,
+            "bleed": null,
+            "divine": null,
+            "occult": null
+        }
+    }
+]

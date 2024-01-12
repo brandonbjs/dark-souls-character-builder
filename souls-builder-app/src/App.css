@@ -413,19 +413,38 @@ button:hover {
 .stat-row {
   display: flex;
   justify-content: space-between;
-  color: #ffffff;
+  color: #dad386; 
 }
 
 .stat-name {
   flex-basis: 50%;
-  border: 0.2px solid rgb(236, 137, 56);
 }
 
 .stat-value {
   flex-basis: 50%;
-  border: 0.2px solid rgb(236, 137, 56);
+  border: 0.2px solid #949292;
+  text-align: right;
+  color: #ffffff; 
+}
+
+.weight-value {
+  flex-basis: 50%;
+  border: 0.2px solid #949292;
   text-align: right;
 }
+
+.green-text {
+  color: rgb(51, 255, 0); /* Replace with actual color code */
+}
+
+.blue-text {
+  color: rgb(0, 195, 255); /* Replace with actual color code */
+}
+
+.red-text {
+  color: rgb(255, 0, 0);; /* Replace with actual color code */
+}
+
 
 
 
