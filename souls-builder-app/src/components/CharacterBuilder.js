@@ -45,6 +45,34 @@ class CharacterBuilder extends Component {
         dexterity: 11, resistance: 11, intelligence: 11, faith: 11},
     }
 
+    // define mapping for HP depending on vitality stat. **STAT GAIN IS NOT LINEAR**
+    this.vitalityToHP = {
+      1: 400, 2: 415, 3: 433, 4: 451, 5: 471, 6: 490, 7: 511, 8: 530, 9: 552, 10: 572,
+      11: 594, 12: 616, 13: 638, 14: 658, 15: 682, 16: 698, 17: 718, 18: 742, 19: 766, 20: 792,
+      21: 821, 22: 849, 23: 878, 24: 908, 25: 938, 26: 970, 27: 1001, 28: 1034, 29: 1066, 30: 1100,
+      31: 1123, 32: 1147, 33: 1170, 34: 1193, 35: 1216, 36: 1239, 37: 1261, 38: 1283, 39: 1304, 40: 1325,
+      41: 1346, 42: 1366, 43: 1386, 44: 1405, 45: 1424, 46: 1442, 47: 1458, 48: 1474, 49: 1489, 50: 1500,
+      51: 1508, 52: 1517, 53: 1526, 54: 1535, 55: 1544, 56: 1553, 57: 1562, 58: 1571, 59: 1580, 60: 1588,
+      61: 1597, 62: 1606, 63: 1615, 64: 1623, 65: 1632, 66: 1641, 67: 1649, 68: 1658, 69: 1666, 70: 1675,
+      71: 1683, 72: 1692, 73: 1700, 74: 1709, 75: 1717, 76: 1725, 77: 1734, 78: 1742, 79: 1750, 80: 1758,
+      81: 1767, 82: 1775, 83: 1783, 84: 1791, 85: 1799, 86: 1807, 87: 1814, 88: 1822, 89: 1830, 90: 1837,
+      91: 1845, 92: 1852, 93: 1860, 94: 1867, 95: 1874, 96: 1881, 97: 1888, 98: 1894, 99: 1900,
+    };
+
+    // define mapping for HP depending on vitality stat. **STAT GAIN IS NOT LINEAR**
+    this.enduranceToStamina = {
+      8: 89, 9: 90, 10: 91, 11: 93, 12: 95, 13: 97, 14: 98, 15: 100, 16: 102, 17: 104,
+      18: 106, 19: 108, 20: 110, 21: 112, 22: 115, 23: 117, 24: 119, 25: 121, 26: 124, 27: 126,
+      28: 129, 29: 131, 30: 133, 31: 136, 32: 139, 33: 141, 34: 144, 35: 146, 36: 149, 37: 152,
+      38: 154, 39: 157, 40: 160, 41: 160, 42: 160, 43: 160, 44: 160, 45: 160, 46: 160, 47: 160, 
+      48: 160, 49: 160, 50: 160, 51: 160, 52: 160, 53: 160, 54: 160, 55: 160, 56: 160, 57: 160, 
+      58: 160, 59: 160, 60: 160, 61: 160, 62: 160, 63: 160, 64: 160, 65: 160, 66: 160, 67: 160, 
+      68: 160, 69: 160, 70: 160, 71: 160, 72: 160, 73: 160, 74: 160, 75: 160, 76: 160, 77: 160, 
+      78: 160, 79: 160, 80: 160, 81: 160, 82: 160, 83: 160, 84: 160, 85: 160, 86: 160, 87: 160, 
+      88: 160, 89: 160, 90: 160, 91: 160, 92: 160, 93: 160, 94: 160, 95: 160, 96: 160, 97: 160, 
+      98: 160, 99: 160,
+    };
+
     this.attributeGroups = ['atk', 'def', 'effects', 'req', 'scale', 'weightDurability'];
 
     this.state = {
@@ -103,6 +131,7 @@ class CharacterBuilder extends Component {
       currentGroupIndex3: 0,
       currentGroupIndex4: 0,
       spellSlots: 0,
+      usedSpellSlots: 0,
       spells: [],
       buildSpellName1: "No Spell",
       buildSpellName2: "No Spell",
@@ -114,6 +143,8 @@ class CharacterBuilder extends Component {
       buildSpellName8: "No Spell",
       buildSpellName9: "No Spell",
       buildSpellName10: "No Spell",
+      buildHP: 0,
+      buildStamina: 0
     }
   }
 
@@ -201,6 +232,10 @@ class CharacterBuilder extends Component {
         console.error('Error fetching spells (in CharacterBuilder.js):', error);
     });
     this.calculateSpellSlots();
+
+    this.calculateHP(this.state.vitality);
+
+    this.calculateStamina(this.state.endurance);
   }
 
   /* using the componentDidUpdate() lifecycle method, we track when there has been a change
@@ -230,6 +265,41 @@ class CharacterBuilder extends Component {
     if (prevState.attunement !== this.state.attunement) {
       this.calculateSpellSlots();
     }
+
+    // if the character vitality changes  calculate new HP
+    if (prevState.vitality !== this.state.vitality) {
+      this.calculateHP(this.state.vitality);
+    }
+
+    // if the character ring 1 changes calculate new HP
+    if (prevState.buildRing1Name !== this.state.buildRing1Name) {
+      this.calculateHP(this.state.vitality);
+    }
+
+    // if the character ring 2 changes calculate new HP
+    if (prevState.buildRing2Name !== this.state.buildRing2Name) {
+      this.calculateHP(this.state.vitality);
+    }
+
+    // if the character head changes calculate new HP
+    if (prevState.buildHeadName !== this.state.buildHeadName) {
+      this.calculateHP(this.state.vitality);
+    }
+
+    // if the character endurance changes calculate new stamina
+    if (prevState.endurance !== this.state.endurance) {
+      this.calculateStamina(this.state.endurance);
+    }
+
+    // if the character ring 1 changes calculate new stamina
+    if (prevState.buildRing1Name !== this.state.buildRing1Name) {
+      this.calculateStamina(this.state.endurance);
+    }
+
+    // if the character ring 2 changes calculate new stamina
+    if (prevState.buildRing2Name !== this.state.buildRing2Name) {
+      this.calculateStamina(this.state.endurance);
+    }
   }
 
   calculateSpellSlots = () => {
@@ -255,6 +325,45 @@ class CharacterBuilder extends Component {
 
     this.setState({spellSlots: spellAttunements});
  }
+
+ // method to calculate the total HP of the build from the vitality stat and other items
+  calculateHP = (vitality) => {
+    let buildHealth = this.vitalityToHP[vitality];
+
+    // Check for "Mask of the Mother" and apply a 10% increase
+    if (this.state.buildHeadName === "Mask of the Mother") {
+      buildHealth *= 1.10; // Increase by 10%
+    }
+
+    // Check for "Ring of Favor and Protection" in either ring slot and apply a 20% increase
+    if (this.state.buildRing1Name === "Ring of Favor and Protection" || this.state.buildRing2Name === "Ring of Favor and Protection") {
+      buildHealth *= 1.20; // Increase by 20%
+    }
+
+    // Check for "Tiny Being's Ring" in either ring slot and apply a 5% increase
+    if (this.state.buildRing1Name === "Tiny Being's Ring" || this.state.buildRing2Name === "Tiny Being's Ring") {
+      buildHealth *= 1.05; // Increase by 5%
+    }
+
+    buildHealth = Math.round(buildHealth);
+
+    this.setState({ buildHP: buildHealth });
+  }
+
+  // method to calculate the total stamina of the build from the endurance stat and other items
+  calculateStamina = (endurance) => {
+    let buildStam = this.enduranceToStamina[endurance];
+
+    // Check for "Ring of Favor and Protection" in either ring slot and apply a 20% increase
+    if (this.state.buildRing1Name === "Ring of Favor and Protection" || this.state.buildRing2Name === "Ring of Favor and Protection") {
+      buildStam *= 1.20; // Increase by 20%
+    }
+
+    buildStam = Math.round(buildStam);
+
+    this.setState({ buildStamina: buildStam });
+  }
+
 
   handleClassChange = (e) => {
     const selectedClass = e.target.value;
@@ -293,20 +402,36 @@ class CharacterBuilder extends Component {
   handleSpellChange = (index, event) => {
     const selectedSpellName = event.target.value;
     const selectedSpell = this.state.spells.find(spell => spell.name === selectedSpellName);
-
+  
     if (selectedSpell) {
-        const { intelligenceRequirement, faithRequirement } = selectedSpell;
-        const { intelligence, faith } = this.state;
+        const { intelligenceRequirement, faithRequirement, slots, spellType } = selectedSpell;
+        const { intelligence, faith, spellSlots, usedSpellSlots } = this.state;
+    
+        // Calculate new used slots if this spell is selected
+        const newUsedSpellSlots = usedSpellSlots - (this.state[`buildSpellName${index + 1}`] !== "No Spell" ? this.state.spells.find(spell => spell.name === this.state[`buildSpellName${index + 1}`]).slots : 0) + slots;
 
-        if ((intelligenceRequirement && intelligence >= intelligenceRequirement) || 
-            (faithRequirement && faith >= faithRequirement)) {
-            this.setState({ [`buildSpellName${index + 1}`]: selectedSpellName });
-        } else {
-            alert(`You do not meet the intelligence or faith requirements for this spell.`);
+        // Check if selecting this spell exceeds the spell slot limit
+        if (newUsedSpellSlots > spellSlots) {
+            alert(`Selecting this spell will exceed your available spell slots.`);
+            return;
         }
+    
+        // Check for sorcery or miracle and their requirements
+        if ((spellType === 'sorcery' && intelligence < intelligenceRequirement) || 
+            (spellType === 'miracle' && faith < faithRequirement)) {
+            alert(`You do not meet the intelligence or faith requirements for this spell.`);
+            return;
+        }
+    
+        // Update the spell and usedSpellSlots
+        this.setState({ 
+            [`buildSpellName${index + 1}`]: selectedSpellName,
+            usedSpellSlots: newUsedSpellSlots
+        });
     }
   }
 
+  
   handleAttributeDiv1Click = () => {
     this.setState(prevState => ({
       currentGroupIndex1: (prevState.currentGroupIndex1 + 1) % this.attributeGroups.length
@@ -701,7 +826,7 @@ handleRingSelection2 = (ringName) => {
             buildLeftHand2Name, buildRightHand2Name, buildRing1, 
             buildRing2, rings, buildRing1Name, buildRing2Name,
             buildHeadName, buildChestName, buildHandsName, buildLegsName,
-            spells, spellSlots } = this.state;
+            spells, spellSlots, buildHP, buildStamina } = this.state;
     
     const leftHandGroup1 = this.attributeGroups[this.state.currentGroupIndex1];
     const rightHandGroup1 = this.attributeGroups[this.state.currentGroupIndex2];
@@ -972,11 +1097,11 @@ handleRingSelection2 = (ringName) => {
                             <option value="No Spell">No Spell</option>
                             {spells.map(spell => (
                                 <option key={spell.id} value={spell.name}>
-                                    {spell.spellType === 'sorcery' ? 
-                                        `${spell.name} (Int: ${spell.intelligenceRequirement})` :
-                                    spell.spellType === 'miracle' ? 
-                                        `${spell.name} (Faith: ${spell.faithRequirement})` :
-                                        spell.name}
+                                {spell.spellType === 'sorcery' ? 
+                                    `${spell.name} (Int: ${spell.intelligenceRequirement}, Slots: ${spell.slots})` :
+                                spell.spellType === 'miracle' ? 
+                                    `${spell.name} (Faith: ${spell.faithRequirement}, Slots: ${spell.slots})` :
+                                    `${spell.name} (Slots: ${spell.slots})`}
                                 </option>
                             ))}
                         </select>
@@ -1190,13 +1315,59 @@ handleRingSelection2 = (ringName) => {
                   <p>Boosts Sorceries, Miracles and Pyromancies damage by 20%, but reduces Magic defence by 30%.</p>
                 </div>
               )}
+              {buildHeadName === "Mask of the Mother" && (
+                <div className="effect">
+                  <p>One of the three masks of the Pinwheel, the necromancer who stole the power of the Gravelord, 
+                    and reigns over the Catacombs. This mask, belonging to the kindly mother, slightly raises HP."</p>
+                </div>
+              )}
             </div>
           </div>
 
         </div>
 
         <div className="stats-grid">
-          {/* stats components go here */}
+          <div className="stat-row">
+            <div className="stat-name">HP</div>
+            <div className="stat-value">{buildHP}</div>
+          </div>
+
+          <div className="stat-row">
+            <div className="stat-name">Stamina</div>
+            <div className="stat-value">{buildStamina}</div>
+          </div>
+
+          <div className="stat-row">
+            <div className="stat-name">Equip Load</div>
+            <div className="stat-value">{}</div>
+          </div>
+
+          <div className="stat-row">
+            <div className="stat-name">Weight left / Roll</div>
+            <div className="stat-value">{}</div>
+          </div>
+
+          <div className="stat-row">
+            <div className="stat-name">Poise</div>
+            <div className="stat-value">{}</div>
+          </div>
+
+          <div className="stat-row">
+            <div className="stat-name">Item Discovery</div>
+            <div className="stat-value">{}</div>
+          </div>
+
+          <div className="stat-row">
+            <div className="stat-name">Attunement Slots</div>
+            <div className="stat-value">{}</div>
+          </div>
+
+          <div className="stat-row">
+            <div className="stat-name">Stamina Regen</div>
+            <div className="stat-value">{}</div>
+          </div>
+
+
         </div>
       </div>
     )
