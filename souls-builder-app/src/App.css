@@ -464,7 +464,7 @@ button:hover {
   padding-bottom: 1vh;
 }
 
-.bonfire {
+.bonfire, .characterBuilder {
   color: #d10909;
 }
 
