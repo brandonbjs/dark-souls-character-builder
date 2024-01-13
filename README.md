@@ -2,6 +2,9 @@
 # Dark Souls Character Builder
 Welcome to my MERN stack Dark Souls Character Builder web application! **PLEASE NOTE: This is an ongoing project and is constantly changing at the moment.**
 
+If items are not displaying in the select dropdowns, it is because I am locally hosting my API and I have not started the API at this time.
+Once this project is closer to a Minimum Viable Product, I will host it on an EC2 instance and the hosted github pages web page will be more interactive with the database.
+
 Try the most recent build of this web application here: https://brandonbjs.github.io/Dark-Souls-Character-Builder-gh-pages/
 
 ## Developer Information:
@@ -39,11 +42,14 @@ The character builder will enable Dark Souls players to theorycraft any build th
 * App.js
 * CharacterBuilder.js
 
-#### Database Collections and Models
-* users: 
-* weapons:
-* armor:
-* characterBuilds:
+#### Current Database Collections and Models
+* users
+* weapons
+* armor
+* characterBuilds
+* items
+* spells
+* rings
 
 Weapon JSON dataset acquired from: https://gist.github.com/BonsaiDen/4096890
 
