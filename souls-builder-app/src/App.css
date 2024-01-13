@@ -81,6 +81,7 @@ body {
   text-align: justify;
 }
 
+
 /* for smaller screens */
 @media screen and (max-width: 1900px) { 
   .attributes-grid,
@@ -302,8 +303,6 @@ button:hover {
   text-decoration: underline;
 }
 
-
-
 .armorDropdown {
   display: flex;
   align-items: center;
@@ -466,6 +465,23 @@ button:hover {
 
 .bonfire, .characterBuilder {
   color: #d10909;
+}
+
+.itemDropdown {
+  display: flex;
+  align-items: center;
+  margin-left: 50%;
+  margin-top: 1vh;
+  width: 50%; 
+  color: #dd0f0f;
+}
+
+.itemInfo {
+  color: #dad386; 
+  font-size: 0.8em;
+  margin-bottom: 1vh;
+  text-decoration: underline;
+  float: right;
 }
 
 

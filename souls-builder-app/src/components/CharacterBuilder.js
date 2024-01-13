@@ -21,6 +21,30 @@ class CharacterBuilder extends Component {
       deprived: 6,
     }
 
+    // Define a mapping of  initial defense values for each class
+    this.classDefenseMapping = {
+      warrior: {physical: 21, magic: 18, fire: 22, lightning: 19,
+          bleed: 48, poison: 36, curse: 30},
+      knight: {physical: 20, magic: 22, fire: 20, lightning: 19,
+        bleed: 40, poison: 30, curse: 30},
+      wanderer: {physical: 22, magic: 16, fire: 24, lightning: 19,
+        bleed: 40, poison: 42, curse: 30},
+      thief: {physical: 20, magic: 22, fire: 20, lightning: 19,
+        bleed: 37, poison: 30, curse: 30},
+      bandit: {physical: 21, magic: 20, fire: 22, lightning: 19,
+        bleed: 56, poison: 36, curse: 30},
+      hunter: {physical: 21, magic: 18, fire: 22, lightning: 19,
+        bleed: 44, poison: 36, curse: 30},
+      sorcerer: {physical: 12, magic: 11, fire: 11, lightning: 13,
+        bleed: 33, poison: 26, curse: 30},
+      pyromancer: {physical: 20, magic: 13, fire: 21, lightning: 16,
+        bleed: 44, poison: 42, curse: 30},
+      cleric: {physical: 18, magic: 25, fire: 19, lightning: 16,
+        bleed: 37, poison: 36, curse: 30},
+      deprived: {physical: 24, magic: 25, fire: 25, lightning: 22,
+        bleed: 44, poison: 36, curse: 30},
+    }
+
     // Define a mapping of  initial attribute values for each class
     this.classAttributeMapping = {
       warrior: {vitality: 11, attunement: 8, endurance: 12, strength: 13,
@@ -174,13 +198,23 @@ class CharacterBuilder extends Component {
       buildItemDiscovery: 100,
       isCovetousGoldSerpentRingApplied: false,
       isSymbolOfAvariceApplied: false,
-      buildPhysicalDef: 0,
       buildItemName1: "No Item",
       buildItemName2: "No Item",
       buildItemName3: "No Item",
       buildItemName4: "No Item",
       buildItemName5: "No Item",
       items: [],
+      buildPhysicalDef: 21,
+      buildMagicDef: 18,
+      buildFireDef: 22,
+      buildLightningDef: 19,
+      buildBleedDef: 48,
+      buildPoisonDef: 36,
+      buildCurseDef: 30,
+      buildArrow1: "No Arrow",
+      buildArrow2: "No Arrow",
+      buildBolt1: "No Bolt",
+      buildBolt2: "No Bolt",
     }
   }
 
@@ -369,6 +403,7 @@ class CharacterBuilder extends Component {
       this.calculateStaminaRecovery(this.state.buildEncumbrance)
       this.calculatePoise()
       this.calculateItemDiscovery(this.state.humanity);
+      this.calculateDefenseStats();
     }
 
     // if the character chest changes calculate new equip load
@@ -377,6 +412,7 @@ class CharacterBuilder extends Component {
       this.calculateEncumbrance()
       this.calculateStaminaRecovery(this.state.buildEncumbrance)
       this.calculatePoise()
+      this.calculateDefenseStats();
     }
 
     // if the character hands changes calculate new equip load
@@ -385,6 +421,7 @@ class CharacterBuilder extends Component {
       this.calculateEncumbrance()
       this.calculateStaminaRecovery(this.state.buildEncumbrance)
       this.calculatePoise()
+      this.calculateDefenseStats();
     }
 
     // if the character legs changes calculate new equip load
@@ -393,6 +430,7 @@ class CharacterBuilder extends Component {
       this.calculateEncumbrance()
       this.calculateStaminaRecovery(this.state.buildEncumbrance)
       this.calculatePoise()
+      this.calculateDefenseStats();
     }
 
     // if the character left hand 1 weapon changes calculate new equip load
@@ -400,6 +438,7 @@ class CharacterBuilder extends Component {
       this.calculateEquipLoad()
       this.calculateEncumbrance()
       this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculateDefenseStats();
     }
 
     // if the character left hand 2 weapon changes calculate new equip load
@@ -407,6 +446,7 @@ class CharacterBuilder extends Component {
       this.calculateEquipLoad()
       this.calculateEncumbrance()
       this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculateDefenseStats();
     }
 
     // if the character right hand 1 weapon changes calculate new equip load
@@ -414,6 +454,7 @@ class CharacterBuilder extends Component {
       this.calculateEquipLoad()
       this.calculateEncumbrance()
       this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculateDefenseStats();
     }
 
     // if the character right hand 2 weapon changes calculate new equip load
@@ -421,6 +462,7 @@ class CharacterBuilder extends Component {
       this.calculateEquipLoad()
       this.calculateEncumbrance()
       this.calculateStaminaRecovery(this.state.buildEncumbrance)
+      this.calculateDefenseStats();
     }
 
     // if the buildEquipLoad changes (BECAUSE ANOTHER ITEM WAS ADDED) then
@@ -688,12 +730,64 @@ class CharacterBuilder extends Component {
       isSymbolOfAvariceApplied: hasSymbolOfAvarice
     });
   }
+
+  calculateDefenseStats = () => {
+    const { characterClass, buildHead, buildChest, buildHands, buildLegs, buildLeftHand1, 
+            buildRightHand1, buildLeftHand2, buildRightHand2 } = this.state;
+  
+    let totalPhysicalDef = this.classDefenseMapping[characterClass].physical;
+    let totalMagicDef = this.classDefenseMapping[characterClass].magic;
+    let totalFireDef = this.classDefenseMapping[characterClass].fire;
+    let totalLightningDef = this.classDefenseMapping[characterClass].lightning;
+    let totalBleedDef = this.classDefenseMapping[characterClass].bleed;
+    let totalPoisonDef = this.classDefenseMapping[characterClass].poison;
+    let totalCurseDef = this.classDefenseMapping[characterClass].curse;
+  
+    const addArmorDefenseStats = (armor) => {
+      if (armor) {
+        totalPhysicalDef += armor.physical || 0;
+        totalMagicDef += armor.magic || 0;
+        totalFireDef += armor.fire || 0;
+        totalLightningDef += armor.lightning || 0;
+        totalBleedDef += armor.bleed || 0;
+        totalPoisonDef += armor.poison || 0;
+        totalCurseDef += armor.curse || 0;
+      }
+    };
+  
+    const addWeaponDefenseStats = (weapon) => {
+      if (weapon && weapon.def) {
+        weapon.def.forEach(def => {
+          totalPhysicalDef += def.physical || 0;
+          totalMagicDef += def.magic || 0;
+          totalFireDef += def.fire || 0;
+          totalLightningDef += def.lightning || 0;
+        });
+      }
+    };
+  
+    [buildHead, buildChest, buildHands, buildLegs].forEach(addArmorDefenseStats);
+    [buildLeftHand1, buildRightHand1, buildLeftHand2, buildRightHand2].forEach(addWeaponDefenseStats);
+  
+    this.setState({
+      buildPhysicalDef: totalPhysicalDef,
+      buildMagicDef: totalMagicDef,
+      buildFireDef: totalFireDef,
+      buildLightningDef: totalLightningDef,
+      buildBleedDef: totalBleedDef,
+      buildPoisonDef: totalPoisonDef,
+      buildCurseDef: totalCurseDef
+      });
+  }
+  
+  
   
   handleClassChange = (e) => {
     const selectedClass = e.target.value
     const attributes = this.classAttributeMapping[selectedClass]
+    const defenseStats = this.classDefenseMapping[selectedClass];
 
-    // Update the buildLevel based on the selected character class
+    // Update the buildLevel and attributes based on the selected character class
     this.setState({
       characterClass: selectedClass,
       buildLevel: this.classLevelMapping[selectedClass] || 1,
@@ -713,6 +807,13 @@ class CharacterBuilder extends Component {
       intelligence: attributes.intelligence,
       initFaith: attributes.faith,
       faith: attributes.faith,
+      buildPhysicalDef: defenseStats.physical,
+      buildMagicDef: defenseStats.magic,
+      buildFireDef: defenseStats.fire,
+      buildLightningDef: defenseStats.lightning,
+      buildBleedDef: defenseStats.bleed,
+      buildPoisonDef: defenseStats.poison,
+      buildCurseDef: defenseStats.curse
     })
   }
 
@@ -1036,6 +1137,27 @@ class CharacterBuilder extends Component {
     this.setState({buildItemName5: selectedItem5})
   }
 
+  // handle arrow/bolt changes
+  handleArrowChange1 = (e) => {
+    const selectedArrow1 = e.target.value
+    this.setState({buildArrow1: selectedArrow1})
+  }
+
+  handleArrowChange2 = (e) => {
+    const selectedArrow2 = e.target.value
+    this.setState({buildArrow2: selectedArrow2})
+  }
+
+  handleBoltChange1 = (e) => {
+    const selectedBolt1 = e.target.value
+    this.setState({buildBolt1: selectedBolt1})
+  }
+
+  handleBoltChange2 = (e) => {
+    const selectedBolt2 = e.target.value
+    this.setState({buildBolt2: selectedBolt2})
+  }
+
   handleNewBuildClick = () => {
     // Open a new page in another tab
     window.open("https://brandonbjs.github.io/Dark-Souls-Character-Builder-gh-pages/", "_blank")
@@ -1170,7 +1292,10 @@ class CharacterBuilder extends Component {
             buildEquipLoad, buildEncumbrance, buildRollType, 
             buildStaminaRecovery, buildPoise, buildItemDiscovery,
             buildItemName1, buildItemName2, buildItemName3, buildItemName4,
-            buildItemName5, items } = this.state
+            buildItemName5, items, buildPhysicalDef, buildMagicDef,
+            buildFireDef, buildLightningDef, buildBleedDef, 
+            buildPoisonDef, buildCurseDef, buildArrow1, buildArrow2,
+            buildBolt1, buildBolt2 } = this.state
     
     const leftHandGroup1 = this.attributeGroups[this.state.currentGroupIndex1]
     const rightHandGroup1 = this.attributeGroups[this.state.currentGroupIndex2]
@@ -1755,52 +1880,53 @@ class CharacterBuilder extends Component {
 
             <div className="stat-row">
               <div className="stat-name">Physical</div>
-              <div className="stat-value">{}</div>
+              <div className="stat-value">{buildPhysicalDef}</div>
             </div>
 
             <div className="stat-row">
               <div className="stat-name">Magic</div>
-              <div className="stat-value">{}</div>
+              <div className="stat-value">{buildMagicDef}</div>
             </div>
 
             <div className="stat-row">
-              <div className="stat-name">Flame</div>
-              <div className="stat-value">{}</div>
+              <div className="stat-name">Fire</div>
+              <div className="stat-value">{buildFireDef}</div>
             </div>
 
             <div className="stat-row">
               <div className="stat-name">Lightning</div>
               
-              <div className="stat-value">{}</div>
+              <div className="stat-value">{buildLightningDef}</div>
             </div>
 
             <div className="stat-row">
               <div className="stat-name">Bleed</div>
-              <div className="stat-value">{}</div>
+              <div className="stat-value">{buildBleedDef}</div>
             </div>
 
             <div className="stat-row">
               <div className="stat-name">Poison</div>
-              <div className="stat-value">{}</div>
+              <div className="stat-value">{buildPoisonDef}</div>
             </div>
 
             <div className="stat-row">
               <div className="stat-name">Curse</div>
-              <div className="stat-value">{}</div>
+              <div className="stat-value">{buildCurseDef}</div>
             </div>
 
           </div>
 
           <div className="char-items">
 
-            <div className="armorInfo">
+            <div className="itemInfo">
               <span>Items</span>
             </div>
             
-            <div className="armorDropdown">
+            <div className="itemDropdown">
               <select className="itemSelect"
               value={buildItemName1}
               onChange={this.handleItemChange1}>
+                <option value="No Item">No Item</option>
                 {items.map(item => (
                     <option key={item._id} value={item.name}>
                         {item.name} 
@@ -1809,10 +1935,11 @@ class CharacterBuilder extends Component {
               </select>
             </div>
 
-            <div className="armorDropdown">
+            <div className="itemDropdown">
               <select className="itemSelect"
               value={buildItemName2}
               onChange={this.handleItemChange2}>
+                <option value="No Item">No Item</option>
                 {items.map(item => (
                     <option key={item._id} value={item.name}>
                         {item.name} 
@@ -1821,10 +1948,11 @@ class CharacterBuilder extends Component {
               </select>
             </div>
 
-            <div className="armorDropdown">
+            <div className="itemDropdown">
               <select className="itemSelect"
               value={buildItemName3}
               onChange={this.handleItemChange3}>
+                <option value="No Item">No Item</option>
                 {items.map(item => (
                     <option key={item._id} value={item.name}>
                         {item.name} 
@@ -1833,10 +1961,11 @@ class CharacterBuilder extends Component {
               </select>
             </div>
 
-            <div className="armorDropdown">
+            <div className="itemDropdown">
               <select className="itemSelect"
               value={buildItemName4}
               onChange={this.handleItemChange4}>
+                <option value="No Item">No Item</option>
                 {items.map(item => (
                     <option key={item._id} value={item.name}>
                         {item.name} 
@@ -1845,15 +1974,84 @@ class CharacterBuilder extends Component {
               </select>
             </div>
 
-            <div className="armorDropdown">
+            <div className="itemDropdown">
               <select className="itemSelect"
               value={buildItemName5}
               onChange={this.handleItemChange5}>
+                <option value="No Item">No Item</option>
                 {items.map(item => (
                     <option key={item._id} value={item.name}>
                         {item.name} 
                     </option>
                 ))}
+              </select>
+            </div>
+
+            <div className="itemInfo">
+              <span>Arrows</span>
+            </div>
+
+            <div className="itemDropdown">
+              <select className="itemSelect"
+              value={buildArrow1}
+              onChange={this.handleArrowChange1}>
+                <option value="No Arrow">No Arrow</option>
+                <option value="feather">Feather Arrow</option>
+                <option value="fire">Fire Arrow</option>
+                <option value="large">Large Arrow</option>
+                <option value="moonlight">Moonlight Arrow</option>
+                <option value="poison">Poison Arrow</option>
+                <option value="standard">Standard Arrow</option>
+                <option value="wooden">Wooden Arrow</option>
+                <option value="dragonslayer">Dragonslayer Arrow</option>
+                <option value="gough's">Gough's Great Arrow</option>
+              </select>
+            </div>
+
+            <div className="itemDropdown">
+              <select className="itemSelect"
+              value={buildArrow2}
+              onChange={this.handleArrowChange2}>
+                <option value="No Arrow">No Arrow</option>
+                <option value="feather">Feather Arrow</option>
+                <option value="fire">Fire Arrow</option>
+                <option value="large">Large Arrow</option>
+                <option value="moonlight">Moonlight Arrow</option>
+                <option value="poison">Poison Arrow</option>
+                <option value="standard">Standard Arrow</option>
+                <option value="wooden">Wooden Arrow</option>
+                <option value="dragonslayer">Dragonslayer Arrow</option>
+                <option value="gough's">Gough's Great Arrow</option>
+              </select>
+            </div>
+
+            <div className="itemInfo">
+              <span>Bolts</span>
+            </div>
+
+            <div className="itemDropdown">
+              <select className="itemSelect"
+              value={buildBolt1}
+              onChange={this.handleBoltChange1}>
+                <option value="No Bolt">No Bolt</option>
+                <option value="heavy">Heavy Bolt</option>
+                <option value="lightning">Lightning Bolt</option>
+                <option value="sniper">Sniper Bolt</option>
+                <option value="standard">Standard Bolt</option>
+                <option value="wood">Wood Bolt</option>
+              </select>
+            </div>
+
+            <div className="itemDropdown">
+              <select className="itemSelect"
+              value={buildBolt2}
+              onChange={this.handleArrowChange2}>
+                <option value="No Bolt">No Bolt</option>
+                <option value="heavy">Heavy Bolt</option>
+                <option value="lightning">Lightning Bolt</option>
+                <option value="sniper">Sniper Bolt</option>
+                <option value="standard">Standard Bolt</option>
+                <option value="wood">Wood Bolt</option>
               </select>
             </div>
             
