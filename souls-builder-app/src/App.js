@@ -1,6 +1,6 @@
 import './App.css'
 import React, { Component } from 'react'
-// import NavigationBar from './components/NavigationBar'
+import NavigationBar from './components/NavigationBar'
 import CharacterBuilder from './components/CharacterBuilder'
 
 class App extends Component {
@@ -10,9 +10,9 @@ class App extends Component {
     return (
       <div className="App">
         
-        {/* <div className='navigationBar'>
+        <div className='navigationBar'>
           <NavigationBar />
-        </div> */}
+        </div> 
 
         <div className='characterBuilder'>
           <h2>Dark Souls Character Builder</h2>

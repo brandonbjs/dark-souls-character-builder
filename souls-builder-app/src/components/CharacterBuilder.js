@@ -756,15 +756,16 @@ class CharacterBuilder extends Component {
     };
   
     const addWeaponDefenseStats = (weapon) => {
-      if (weapon && weapon.def) {
-        weapon.def.forEach(def => {
-          totalPhysicalDef += def.physical || 0;
-          totalMagicDef += def.magic || 0;
-          totalFireDef += def.fire || 0;
-          totalLightningDef += def.lightning || 0;
+      if (weapon && Array.isArray(weapon.def)) {
+        weapon.def.forEach(defense => {
+          totalPhysicalDef += defense.physical || 0;
+          totalMagicDef += defense.magic || 0;
+          totalFireDef += defense.fire || 0;
+          totalLightningDef += defense.lightning || 0;
         });
       }
     };
+    
   
     [buildHead, buildChest, buildHands, buildLegs].forEach(addArmorDefenseStats);
     [buildLeftHand1, buildRightHand1, buildLeftHand2, buildRightHand2].forEach(addWeaponDefenseStats);
