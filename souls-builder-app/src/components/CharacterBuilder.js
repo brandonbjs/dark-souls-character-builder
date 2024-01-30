@@ -295,7 +295,7 @@ class CharacterBuilder extends Component {
 
     // initial fetch method to populate the helmets array with helmets from
     // my MongoDB database.
-    fetch('http://dscb.ddns.net:1234/fetchHelmets')
+    fetch('http://dscb.ddns.net:443/fetchHelmets')
         .then(response => response.json())
         .then(data => {
             this.setState({ helmets: data })
