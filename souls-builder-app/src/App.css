@@ -9,6 +9,10 @@ body, h1, h2, p, ul {
   padding: 0;
 }
 
+.characterBuilder {
+  margin-top: 1%;
+}
+
 /* Apply a background color to the entire body */
 body {
   background-color: #000000;

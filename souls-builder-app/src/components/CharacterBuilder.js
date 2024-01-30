@@ -45,6 +45,74 @@ class CharacterBuilder extends Component {
         bleed: 44, poison: 36, curse: 30},
     }
 
+    // Define the sequence of defense stat increases
+    this.defenseStatSequence = [
+      [1, 1, 1, 2], [2, 1, 2, 1], [1, 2, 1, 2], [1, 1, 1, 1],
+      [2, 1, 1, 2],[1, 2, 2, 1],[1, 1, 1, 1],[2, 1, 1, 2],
+      [1, 1, 1, 1],[1, 2, 2, 2],[2, 1, 1, 1],[1, 1, 1, 2],
+      [1, 1, 1, 1],[2, 2, 2, 2],[1, 1, 1, 1],[1, 1, 1, 2],
+      [2, 1, 1, 1],[1, 2, 2, 2],[1, 1, 1, 1],[2, 1, 1, 2],
+      [1, 1, 1, 1],[1, 2, 2, 2],[2, 1, 1, 1],[1, 1, 1, 1],
+      [1, 1, 1, 2],[1, 2, 1, 1],[2, 1, 2, 2],[1, 1, 1, 1],
+      [1, 1, 1, 2],[2, 1, 1, 1],[1, 2, 2, 1],[1, 1, 1, 2],
+      [2, 1, 1, 2],[1, 2, 1, 1],[1, 1, 2, 1],[2, 1, 1, 2],
+      [1, 1, 1, 1],[1, 1, 1, 2],[1, 2, 1, 1],[2, 1, 2, 1],
+      [1, 1, 1, 2],[1, 1, 1, 1],[1, 1, 1, 2],[2, 2, 1, 1],
+      [1, 1, 2, 1],[1, 1, 1, 2],[1, 1, 1, 1],[2, 1, 1, 1],
+      [1, 2, 1, 2],[1, 1, 1, 1],[1, 1, 2, 1],[1, 1, 1, 2],
+      [2, 1, 1, 1],[1, 1, 1, 1],[1, 1, 1, 2],[1, 2, 1, 1],
+      [1, 1, 1, 1],[2, 1, 2, 2],[1, 1, 1, 1],[1, 1, 1, 1],
+      [1, 1, 1, 1],[1, 1, 1, 2],[1, 2, 1, 1],[2, 1, 1, 1],
+      [1, 1, 1, 1],[1, 1, 1, 1],[1, 1, 2, 2],[1, 1, 1, 1],
+      [1, 1, 1, 1],[1, 1, 1, 1],[1, 1, 1, 1],[1, 1, 1, 1],
+      [2, 2, 1, 1],[1, 1, 1, 1],[1, 1, 1, 1],[1, 1, 1, 1],
+      [1, 1, 1, 0],[1, 1, 1, 1],[0, 1, 1, 1],[1, 1, 1, 0],
+      [1, 1, 1, 1],[0, 1, 1, 0],[1, 1, 0, 1],[1, 1, 1, 1],
+      [1, 0, 1, 0],[0, 1, 0, 1],[1, 1, 1, 0],[0, 1, 1, 1],
+      [1, 0, 1, 0],[0, 1, 0, 1],[1, 0, 1, 1],[1, 1, 0, 0],
+      [0, 0, 1, 1],[1, 1, 0, 0],[0, 0, 1, 1],[1, 1, 0, 0],
+      [0, 0, 1, 1],[1, 1, 0, 1],[0, 0, 1, 0],[1, 1, 0, 1],
+      [0, 0, 1, 0],[1, 1, 0, 1],[0, 0, 1, 0],[1, 1, 0, 1],
+      [0, 0, 1, 1],[1, 1, 0, 0],[0, 0, 1, 1],[1, 1, 0, 0],
+      [1, 0, 1, 1],[1, 1, 0, 0],[0, 0, 1, 1],[0, 1, 1, 1],
+      [1, 0, 0, 0],[0, 1, 0, 1],[1, 0, 1, 1],[0, 1, 0, 0],
+      [1, 0, 1, 1],[0, 1, 0, 0],[1, 0, 1, 1],[0, 1, 0, 0],
+      [1, 0, 1, 1],[0, 1, 0, 0],[1, 0, 1, 1],[0, 1, 0, 0],
+      [1, 0, 1, 1],[0, 1, 0, 0],[1, 0, 1, 1],[0, 1, 0, 0],
+      [1, 0, 1, 1],[0, 1, 0, 0],[1, 0, 0, 1],[0, 0, 1, 0],
+      [1, 1, 0, 1],[0, 0, 1, 0],[1, 1, 0, 1],[0, 0, 1, 0],
+      [0, 1, 0, 1],[1, 0, 1, 0],[0, 1, 0, 1],[1, 0, 1, 0],
+      [0, 1, 0, 1],[1, 0, 0, 0],[0, 0, 1, 1],[1, 1, 0, 0],
+      [0, 0, 1, 1],[1, 1, 0, 0],[0, 0, 1, 1],[0, 1, 0, 0],
+      [1, 0, 0, 0],[0, 1, 1, 1],[1, 0, 0, 0],[0, 0, 1, 1],
+      [1, 1, 0, 0],[0, 0, 1, 1],[1, 1, 0, 0],[0, 0, 1, 1],
+      [0, 0, 0, 0],[0, 1, 1, 1],[1, 0, 0, 0],[0, 0, 1, 1],
+      [1, 1, 0, 0],[0, 0, 1, 0],[0, 1, 0, 1],[1, 0, 0, 0],
+      [0, 0, 1, 1],[1, 1, 0, 0],[0, 0, 1, 1],[0, 1, 0, 0],
+      [1, 0, 0, 0],[0, 0, 1, 0],[1, 1, 0, 1],[0, 0, 1, 0],
+      [0, 1, 0, 0],[1, 0, 0, 0],[0, 0, 1, 0],[1, 1, 0, 0],
+      [0, 0, 0, 0],[0, 1, 1, 0],[1, 0, 0, 0],[0, 0, 1, 0],
+      [0, 1, 0, 0],[1, 0, 0, 1],[0, 0, 1, 0],[0, 1, 0, 0],
+      [1, 0, 0, 0],[0, 1, 1, 0],[0, 0, 0, 0],[0, 0, 0, 0],
+      [1, 1, 1, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 1, 1, 0],
+      [0, 0, 0, 0],[0, 0, 0, 0],[0, 1, 0, 0],[0, 0, 1, 0],
+      [0, 0, 0, 0],[0, 0, 0, 0],[0, 1, 1, 0],[0, 0, 0, 1],
+      [0, 0, 0, 0],[1, 0, 0, 0],[0, 0, 0, 0],[0, 1, 0, 0],
+      [0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],
+      [0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 1, 0],
+      [0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 1, 0, 0],
+      [0, 0, 0, 0],[0, 0, 0, 1],[0, 0, 0, 0],[0, 0, 0, 0],
+      [1, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],
+      [0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],
+      [0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],
+      [0, 0, 0, 0],[0, 0, 1, 0],[0, 0, 0, 0],[0, 0, 0, 1],
+      [0, 1, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],
+      [1, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],
+      [0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],
+      [0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0],
+      [0, 0, 0, 0],[0, 0, 0, 1],
+    ];
+
     // Define a mapping of  initial attribute values for each class
     this.classAttributeMapping = {
       warrior: {vitality: 11, attunement: 8, endurance: 12, strength: 13,
@@ -343,31 +411,116 @@ class CharacterBuilder extends Component {
       }
 
       this.calculateTotalSouls(this.state.buildLevel)
+      
     }
     
     // if the character class changes  calculate new spell slots
     if (prevState.characterClass !== this.state.characterClass) {
-      this.calculateSpellSlots()
+      this.calculateSpellSlots();
+      this.calculateDefenseStats();
     }
 
-    // if the character attunement changes  calculate new spell slots
-    if (prevState.attunement !== this.state.attunement) {
-      this.calculateSpellSlots()
-    }
-
-    // if the character vitality changes  calculate new HP
-    if (prevState.vitality !== this.state.vitality) {
+    // if the character vitality INCREASES calculate new HP
+    if (prevState.vitality < this.state.vitality) {
       this.calculateHP(this.state.vitality)
+      this.levelUpDef('vitality');
     }
 
-    // if the character endurance changes calculate new stamina
-    if (prevState.endurance !== this.state.endurance) {
+    // if the character vitality DECREASES calculate new HP
+    if (prevState.vitality > this.state.vitality) {
+      this.calculateHP(this.state.vitality)
+      this.levelDownDef('vitality');
+    }
+
+    // if the character attunement INCREASES  calculate new spell slots
+    if (prevState.attunement < this.state.attunement) {
+      this.calculateSpellSlots()
+      this.levelUpDef('attunement');
+    }
+
+    // if the character attunement DECREASES  calculate new spell slots
+    if (prevState.attunement > this.state.attunement) {
+      this.calculateSpellSlots()
+      this.levelDownDef('attunement');
+    }
+
+    // if the character endurance INCREASES calculate new stamina
+    if (prevState.endurance < this.state.endurance) {
       this.calculateStamina(this.state.endurance)
       this.calculateTotalEquipLoad(this.state.endurance)
       this.calculateEncumbrance()
+      this.levelUpDef('endurance');
     }
 
-    // if the character endurance changes calculate new stamina
+    // if the character endurance DECREASES calculate new stamina
+    if (prevState.endurance > this.state.endurance) {
+      this.calculateStamina(this.state.endurance)
+      this.calculateTotalEquipLoad(this.state.endurance)
+      this.calculateEncumbrance()
+      this.levelDownDef('endurance');
+    }
+
+    // if the character strength INCREASES 
+    if (prevState.strength < this.state.strength) {
+      this.levelUpDef('strength');
+    }
+
+    // if the character strength DECREASES 
+    if (prevState.strength > this.state.strength) {
+      this.levelDownDef('strength');
+    }
+
+    // if the character dexterity INCREASES 
+    if (prevState.dexterity < this.state.dexterity) {
+      this.levelUpDef('dexterity');
+    }
+    
+    // if the character dexterity DECREASES 
+    if (prevState.dexterity > this.state.dexterity) {
+      this.levelDownDef('dexterity');
+    }
+
+    // if the character resistance INCREASES 
+    if (prevState.resistance < this.state.resistance) {
+      this.levelUpDef('resistance');
+    }
+
+    // if the character resistance DECREASES 
+    if (prevState.resistance > this.state.resistance) {
+      this.levelDownDef('resistance');
+    }
+
+    // if the character intelligence INCREASES 
+    if (prevState.intelligence < this.state.intelligence) {
+      this.levelUpDef('intelligence');
+    }
+
+    // if the character intelligence DECREASES 
+    if (prevState.intelligence > this.state.intelligence) {
+      this.levelDownDef('intelligence');
+    }
+
+    // if the character faith INCREASES 
+    if (prevState.faith < this.state.faith) {
+      this.levelUpDef('faith');
+    }
+
+    // if the character faith DECREASES 
+    if (prevState.faith > this.state.faith) {
+      this.levelDownDef('faith');
+    }
+
+    // if the character humanity INCREASES 
+    if (prevState.humanity < this.state.humanity) {
+      this.humanityUp();
+    }
+
+    // if the character humanity DECREASES 
+    if (prevState.humanity > this.state.humanity) {
+      this.humanityDown();
+    }
+
+    // if the character humanity changes calculate new item discovery
     if (prevState.humanity !== this.state.humanity) {
       this.calculateItemDiscovery(this.state.humanity);
     }
@@ -381,6 +534,7 @@ class CharacterBuilder extends Component {
       this.calculatePoise()
       this.calculateItemDiscovery(this.state.humanity);
       this.calculateSpellSlots();
+      this.calculateDefenseStats();
     }
 
     // if the character ring 2 changes calculate new stamina
@@ -392,6 +546,7 @@ class CharacterBuilder extends Component {
       this.calculatePoise()
       this.calculateItemDiscovery(this.state.humanity);
       this.calculateSpellSlots();
+      this.calculateDefenseStats();
     }
 
     // if the character head changes calculate new related stats
@@ -520,6 +675,11 @@ class CharacterBuilder extends Component {
     // Check for "Tiny Being's Ring" in either ring slot and apply a 5% increase
     if (this.state.buildRing1Name === "Tiny Being's Ring" || this.state.buildRing2Name === "Tiny Being's Ring") {
       buildHealth *= 1.05 // Increase by 5%
+    }
+
+    // Check for "Dusk Crown Ring" in either ring slot and apply a 50% decrease
+    if (this.state.buildRing1Name === "Dusk Crown Ring" || this.state.buildRing2Name === "Dusk Crown Ring") {
+      buildHealth = buildHealth/2;
     }
 
     buildHealth = Math.round(buildHealth)
@@ -731,9 +891,10 @@ class CharacterBuilder extends Component {
     });
   }
 
+  // calculate the defense stats from ARMOR 
   calculateDefenseStats = () => {
-    const { characterClass, buildHead, buildChest, buildHands, buildLegs, buildLeftHand1, 
-            buildRightHand1, buildLeftHand2, buildRightHand2 } = this.state;
+    const { characterClass, buildHead, buildChest, buildHands, 
+            buildLegs, buildRing1Name, buildRing2Name } = this.state;
   
     let totalPhysicalDef = this.classDefenseMapping[characterClass].physical;
     let totalMagicDef = this.classDefenseMapping[characterClass].magic;
@@ -755,21 +916,44 @@ class CharacterBuilder extends Component {
       }
     };
   
-    const addWeaponDefenseStats = (weapon) => {
-      if (weapon && Array.isArray(weapon.def)) {
-        weapon.def.forEach(defense => {
-          totalPhysicalDef += defense.physical || 0;
-          totalMagicDef += defense.magic || 0;
-          totalFireDef += defense.fire || 0;
-          totalLightningDef += defense.lightning || 0;
-        });
-      }
-    };
-    
-  
     [buildHead, buildChest, buildHands, buildLegs].forEach(addArmorDefenseStats);
-    [buildLeftHand1, buildRightHand1, buildLeftHand2, buildRightHand2].forEach(addWeaponDefenseStats);
-  
+
+    // special defense stat increases from RINGS are handled below
+    // each ring gets a special IF statement because multiple rings can be worn, need to check both
+    if (buildRing1Name === "Ring of Steel Protection" || buildRing2Name === "Ring of Steel Protection") {
+      totalPhysicalDef += 50;
+    }
+
+    if (buildRing1Name === "Flame Stoneplate Ring" || buildRing2Name === "Flame Stoneplate Ring") {
+      totalFireDef += 50;
+    }
+
+    if (buildRing1Name === "Spell Stoneplate Ring" || buildRing2Name === "Spell Stoneplate Ring") {
+      totalMagicDef += 50;
+    }
+
+    if (buildRing1Name === "Thunder Stoneplate Ring" || buildRing2Name === "Thunder Stoneplate Ring") {
+      totalLightningDef += 50;
+    }
+
+    if (buildRing1Name === "Speckled Stoneplate Ring" || buildRing2Name === "Speckled Stoneplate Ring") {
+      totalFireDef += 25;
+      totalMagicDef += 25;
+      totalLightningDef += 25;
+    }
+
+    if (buildRing1Name === "Bloodbite Ring" || buildRing2Name === "Bloodbite Ring") {
+      totalBleedDef *= 5;
+    }
+
+    if (buildRing1Name === "Poisonbite Ring" || buildRing2Name === "Poisonbite Ring") {
+      totalPoisonDef *= 5;
+    }
+
+    if (buildRing1Name === "Cursebite Ring" || buildRing2Name === "Cursebite Ring") {
+      totalCurseDef *= 5;
+    }
+   
     this.setState({
       buildPhysicalDef: totalPhysicalDef,
       buildMagicDef: totalMagicDef,
@@ -780,8 +964,361 @@ class CharacterBuilder extends Component {
       buildCurseDef: totalCurseDef
       });
   }
+
+  // method is used to handle specific defense stat INCREASES based 
+  // on the attribute passed
+  levelUpDef = (attribute) => {
+     const softCap = 225;
+     if (this.state.buildLevel >= softCap) {
+      this.handlePostSoftCapIncrease();
+     } else {
+      this.handlePreSoftCapIncrease();
+     }
+         // Special handling for endurance affecting bleed stat
+    if (attribute === 'endurance') {
+      this.increaseBleedStat();
+    }
+    if (attribute === 'resistance') {
+      this.increaseResistanceStats();
+    }
+  }
+
+  // method is used to handle specific defense stat DECREASES based 
+  // on the attribute passed
+  levelDownDef = (attribute) => {
+    const softCap = 225;
+    if (this.state.buildLevel >= softCap) {
+     this.handlePostSoftCapDecrease();
+    } else {
+     this.handlePreSoftCapDecrease();
+    }
+        // Special handling for endurance affecting bleed stat
+   if (attribute === 'endurance') {
+     this.decreaseBleedStat();
+   }
+   if (attribute === 'resistance') {
+     this.decreaseResistanceStats();
+   }
+ }
+
+  // this method is used to INCREMENT pre soft cap defense stats
+  handlePreSoftCapIncrease = () => {
+    // Calculate the index in the sequence based on the current level
+    const sequenceIndex = (this.state.buildLevel + 1) % this.defenseStatSequence.length;
+    const statIncreases = this.defenseStatSequence[sequenceIndex];
+
+    // Update defense stats
+    this.setState(prevState => ({
+      buildPhysicalDef: prevState.buildPhysicalDef + statIncreases[0],
+      buildMagicDef: prevState.buildMagicDef + statIncreases[1],
+      buildFireDef: prevState.buildFireDef + statIncreases[2],
+      buildLightningDef: prevState.buildLightningDef + statIncreases[3],
+    }));
+  }
+
+  // this method is used to DECREMENT pre soft cap defense stats
+  handlePreSoftCapDecrease = () => {
+    // Calculate the index in the sequence based on the current level
+    const sequenceIndex = (this.state.buildLevel - 1) % this.defenseStatSequence.length;
+    const statIncreases = this.defenseStatSequence[sequenceIndex];
+
+    // Update defense stats
+    this.setState(prevState => ({
+      buildPhysicalDef: prevState.buildPhysicalDef - statIncreases[0],
+      buildMagicDef: prevState.buildMagicDef - statIncreases[1],
+      buildFireDef: prevState.buildFireDef - statIncreases[2],
+      buildLightningDef: prevState.buildLightningDef - statIncreases[3],
+    }));
+  }
+
+  // this method is used to INCREMENT post soft cap defense stats
+  handlePostSoftCapIncrease = () => {
+    const levelBeyondSoftCap = this.state.buildLevel - 225;
+    const cycleLength = 4 * 2 + 12; // 4 stats with 2 level wait each + 12 levels wait
+    const cyclePosition = levelBeyondSoftCap % cycleLength;
+
+    // Determine which stat to increment
+    let increment = [0, 0, 0, 0]; // [physical, magic, fire, lightning]
+    if (cyclePosition === 0 || cyclePosition === 2 || cyclePosition === 4 || cyclePosition === 6) {
+      increment[cyclePosition / 2] = 1;
+    }
+
+    // Update defense stats
+    this.setState(prevState => ({
+      buildPhysicalDef: prevState.buildPhysicalDef + increment[0],
+      buildMagicDef: prevState.buildMagicDef + increment[1],
+      buildFireDef: prevState.buildFireDef + increment[2],
+      buildLightningDef: prevState.buildLightningDef + increment[3],
+    }));
+  }
+
+    // this method is used to DECREMENT post soft cap defense stats
+    handlePostSoftCapDecrease = () => {
+      const levelBeyondSoftCap = this.state.buildLevel - 225;
+      const cycleLength = 4 * 2 + 12; // 4 stats with 2 level wait each + 12 levels wait
+      const cyclePosition = levelBeyondSoftCap % cycleLength;
   
+      // Determine which stat to increment
+      let increment = [0, 0, 0, 0]; // [physical, magic, fire, lightning]
+      if (cyclePosition === 0 || cyclePosition === 2 || cyclePosition === 4 || cyclePosition === 6) {
+        increment[cyclePosition / 2] = 1;
+      }
   
+      // Update defense stats
+      this.setState(prevState => ({
+        buildPhysicalDef: prevState.buildPhysicalDef - increment[0],
+        buildMagicDef: prevState.buildMagicDef - increment[1],
+        buildFireDef: prevState.buildFireDef - increment[2],
+        buildLightningDef: prevState.buildLightningDef - increment[3],
+      }));
+    }
+
+  increaseBleedStat = () => {
+    const enduranceLevel = this.state.endurance;
+    let bleedIncrement = enduranceLevel < 15 ? 4 : enduranceLevel < 30 ? 3 : 1;
+
+    this.setState(prevState => ({
+      buildBleedDef: prevState.buildBleedDef + bleedIncrement
+    }));
+  }
+
+  decreaseBleedStat = () => {
+    const enduranceLevel = this.state.endurance;
+    let bleedIncrement = enduranceLevel < 15 ? 4 : enduranceLevel < 30 ? 3 : 1;
+
+    this.setState(prevState => ({
+      buildBleedDef: prevState.buildBleedDef - bleedIncrement
+    }));
+  }
+
+  increaseResistanceStats = () => {
+    const resistanceLevel = this.state.resistance;
+    let physicalIncrement = 0;
+    let fireIncrement = 0;
+    let magicIncrement = 0;
+    let lightningIncrement = 0;
+    let poisonIncrement = 0;
+
+    // Determine the increments based on resistance level
+    if (resistanceLevel < 50) {
+      physicalIncrement = 3;
+      fireIncrement = 3;
+      magicIncrement = 1;
+      lightningIncrement = 1;
+      poisonIncrement = resistanceLevel < 30 ? 6 : 3;
+    } else {
+      physicalIncrement = 1;
+      fireIncrement = 1;
+      magicIncrement = 1;
+      lightningIncrement = 1;
+      poisonIncrement = 1;
+    }
+
+    // Update the defense stats
+    this.setState(prevState => ({
+      buildPhysicalDef: prevState.buildPhysicalDef + physicalIncrement,
+      buildFireDef: prevState.buildFireDef + fireIncrement,
+      buildMagicDef: prevState.buildMagicDef + magicIncrement,
+      buildLightningDef: prevState.buildLightningDef + lightningIncrement,
+      buildPoisonDef: prevState.buildPoisonDef + poisonIncrement
+    }));
+  }
+
+  decreaseResistanceStats = () => {
+    const resistanceLevel = this.state.resistance;
+    let physicalIncrement = 0;
+    let fireIncrement = 0;
+    let magicIncrement = 0;
+    let lightningIncrement = 0;
+    let poisonIncrement = 0;
+
+    // Determine the increments based on resistance level
+    if (resistanceLevel < 50) {
+      physicalIncrement = 3;
+      fireIncrement = 3;
+      magicIncrement = 1;
+      lightningIncrement = 1;
+      poisonIncrement = resistanceLevel < 30 ? 6 : 3;
+    } else {
+      physicalIncrement = 1;
+      fireIncrement = 1;
+      magicIncrement = 1;
+      lightningIncrement = 1;
+      poisonIncrement = 1;
+    }
+
+    // Update the defense stats
+    this.setState(prevState => ({
+      buildPhysicalDef: prevState.buildPhysicalDef - physicalIncrement,
+      buildFireDef: prevState.buildFireDef - fireIncrement,
+      buildMagicDef: prevState.buildMagicDef - magicIncrement,
+      buildLightningDef: prevState.buildLightningDef - lightningIncrement,
+      buildPoisonDef: prevState.buildPoisonDef - poisonIncrement
+    }));
+  }
+
+  humanityUp = () => {
+    const { buildLevel, humanity } = this.state
+    let curseIncrement = 0;
+    let incrementPhysical = 0;
+    let incrementMagic = 0;
+    let incrementFire = 0;
+    let incrementLightning = 0;
+    
+    if (buildLevel < 90) {
+      // Calculate the index in the sequence based on the current level
+      const sequenceIndex = (buildLevel - 1) % this.defenseStatSequence.length;
+      const statIncreases = this.defenseStatSequence[sequenceIndex];
+
+      // Update defense stats
+      this.setState(prevState => ({
+        buildPhysicalDef: prevState.buildPhysicalDef + statIncreases[0],
+        buildMagicDef: prevState.buildMagicDef + statIncreases[1],
+        buildFireDef: prevState.buildFireDef + statIncreases[2],
+        buildLightningDef: prevState.buildLightningDef + statIncreases[3],
+      }));
+    } else if (buildLevel >= 90 && buildLevel <= 125) {
+      // Determine the pattern based on the build level
+      const patternIndex = (buildLevel - 91) % 7;
+      switch (patternIndex) {
+        case 0: incrementPhysical = 1; break;
+        case 1: incrementMagic = 1; incrementFire = 1; incrementLightning = 1; break;
+        case 2: incrementPhysical = 0; incrementMagic = 0; incrementFire = 0; incrementLightning = 0; break;
+        case 3: incrementMagic = 1; break;
+        case 4: incrementPhysical = 1; incrementFire = 1; incrementLightning = 1; break;
+        case 5: incrementPhysical = 0; incrementMagic = 0; incrementFire = 0; incrementLightning = 0; break;
+        case 6: incrementFire = 1; break;
+        default: break;
+      }
+      // Update the defense stats
+      this.setState(prevState => ({
+        buildPhysicalDef: prevState.buildPhysicalDef + incrementPhysical,
+        buildMagicDef: prevState.buildMagicDef + incrementMagic,
+        buildFireDef: prevState.buildFireDef + incrementFire,
+        buildLightningDef: prevState.buildLightningDef + incrementLightning
+      }));
+    } else if (buildLevel > 125) {
+      // Increments every 5 levels past 125
+      const cycleLength = 20; // 4 stats with 5 level wait each
+      const cyclePosition = (buildLevel - 126) % cycleLength;
+      if (cyclePosition % 5 === 0) {
+        switch (cyclePosition / 5) {
+          case 0: incrementPhysical = 1; break;
+          case 1: incrementMagic = 1; break;
+          case 2: incrementFire = 1; break;
+          case 3: incrementLightning = 1; break;
+          default: break;
+        }
+      }
+      // Update the defense stats
+      this.setState(prevState => ({
+        buildPhysicalDef: prevState.buildPhysicalDef + incrementPhysical,
+        buildMagicDef: prevState.buildMagicDef + incrementMagic,
+        buildFireDef: prevState.buildFireDef + incrementFire,
+        buildLightningDef: prevState.buildLightningDef + incrementLightning
+      }));
+    }
+
+    if (humanity > 0 && humanity <= 5) {
+      curseIncrement += 10;
+    } else if (humanity > 5 && humanity <= 10) {
+      curseIncrement += 8;
+    } else if (humanity > 10 && humanity <= 30) {
+      if (humanity % 2 === 0) {
+        curseIncrement += 1;
+      } else {
+        curseIncrement += 2;
+      }
+    }
+    
+
+    // Update the defense stats
+    this.setState(prevState => ({
+      buildCurseDef: prevState.buildCurseDef + curseIncrement
+    }));
+  }
+
+  humanityDown = () => {
+    const { buildLevel, humanity } = this.state
+    let curseDecrement = 0;
+    let incrementPhysical = 0;
+    let incrementMagic = 0;
+    let incrementFire = 0;
+    let incrementLightning = 0;
+    
+    if (buildLevel < 90) {
+      // Calculate the index in the sequence based on the current level
+      const sequenceIndex = (buildLevel - 1) % this.defenseStatSequence.length;
+      const statDecreases = this.defenseStatSequence[sequenceIndex];
+
+      // Update defense stats
+      this.setState(prevState => ({
+        buildPhysicalDef: prevState.buildPhysicalDef - statDecreases[0],
+        buildMagicDef: prevState.buildMagicDef - statDecreases[1],
+        buildFireDef: prevState.buildFireDef - statDecreases[2],
+        buildLightningDef: prevState.buildLightningDef - statDecreases[3],
+      }));
+    } else if (buildLevel >= 90 && buildLevel <= 125) {
+      // Determine the pattern based on the build level
+      const patternIndex = (buildLevel - 91) % 7;
+      switch (patternIndex) {
+        case 0: incrementPhysical = 1; break;
+        case 1: incrementMagic = 1; incrementFire = 1; incrementLightning = 1; break;
+        case 2: incrementPhysical = 0; incrementMagic = 0; incrementFire = 0; incrementLightning = 0; break;
+        case 3: incrementMagic = 1; break;
+        case 4: incrementPhysical = 1; incrementFire = 1; incrementLightning = 1; break;
+        case 5: incrementPhysical = 0; incrementMagic = 0; incrementFire = 0; incrementLightning = 0; break;
+        case 6: incrementFire = 1; break;
+        default: break;
+      }
+      // Update the defense stats
+      this.setState(prevState => ({
+        buildPhysicalDef: prevState.buildPhysicalDef - incrementPhysical,
+        buildMagicDef: prevState.buildMagicDef - incrementMagic,
+        buildFireDef: prevState.buildFireDef - incrementFire,
+        buildLightningDef: prevState.buildLightningDef - incrementLightning
+      }));
+    } else if (buildLevel > 125) {
+      // Increments every 5 levels past 125
+      const cycleLength = 20; // 4 stats with 5 level wait each
+      const cyclePosition = (buildLevel - 126) % cycleLength;
+      if (cyclePosition % 5 === 0) {
+        switch (cyclePosition / 5) {
+          case 0: incrementPhysical = 1; break;
+          case 1: incrementMagic = 1; break;
+          case 2: incrementFire = 1; break;
+          case 3: incrementLightning = 1; break;
+          default: break;
+        }
+      }
+      // Update the defense stats
+      this.setState(prevState => ({
+        buildPhysicalDef: prevState.buildPhysicalDef - incrementPhysical,
+        buildMagicDef: prevState.buildMagicDef - incrementMagic,
+        buildFireDef: prevState.buildFireDef - incrementFire,
+        buildLightningDef: prevState.buildLightningDef - incrementLightning
+      }));
+    }
+    
+    
+    
+    if (humanity >= 0 && humanity <= 5) {
+      curseDecrement += 10;
+    } else if (humanity > 5 && humanity <= 10) {
+      curseDecrement += 8;
+    } else if (humanity > 10 && humanity <= 30) {
+      if (humanity % 2 === 0) {
+        curseDecrement += 1;
+      } else {
+        curseDecrement += 2;
+      }
+    }
+  
+    // Update the defense stats
+    this.setState(prevState => ({
+      buildCurseDef: prevState.buildCurseDef - curseDecrement
+    }));
+  }
   
   handleClassChange = (e) => {
     const selectedClass = e.target.value
@@ -1171,7 +1708,7 @@ class CharacterBuilder extends Component {
 
   // Generic method to increment an attribute to a MAX of 99
   handleIncrement = (attribute) => {
-    if (attribute === "humanity") {
+    if (attribute === "humanity" && this.state.humanity < 99) {
       this.setState((prevState) => ({
         humanity: prevState.humanity + 1,
       }))
