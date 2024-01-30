@@ -8,8 +8,8 @@ app.use(express.json());
 app.use(cors());
 
 // SSL cert paths
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/dscb.ddns.net/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/dscb.ddns.net/fullchain.pem', 'utf8');
+const privateKey = fs.readFileSync('/home/ec2-user/dark-souls-character-builder/certificates/', 'utf8');
+const certificate = fs.readFileSync('/home/ec2-user/dark-souls-character-builder/certificates/', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
 // Create HTTPS server
