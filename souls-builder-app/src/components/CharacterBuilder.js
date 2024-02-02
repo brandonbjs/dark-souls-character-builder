@@ -760,6 +760,8 @@ class CharacterBuilder extends Component {
     this.setState({ buildEquipLoad: equipLoad })
   }
 
+  // calculate encumbrance rate (this controls what kind of roll the user has) by dividing
+  // equip load by the total equip loag and multiply by 100 to get the percent.
   calculateEncumbrance = () => {
     const { buildEquipLoad, buildTotalEquipLoad } = this.state
   
@@ -781,6 +783,8 @@ class CharacterBuilder extends Component {
     this.setState({ buildEncumbrance: encumbrance })
   }
 
+  // calculate the builds stamina recovery based on their encumbrance level and whether
+  // or not they have the cloranthy ring
   calculateStaminaRecovery = (currentBuildEncumbrance) => {
     const { buildRing1Name, buildRing2Name, buildHeadName, buildStaminaRecovery, 
       buildLeftHand1Name, buildLeftHand2Name, buildRightHand1Name, 
@@ -1073,6 +1077,7 @@ class CharacterBuilder extends Component {
       }));
     }
 
+  // calculate how much to increase the bleed resist stat by, based on the current endurance level
   increaseBleedStat = () => {
     const enduranceLevel = this.state.endurance;
     let bleedIncrement = enduranceLevel < 15 ? 4 : enduranceLevel < 30 ? 3 : 1;
@@ -1082,6 +1087,7 @@ class CharacterBuilder extends Component {
     }));
   }
 
+  // calculate how much to decrease the bleed resist stat by, based on the current endurance level
   decreaseBleedStat = () => {
     const enduranceLevel = this.state.endurance;
     let bleedIncrement = enduranceLevel < 15 ? 4 : enduranceLevel < 30 ? 3 : 1;
@@ -1091,6 +1097,7 @@ class CharacterBuilder extends Component {
     }));
   }
 
+  // calculate how much to increase all def resist stats by, scaling based on the current resist level
   increaseResistanceStats = () => {
     const resistanceLevel = this.state.resistance;
     let physicalIncrement = 0;
@@ -1124,6 +1131,7 @@ class CharacterBuilder extends Component {
     }));
   }
 
+  // calculate how much to decrease all def resist stats by, scaling based on the current resist level
   decreaseResistanceStats = () => {
     const resistanceLevel = this.state.resistance;
     let physicalIncrement = 0;
@@ -1300,8 +1308,6 @@ class CharacterBuilder extends Component {
       }));
     }
     
-    
-    
     if (humanity >= 0 && humanity <= 5) {
       curseDecrement += 10;
     } else if (humanity > 5 && humanity <= 10) {
@@ -1320,6 +1326,7 @@ class CharacterBuilder extends Component {
     }));
   }
   
+  // handler method that changes all the relevant stats based on the selected class
   handleClassChange = (e) => {
     const selectedClass = e.target.value
     const attributes = this.classAttributeMapping[selectedClass]
@@ -1362,6 +1369,8 @@ class CharacterBuilder extends Component {
     this.setState({buildCovenant: selectedCovenant})
   }
 
+  // handler method that changes the selected spell when the user selects a new one
+  // and update how many spell slots are used
   handleSpellChange = (index, event) => {
     const selectedSpellName = event.target.value
     const selectedSpell = this.state.spells.find(spell => spell.name === selectedSpellName)
@@ -1394,31 +1403,39 @@ class CharacterBuilder extends Component {
     }
   }
 
-  
+  // handler that allows the user to click the weapon stat div and oscillate through the different
+  // weapon statistics
   handleAttributeDiv1Click = () => {
     this.setState(prevState => ({
       currentGroupIndex1: (prevState.currentGroupIndex1 + 1) % this.attributeGroups.length
     }))
   }
 
+  // handler that allows the user to click the weapon stat div and oscillate through the different
+  // weapon statistics
   handleAttributeDiv2Click = () => {
     this.setState(prevState => ({
       currentGroupIndex2: (prevState.currentGroupIndex2 + 1) % this.attributeGroups.length
     }))
   }
 
-    handleAttributeDiv3Click = () => {
+  // handler that allows the user to click the weapon stat div and oscillate through the different
+  // weapon statistics
+  handleAttributeDiv3Click = () => {
     this.setState(prevState => ({
       currentGroupIndex3: (prevState.currentGroupIndex3 + 1) % this.attributeGroups.length
     }))
   }
 
+  // handler that allows the user to click the weapon stat div and oscillate through the different
+  // weapon statistics
   handleAttributeDiv4Click = () => {
     this.setState(prevState => ({
       currentGroupIndex4: (prevState.currentGroupIndex4 + 1) % this.attributeGroups.length
     }))
   }
 
+  // this method renders weapon stats under each weapon inside the weapon stat div
   renderAttributes = (weapon, group) => {
 
     // Capitalize the first letter of the group name for display
@@ -1443,6 +1460,7 @@ class CharacterBuilder extends Component {
     }
   }
 
+  // handler method for when the user selects a new helmet
   handleHeadChange = (e) => {
     const selectedHead = e.target.value
 
@@ -1450,10 +1468,12 @@ class CharacterBuilder extends Component {
     this.handleHelmetSelection(selectedHead)
   }
 
+  // getter method to grab the name of the helmet
   getHelmetByName = (helmetName) => {
     return this.state.helmets.find(helmet => helmet.name === helmetName)
   }
   
+  // change the buildHead state which is the entire helmet object that was chosen by the user (not just the name)
   handleHelmetSelection = (helmetName) => {
     const selectedHelmet = this.getHelmetByName(helmetName)
     if (selectedHelmet) {
@@ -1464,6 +1484,8 @@ class CharacterBuilder extends Component {
     }
   }
 
+  // handler method for when the user changes their selected chest in the select dropdown menu 
+  // (populated by one of the five MongoDB collections)
   handleChestChange = (e) => {
     const selectedChest = e.target.value
 
@@ -1471,10 +1493,12 @@ class CharacterBuilder extends Component {
     this.handleChestSelection(selectedChest)
   }
 
+  // getter method to grab the name of the chest
   getChestByName = (chestName) => {
     return this.state.chests.find(chest => chest.name === chestName)
   }
   
+  // change the buildChest state which is the entire chest object that was chosen by the user (not just the name)
   handleChestSelection = (chestName) => {
     const selectedChest = this.getChestByName(chestName)
     if (selectedChest) {
@@ -1485,6 +1509,8 @@ class CharacterBuilder extends Component {
     }
   }
 
+  // handler method for when the user changes their selected hands in the select dropdown menu 
+  // (populated by one of the five MongoDB collections)
   handleHandsChange = (e) => {
     const selectedHands = e.target.value
 
@@ -1492,10 +1518,12 @@ class CharacterBuilder extends Component {
     this.handleHandSelection(selectedHands)
   }
 
+  // getter method to grab the name of the hands.
   getHandsByName = (handName) => {
     return this.state.hands.find(hand => hand.name === handName)
   }
   
+  // change the buildHands state which is the entire hands object that was chosen by the user (not just the name)
   handleHandSelection = (handName) => {
     const selectedHand = this.getHandsByName(handName)
     if (selectedHand) {
@@ -1506,6 +1534,8 @@ class CharacterBuilder extends Component {
     }
   }
 
+  // handler method for when the user changes their selected legs in the select dropdown menu 
+  // (populated by one of the five MongoDB collections)
   handleLegsChange = (e) => {
     const selectedLegs = e.target.value
 
@@ -1513,10 +1543,12 @@ class CharacterBuilder extends Component {
     this.handleLegsSelection(selectedLegs)
   }
 
+  // getter method to grab the name of the legs
   getLegsByName = (legName) => {
     return this.state.legs.find(leg => leg.name === legName)
   }
   
+  // change the buildLegs state which is the entire legs object that was chosen by the user (not just the name)
   handleLegsSelection = (legName) => {
     const selectedLegs = this.getLegsByName(legName)
     if (selectedLegs) {
@@ -1527,6 +1559,8 @@ class CharacterBuilder extends Component {
     }
   }
 
+  // handler method for when the user changes their selected Rings in the select dropdown menu 
+  // (populated by one of the five MongoDB collections)
   handleRing1Change = (e) => {
     const selectedRing1 = e.target.value
 
@@ -1540,50 +1574,60 @@ class CharacterBuilder extends Component {
       this.handleRingSelection1(selectedRing1)
 
     }
-}
+  }
 
+  // handler method for when the user changes their selected Rings in the select dropdown menu 
+  // (populated by one of the five MongoDB collections)
   handleRing2Change = (e) => {
-  const selectedRing2 = e.target.value
+    const selectedRing2 = e.target.value
 
-  // Check if the selected ring is already selected as the second ring
-  if (selectedRing2 === "No Ring") {
-    this.setState({ buildRing2Name: selectedRing2 })
-    } else if (selectedRing2 === this.state.buildRing1Name) {
-      alert("This ring is already selected in the other slot.")
-    } else {
+    // Check if the selected ring is already selected as the second ring
+    if (selectedRing2 === "No Ring") {
       this.setState({ buildRing2Name: selectedRing2 })
-      this.handleRingSelection2(selectedRing2)
-  }
+      } else if (selectedRing2 === this.state.buildRing1Name) {
+        alert("This ring is already selected in the other slot.")
+      } else {
+        this.setState({ buildRing2Name: selectedRing2 })
+        this.handleRingSelection2(selectedRing2)
+      }
   }
 
+  // getter method to grab the name of a ring
   getRingByName = (ringName) => {
     return this.state.rings.find(ring => ring.name === ringName)
   }
 
+  // change the buildRing1 or buildRing2 state which is the entire
+  // ring object that was chosen by the user (not just the name)
   handleRingSelection1 = (ringName) => {
     const selectedRing = this.getRingByName(ringName)
     if (selectedRing) {
       this.setState({ buildRing1: selectedRing })
     } else {
-      // Handle the case where the weapon is not found
+      // Handle the case where the ring is not found
       console.log("Ring not found")
     }
   }
 
+  // change the buildRing1 or buildRing2 state which is the entire
+  // ring object that was chosen by the user (not just the name)
   handleRingSelection2 = (ringName) => {
     const selectedRing = this.getRingByName(ringName)
     if (selectedRing) {
       this.setState({ buildRing2: selectedRing })
     } else {
-      // Handle the case where the weapon is not found
+      // Handle the case where the ring is not found
       console.log("Ring not found")
     }
   }
 
+  // getter method to grab the name of a weapon
   getWeaponByName = (weaponName) => {
     return this.state.weapons.find(weapon => weapon.name === weaponName)
   }
 
+  // handler method for when the user changes their selected Weapon in the 
+  // select dropdown menu (populated by one of the five MongoDB collections)
   handleLeftHandOneChange = (e) => {
     const selectedLeftHand1 = e.target.value
     this.setState({buildLeftHand1Name: selectedLeftHand1})
@@ -1591,6 +1635,8 @@ class CharacterBuilder extends Component {
     
   }
 
+  // change the buildLeftHand1 state which is  the entire weapon object 
+  // that was chosen by the user (not just the name)
   handleWeaponSelection1 = (weaponName) => {
     const selectedWeapon = this.getWeaponByName(weaponName)
     if (selectedWeapon) {
@@ -1601,12 +1647,16 @@ class CharacterBuilder extends Component {
     }
   }
 
+  // handler method for when the user changes their selected Weapon in the 
+  // select dropdown menu (populated by one of the five MongoDB collections)
   handleRightHandOneChange = (e) => {
     const selectedRightHand1 = e.target.value
     this.setState({buildRightHand1Name: selectedRightHand1})
     this.handleWeaponSelection2(selectedRightHand1)
   }
 
+  // change the buildRightHand1 state which is  the entire weapon object 
+  // that was chosen by the user (not just the name)
   handleWeaponSelection2 = (weaponName) => {
     const selectedWeapon = this.getWeaponByName(weaponName)
     if (selectedWeapon) {
@@ -1617,12 +1667,16 @@ class CharacterBuilder extends Component {
     }
   }
 
+  // handler method for when the user changes their selected Weapon in the 
+  // select dropdown menu (populated by one of the five MongoDB collections)
   handleLeftHandTwoChange = (e) => {
     const selectedLeftHand2 = e.target.value
     this.setState({buildLeftHand2Name: selectedLeftHand2})
     this.handleWeaponSelection3(selectedLeftHand2)
   }
 
+  // change the buildLeftHand2 state which is  the entire weapon object 
+  // that was chosen by the user (not just the name)
   handleWeaponSelection3 = (weaponName) => {
     const selectedWeapon = this.getWeaponByName(weaponName)
     if (selectedWeapon) {
@@ -1633,12 +1687,16 @@ class CharacterBuilder extends Component {
     }
   }
 
+  // handler method for when the user changes their selected Weapon in the 
+  // select dropdown menu (populated by one of the five MongoDB collections)
   handleRightHandTwoChange = (e) => {
     const selectedRightHand2 = e.target.value
     this.setState({buildRightHand2Name: selectedRightHand2})
     this.handleWeaponSelection4(selectedRightHand2)
   }
 
+  // change the buildRightHand2 state which is  the entire weapon object 
+  // that was chosen by the user (not just the name)
   handleWeaponSelection4 = (weaponName) => {
     const selectedWeapon = this.getWeaponByName(weaponName)
     if (selectedWeapon) {
@@ -1649,27 +1707,36 @@ class CharacterBuilder extends Component {
     }
   }
 
-
+  // handler methods for when the user changes their selected items 
+  // in the select dropdown menu
   handleItemChange1 = (e) => {
     const selectedItem1 = e.target.value
     this.setState({buildItemName1: selectedItem1})
   }
 
+  // handler methods for when the user changes their selected items 
+  // in the select dropdown menu
   handleItemChange2 = (e) => {
     const selectedItem2 = e.target.value
     this.setState({buildItemName2: selectedItem2})
   }
 
+  // handler methods for when the user changes their selected items 
+  // in the select dropdown menu
   handleItemChange3 = (e) => {
     const selectedItem3 = e.target.value
     this.setState({buildItemName3: selectedItem3})
   }
 
+  // handler methods for when the user changes their selected items 
+  // in the select dropdown menu
   handleItemChange4 = (e) => {
     const selectedItem4 = e.target.value
     this.setState({buildItemName4: selectedItem4})
   }
 
+  // handler methods for when the user changes their selected items 
+  // in the select dropdown menu
   handleItemChange5 = (e) => {
     const selectedItem5 = e.target.value
     this.setState({buildItemName5: selectedItem5})
@@ -1681,26 +1748,32 @@ class CharacterBuilder extends Component {
     this.setState({buildArrow1: selectedArrow1})
   }
 
+  // handle arrow/bolt changes
   handleArrowChange2 = (e) => {
     const selectedArrow2 = e.target.value
     this.setState({buildArrow2: selectedArrow2})
   }
 
+  // handle arrow/bolt changes
   handleBoltChange1 = (e) => {
     const selectedBolt1 = e.target.value
     this.setState({buildBolt1: selectedBolt1})
   }
 
+  // handle arrow/bolt changes
   handleBoltChange2 = (e) => {
     const selectedBolt2 = e.target.value
     this.setState({buildBolt2: selectedBolt2})
   }
 
+  // handler method that opens a new webpage for the user so they can
+  // create a fresh build without refreshing the current one they are working on
   handleNewBuildClick = () => {
     // Open a new page in another tab
     window.open("https://brandonbjs.github.io/Dark-Souls-Character-Builder-gh-pages/", "_blank")
   }
 
+  // handler method that resets the entire Character Builder for the user
   handleResetClick = () => {
     // Refresh the current page
     window.location.reload()
@@ -1788,6 +1861,7 @@ class CharacterBuilder extends Component {
       this.setState({ spentSouls: totalSouls })
     }
     
+    // this calculates how many souls are needed for THE CURRENT LEVEL, not the next one
     getSoulsForLevel = (level) => {
       
       let soulsForThisLevel
@@ -1857,10 +1931,19 @@ class CharacterBuilder extends Component {
     /* character-builder div encompasses our three columns (attributes-grid,
        items-grid, and stats-grid) and their resprective grids/fields
          
-         attributes-grid will house fields and inputs for: class, gender, level, 
-         and all attribute points (based on what class is chosen): all starting classes 
-         in Dark Souls begin with varying levels ***which affects the amount of attributes 
-         they start with*** */
+      attributes-grid will house fields and inputs for: class, gender, level, 
+      and all attribute points (based on what class is chosen): all starting classes 
+      in Dark Souls begin with varying levels ***which affects the amount of attributes 
+      they start with*** 
+
+      items-grid houses the armor and weapons that the user will be swapping between.
+      User is able to change each of these using a select drop down, with data loaded from
+      my MongoDB database.
+
+      stats-grid houses all the relevant stats for the character (hp, stamina, 
+      stamina recovery, etc) as well as the defensive stats, the items, arrows,
+      and bolts
+    */
       <div className="character-builder">
         
         <div className="attributes-grid">
