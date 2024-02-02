@@ -1,6 +1,6 @@
 ![Alt Text](https://github.com/brandonbjs/dark-souls-character-builder/blob/main/public/images/dark-souls-title.jpg)
 # Dark Souls Character Builder
-Welcome to my MERN stack Dark Souls Character Builder web application! **PLEASE NOTE: This project is now a Minimum Viable Product.**
+Welcome to my MERN stack Dark Souls Character Builder! **PLEASE NOTE: This project is now a Minimum Viable Product.**
 
 Try it out! Build your own Dark Souls character here: https://brandonbjs.github.io/Dark-Souls-Character-Builder-gh-pages/
 
