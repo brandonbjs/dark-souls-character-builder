@@ -21,6 +21,7 @@ The purpose of this project is to practice, improve, and showcase my MERN stack 
 ### Planning: 
 * **Front-End Development:** The front-end user interface will be designed using React and styled using CSS. I will uphold ES6 best practices to provide the user with an intuitive and enjoyable character building experience.
 *  **Back-End Development:** The back-end will consist of a MongoDB that will be integrated using Node.js and Express.js. I will be creating a custom Node.js API, fit with suitable endpoints that will make GET, POST, PUT, and DELETE requests to and from my MongoDB.
+*  **Hosting:** The webpage is hosted using GitHub Pages and the API+MongoDB are served on an Amazon EC2 instance.
 
 ### Functionality
 The character builder will enable Dark Souls players to theorycraft any build they can imagine. The user will be able to: 
