@@ -1,14 +1,14 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const RingSchema = mongoose.Schema({
     name: {
-        type: String
+        type: String,
     },
     effect: {
-        type: String
-    }
-});
+        type: String,
+    },
+})
 
-const RingModel = mongoose.model("rings", RingSchema)
+const RingModel = mongoose.model('rings', RingSchema)
 
-export { RingModel };
+export { RingModel }

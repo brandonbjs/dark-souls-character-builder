@@ -1,14 +1,14 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const ItemSchema = mongoose.Schema({
     name: {
-        type: String
+        type: String,
     },
     description: {
-        type: String
-    }
-});
+        type: String,
+    },
+})
 
-const ItemModel = mongoose.model("items", ItemSchema)
+const ItemModel = mongoose.model('items', ItemSchema)
 
-export { ItemModel };
+export { ItemModel }

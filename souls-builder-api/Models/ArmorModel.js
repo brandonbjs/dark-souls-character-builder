@@ -1,44 +1,44 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const ArmorSchema = mongoose.Schema({
     set: {
-        type: String
+        type: String,
     },
     name: {
-        type: String
+        type: String,
     },
     position: {
-        type: Number
+        type: Number,
     },
     poise: {
-        type: Number
+        type: Number,
     },
     weight: {
-        type: Number
+        type: Number,
     },
     physical: {
-        type: Number
+        type: Number,
     },
     magic: {
-        type: Number
+        type: Number,
     },
     fire: {
-        type: Number
+        type: Number,
     },
     lightning: {
-        type: Number
+        type: Number,
     },
     bleed: {
-        type: Number
+        type: Number,
     },
     poison: {
-        type: Number
+        type: Number,
     },
     curse: {
-        type: Number
-    }
-});
+        type: Number,
+    },
+})
 
-const ArmorModel = mongoose.model("armorzeros", ArmorSchema)
+const ArmorModel = mongoose.model('armorzeros', ArmorSchema)
 
-export { ArmorModel };
+export { ArmorModel }

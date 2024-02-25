@@ -1,61 +1,63 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
-
 /* Reset default margin and padding for better consistency */
-body, h1, h2, p, ul {
-  margin: 0;
-  padding: 0;
+body,
+h1,
+h2,
+p,
+ul {
+    margin: 0;
+    padding: 0;
 }
 
 .characterBuilder {
-  margin-top: 1%;
+    margin-top: 1%;
 }
 
 /* Apply a background color to the entire body */
 body {
-  background-color: #000000;
-  font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    font-family: 'Arial', sans-serif;
 }
-
 
 /*============================= Style the navigation bar ==============================*/
 .navigationBar {
-  background-color: #333;
-  padding: 5px;
-  text-align: center;
+    background-color: #333;
+    padding: 5px;
+    text-align: center;
 }
 
 /* Style the navigation buttons */
 .navbar a {
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 20px;
-  margin: 0 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 /* Change button color on hover */
 .navbar a:hover {
-  background-color: #555;
+    background-color: #555;
 }
 
 /* Add a border to the active button */
 .navbar a.active {
-  border: 2px solid #fff;
+    border: 2px solid #fff;
 }
 
 /* Center the buttons horizontally */
 .navbar-center {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 /* Optional: Add a subtle box-shadow for depth */
 .navbar {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /*=====================================================================================*/
@@ -63,68 +65,65 @@ body {
 /*============================= Style the character builder ==============================*/
 
 .character-builder {
-  display: flex;
-  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
-  gap: 3px;
-  padding: 10px;
-  justify-content: center;
+    display: flex;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 3px;
+    padding: 10px;
+    justify-content: center;
 }
-
 
 .attributes-grid,
 .stats-grid,
 .items-grid {
-  border: 1px solid rgb(207, 201, 202);
-  background-color: #1a1a1a;
-  height: auto;
-  width: 20%;
-  text-align: left;
-  padding: 1vh;
-  justify-content: space-between;
-  align-items: flex-start; 
-  text-align: justify;
+    border: 1px solid rgb(207, 201, 202);
+    background-color: #1a1a1a;
+    height: auto;
+    width: 20%;
+    text-align: left;
+    padding: 1vh;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: justify;
 }
-
 
 /* for smaller screens */
-@media screen and (max-width: 1900px) { 
-  .attributes-grid,
-  .stats-grid,
-  .items-grid {
-    width: 100%; 
-    height: 100%;
-  }
+@media screen and (max-width: 1900px) {
+    .attributes-grid,
+    .stats-grid,
+    .items-grid {
+        width: 100%;
+        height: 100%;
+    }
 }
 
-
 .dropdown {
-  margin-bottom: 1vh;
+    margin-bottom: 1vh;
 }
 
 label {
-  display:inline;
-  margin-bottom: 5px;
-  color: #d10909; 
-  font-size: 1em;
+    display: inline;
+    margin-bottom: 5px;
+    color: #d10909;
+    font-size: 1em;
 }
 
 select {
-  width: 40%;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #333; 
-  color: #fff; 
-  border: 1px solid #555;
+    width: 40%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
 }
 
 button {
-  width: 25%;
-  padding: 10px;
-  border-radius: 5px;
-  margin-left: 1vw;
-  background-color: #333; 
-  color: #fff; 
-  border: 1px solid #555; 
+    width: 25%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 1vw;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
 }
 
 /*=====================================================================================*/
@@ -132,366 +131,360 @@ button {
 /*============================= ATTRIBUTES-GRID STYLED HERE ==============================*/
 
 .characterClass {
-  margin-left: 1vw;
+    margin-left: 1vw;
 }
 
 .characterGender {
-  margin-left: 0.5vw;
+    margin-left: 0.5vw;
 }
 
 .genderDropdown {
-  margin-bottom: 1vh;
-  border-bottom: 1px solid rgb(207, 201, 202);
-  padding-bottom: 1vh;
+    margin-bottom: 1vh;
+    border-bottom: 1px solid rgb(207, 201, 202);
+    padding-bottom: 1vh;
 }
 
 .levelNumber {
-  width: 25%;
-  padding: 2px;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  border-radius: 5px;
-  margin-left: 18%;
-  background-color: #333; 
-  color: #ffffff; 
-  border: 1px solid #555; 
+    width: 25%;
+    padding: 2px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 5px;
+    margin-left: 18%;
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
 }
 
 .initialLevelNumber {
-  margin-left: 30%;
-  color: #dd0f0f;
+    margin-left: 30%;
+    color: #dd0f0f;
 }
 
 .buildLevel {
-  margin-top: 1vh;
-  margin-bottom: 1vh;
-  color: #dd0f0f;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    color: #dd0f0f;
 }
 
 .humanityNumber {
-  width: 25%;
-  padding: 5px;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  border-radius: 5px;
-  margin-left: 46%;
-  margin-right: 5%;
-  background-color: #333; 
-  color: #fff; 
-  border: 1px solid #555; 
+    width: 25%;
+    padding: 5px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 5px;
+    margin-left: 46%;
+    margin-right: 5%;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
 }
 
 .attributesInfo {
-  margin-top: 1vh;
-  color: #dad386; 
-  font-size: 0.8em;
-  text-decoration: underline;
+    margin-top: 1vh;
+    color: #dad386;
+    font-size: 0.8em;
+    text-decoration: underline;
 }
 
 .attribute-row {
-  margin: 1vh 0;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+    margin: 1vh 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .attribute-name {
-  flex-basis: 30%; /* Adjust as needed */
-  text-align: left;
-  margin-right: 0.3vw;
-  color: #dd0f0f;
+    flex-basis: 30%; /* Adjust as needed */
+    text-align: left;
+    margin-right: 0.3vw;
+    color: #dd0f0f;
 }
 
-.attribute-values, .current-value {
-  flex-basis: 45%; /* Adjust as needed */
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  color: #dd0f0f;
+.attribute-values,
+.current-value {
+    flex-basis: 45%; /* Adjust as needed */
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    color: #dd0f0f;
 }
 
 .current-value {
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  width: 10%; 
-  padding: 3px;
-  margin-left: 2.5vw; 
-  border-radius: 5px;
-  background-color: #333; 
-  color: #fff; 
-  border: 1px solid #555; 
-  font-size: 1em; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+    padding: 3px;
+    margin-left: 2.5vw;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    font-size: 1em;
 }
 
 .attributeButton {
-  flex-basis: 20%; /* Adjust as needed */
-  width: auto; /* Let the width be determined by the content and container */
+    flex-basis: 20%; /* Adjust as needed */
+    width: auto; /* Let the width be determined by the content and container */
 }
 
 .covenantDropdown {
-  margin-top: 1vh;
-  margin-bottom: 1vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .soulsCounter {
-  color: #f1e202;
-  margin-top: 1vh;
-  border-top: 1px solid rgb(207, 201, 202);
-  padding-top: 1vh;
+    color: #f1e202;
+    margin-top: 1vh;
+    border-top: 1px solid rgb(207, 201, 202);
+    padding-top: 1vh;
 }
 
 .soulsToNextLevel {
-  padding-top: 1vh;
+    padding-top: 1vh;
 }
 
 .minSoulsReq {
-  padding-top: 2vh;
-  padding-bottom: 2vh;
-  border-bottom: 1px solid rgb(207, 201, 202);
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border-bottom: 1px solid rgb(207, 201, 202);
 }
 
 .soulsToNextLevelNumber {
-  width: 25%;
-  padding: 5px;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  border-radius: 5px;
-  margin-left: 28%;
-  background-color: #333; 
-  color: #fff; 
-  border: 1px solid #555; 
+    width: 25%;
+    padding: 5px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 5px;
+    margin-left: 28%;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
 }
 
 .spentSoulsNumber {
-  width: 25%;
-  padding: 5px;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  border-radius: 5px;
-  margin-left: 22%;
-  background-color: #333; 
-  border: 1px solid #555; 
+    width: 25%;
+    padding: 5px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 5px;
+    margin-left: 22%;
+    background-color: #333;
+    border: 1px solid #555;
 }
 
 .characterCovenant {
-  margin-left: 1vw;
-  width: 8vw;
+    margin-left: 1vw;
+    width: 8vw;
 }
 
 .init {
-  padding-left: 24%;
-  text-decoration: underline;
+    padding-left: 24%;
+    text-decoration: underline;
 }
 
 .current {
-  padding-left: 15%;
-  text-decoration: underline;
+    padding-left: 15%;
+    text-decoration: underline;
 }
 
 /* Add a subtle animation on hover */
 select:hover,
 button:hover {
-  border-color: #d10909;
+    border-color: #d10909;
 }
 
 /*=====================================================================================*/
 
-
 /*============================= ITEM-GRID STYLED HERE ==============================*/
 
 .armorInfo {
-  color: #dad386; 
-  font-size: 0.8em;
-  margin-bottom: 1vh;
-  text-decoration: underline;
+    color: #dad386;
+    font-size: 0.8em;
+    margin-bottom: 1vh;
+    text-decoration: underline;
 }
 
 .armorDropdown {
-  display: flex;
-  align-items: center;
-  margin-top: 1vh;
-  width: 100%; 
-  color: #dd0f0f;
+    display: flex;
+    align-items: center;
+    margin-top: 1vh;
+    width: 100%;
+    color: #dd0f0f;
 }
 
 .dropdownLabel {
-  width: 80px; /* Adjust based on longest label */
-  text-align: left;
-  margin-right: 10px; /* Space between label and dropdown */
+    width: 80px; /* Adjust based on longest label */
+    text-align: left;
+    margin-right: 10px; /* Space between label and dropdown */
 }
 
 .itemSelect {
-  margin-left: 0.5vw;
-  width: 10vw;
-  flex-grow: 1;
+    margin-left: 0.5vw;
+    width: 10vw;
+    flex-grow: 1;
 }
 
 .weaponInfo {
-  border-top: 1px solid rgb(207, 201, 202);
-  margin-top: 1vh;
-  padding-top: 1vh;
-  color: #dad386; 
-  font-size: 0.8em;
+    border-top: 1px solid rgb(207, 201, 202);
+    margin-top: 1vh;
+    padding-top: 1vh;
+    color: #dad386;
+    font-size: 0.8em;
 }
 
 .leftHand {
-  float: left;
-  text-decoration: underline;
+    float: left;
+    text-decoration: underline;
 }
 
 .rightHand {
-  float: right;
-  text-decoration: underline;
+    float: right;
+    text-decoration: underline;
 }
 
 .weaponsContainer {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  margin-top: 2vh;
-  height: auto;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    margin-top: 2vh;
+    height: auto;
 }
 
-.leftHandWeapon, .rightHandWeapon {
-  width: 100%;
+.leftHandWeapon,
+.rightHandWeapon {
+    width: 100%;
 }
 
 .weaponSelect {
-  width: 100%;
-  
+    width: 100%;
 }
 
 .weaponAttributes {
-  cursor: pointer;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  height: auto;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    height: auto;
 }
 
 .weaponAttributes:hover {
-  background-color: #ddec02fa;
+    background-color: #ddec02fa;
 }
 
 .groupNameP {
-  color: rgb(114, 20, 151);
-  font-weight: bold;
-  text-decoration: underline;
+    color: rgb(114, 20, 151);
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .spellSlotsContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
-  max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    max-width: 100%;
 }
 
 .spellsDropdown {
-  width: 100%; /* Adjust this as needed */
+    width: 100%; /* Adjust this as needed */
 }
 
 .effectsContainer {
-  border-top: 1px solid rgb(207, 201, 202);
-  margin-top: 1vh;
-  padding-top: 1vh;
+    border-top: 1px solid rgb(207, 201, 202);
+    margin-top: 1vh;
+    padding-top: 1vh;
 }
 
 .effect {
-  color: #dad386;
+    color: #dad386;
 }
 
 .effectsSpan {
-  color: #dad386; 
-  font-weight: bold;
-  text-decoration: underline;
+    color: #dad386;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .spellsAndInfoContainer {
-  border-top: 1px solid rgb(207, 201, 202);
-  margin-top: 2.5vh;
-  padding-top: 1vh;
+    border-top: 1px solid rgb(207, 201, 202);
+    margin-top: 2.5vh;
+    padding-top: 1vh;
 }
 
 /*========================================================================================*/
 
 /*============================= Style the stats grid ==============================*/
 
-
 .stat-row {
-  display: flex;
-  justify-content: space-between;
-  color: #dad386; 
+    display: flex;
+    justify-content: space-between;
+    color: #dad386;
 }
 
 .stat-name {
-  flex-basis: 50%;
+    flex-basis: 50%;
 }
 
 .stat-value {
-  flex-basis: 50%;
-  border: 0.2px solid #949292;
-  text-align: right;
-  color: #ffffff; 
+    flex-basis: 50%;
+    border: 0.2px solid #949292;
+    text-align: right;
+    color: #ffffff;
 }
 
 .weight-value {
-  flex-basis: 50%;
-  border: 0.2px solid #949292;
-  text-align: right;
+    flex-basis: 50%;
+    border: 0.2px solid #949292;
+    text-align: right;
 }
 
 .green-text {
-  color: rgb(51, 255, 0); /* Replace with actual color code */
+    color: rgb(51, 255, 0); /* Replace with actual color code */
 }
 
 .blue-text {
-  color: rgb(0, 195, 255); /* Replace with actual color code */
+    color: rgb(0, 195, 255); /* Replace with actual color code */
 }
 
 .red-text {
-  color: rgb(255, 0, 0);; /* Replace with actual color code */
+    color: rgb(255, 0, 0); /* Replace with actual color code */
 }
 
 .char-stats {
-  border-bottom: 1px solid rgb(207, 201, 202);
-  margin-bottom: 1vh;
-  padding-bottom: 1vh;
+    border-bottom: 1px solid rgb(207, 201, 202);
+    margin-bottom: 1vh;
+    padding-bottom: 1vh;
 }
 
 .char-defense {
-  border-bottom: 1px solid rgb(207, 201, 202);
-  margin-bottom: 1vh;
-  padding-bottom: 1vh;
+    border-bottom: 1px solid rgb(207, 201, 202);
+    margin-bottom: 1vh;
+    padding-bottom: 1vh;
 }
 
-.bonfire, .characterBuilder {
-  color: #d10909;
+.bonfire,
+.characterBuilder {
+    color: #d10909;
 }
 
 .itemDropdown {
-  display: flex;
-  align-items: center;
-  margin-left: 50%;
-  margin-top: 1vh;
-  width: 50%; 
-  color: #dd0f0f;
+    display: flex;
+    align-items: center;
+    margin-left: 50%;
+    margin-top: 1vh;
+    width: 50%;
+    color: #dd0f0f;
 }
 
 .itemInfo {
-  color: #dad386; 
-  font-size: 0.8em;
-  margin-bottom: 1vh;
-  text-decoration: underline;
-  float: right;
+    color: #dad386;
+    font-size: 0.8em;
+    margin-bottom: 1vh;
+    text-decoration: underline;
+    float: right;
 }
-
-
-
-
-
-
 
 /*=================================================================================*/

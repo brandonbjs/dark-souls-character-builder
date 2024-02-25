@@ -1,50 +1,50 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const WeaponSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     atk: {
         physical: { type: Number },
         magic: { type: Number },
         fire: { type: Number },
         lightning: { type: Number },
-        bonus: { type: Number }
+        bonus: { type: Number },
     },
     def: {
         physical: { type: Number },
         magic: { type: Number },
         fire: { type: Number },
         lightning: { type: Number },
-        stab: { type: Number }
+        stab: { type: Number },
     },
     effects: {
         poison: { type: String },
         bleed: { type: String },
         divine: { type: String },
-        occult: { type: String }
+        occult: { type: String },
     },
     req: {
         strength: { type: Number },
         dexterity: { type: Number },
         intelligence: { type: Number },
-        faith: { type: Number }
+        faith: { type: Number },
     },
     scale: {
         strength: { type: String },
         dexterity: { type: String },
         intelligence: { type: String },
-        faith: { type: String }
+        faith: { type: String },
     },
-    type: {type: String },
+    type: { type: String },
     durability: { type: Number },
     weight: { type: Number },
     attackTypes: [String],
     obtained: [String],
-    aotaOnly: { type: Boolean }
-});
+    aotaOnly: { type: Boolean },
+})
 
-const WeaponModel = mongoose.model("weapons", WeaponSchema)
+const WeaponModel = mongoose.model('weapons', WeaponSchema)
 
-export { WeaponModel };
+export { WeaponModel }

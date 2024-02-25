@@ -1,29 +1,29 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const SpellSchema = mongoose.Schema({
     name: {
-        type: String
+        type: String,
     },
     description: {
-        type: String
+        type: String,
     },
     uses: {
-        type: Number
+        type: Number,
     },
     slots: {
-        type: Number
+        type: Number,
     },
     intelligenceRequirement: {
-        type: Number
+        type: Number,
     },
     faithRequirement: {
-        type: Number
+        type: Number,
     },
     spellType: {
-        type: String
-    }
-});
+        type: String,
+    },
+})
 
-const SpellModel = mongoose.model("spells", SpellSchema)
+const SpellModel = mongoose.model('spells', SpellSchema)
 
-export { SpellModel };
+export { SpellModel }
