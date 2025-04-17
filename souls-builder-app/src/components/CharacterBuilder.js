@@ -3299,6 +3299,7 @@ class CharacterBuilder extends Component {
                         <span className="dropdownLabel">Head</span>
                         <select
                             className="itemSelect"
+                            id="helmet-select"
                             value={buildHeadName}
                             onChange={this.handleHeadChange}
                         >
