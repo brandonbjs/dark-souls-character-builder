@@ -900,7 +900,7 @@ class CharacterBuilder extends Component {
 
         // initial fetch method to populate the helmets array with helmets from
         // my MongoDB database.
-        fetch('https://dscb.ddns.net:443/fetchHelmets')
+        fetch(`${process.env.REACT_APP_API_URL}/fetchHelmets`)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ helmets: data })
@@ -914,7 +914,7 @@ class CharacterBuilder extends Component {
 
         // initial fetch method to populate the chests array with chests from
         // my MongoDB database.
-        fetch('https://dscb.ddns.net:443/fetchChests')
+        fetch(`${process.env.REACT_APP_API_URL}/fetchChests`)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ chests: data })
@@ -928,7 +928,7 @@ class CharacterBuilder extends Component {
 
         // initial fetch method to populate the hands array with hands from
         // my MongoDB database.
-        fetch('https://dscb.ddns.net:443/fetchHands')
+        fetch(`${process.env.REACT_APP_API_URL}/fetchHands`)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ hands: data })
@@ -942,7 +942,7 @@ class CharacterBuilder extends Component {
 
         // initial fetch method to populate the legs array with chests from
         // my MongoDB database.
-        fetch('https://dscb.ddns.net:443/fetchLegs')
+        fetch(`${process.env.REACT_APP_API_URL}/fetchLegs`)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ legs: data })
@@ -956,7 +956,7 @@ class CharacterBuilder extends Component {
 
         // initial fetch method to populate the legs array with chests from
         // my MongoDB database.
-        fetch('https://dscb.ddns.net:443/fetchWeapons')
+        fetch(`${process.env.REACT_APP_API_URL}/fetchWeapons`)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ weapons: data })
@@ -970,7 +970,7 @@ class CharacterBuilder extends Component {
 
         // initial fetch method to populate the rings array with rings from
         // my MongoDB database rings collection.
-        fetch('https://dscb.ddns.net:443/fetchRings')
+        fetch(`${process.env.REACT_APP_API_URL}/fetchRings`)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ rings: data })
@@ -984,7 +984,7 @@ class CharacterBuilder extends Component {
 
         // initial fetch method to populate the spells array with spells from
         // my MongoDB database spells collection.
-        fetch('https://dscb.ddns.net:443/fetchSpells')
+        fetch(`${process.env.REACT_APP_API_URL}/fetchSpells`)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ spells: data })
@@ -998,7 +998,7 @@ class CharacterBuilder extends Component {
 
         // initial fetch method to populate the items array with items from
         // my MongoDB database items collection.
-        fetch('https://dscb.ddns.net:443/fetchItems')
+        fetch(`${process.env.REACT_APP_API_URL}/fetchItems`)
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ items: data })

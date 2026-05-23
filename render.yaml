@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: souls-builder-api
+    runtime: node
+    rootDir: souls-builder-api
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        sync: false

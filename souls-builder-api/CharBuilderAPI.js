@@ -16,21 +16,6 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-// SSL cert paths
-const privateKey = fs.readFileSync(
-    '/home/ec2-user/dark-souls-character-builder/certificates/privkey.pem',
-    'utf8'
-)
-const certificate = fs.readFileSync(
-    '/home/ec2-user/dark-souls-character-builder/certificates/fullchain.pem',
-    'utf8'
-)
-const credentials = { key: privateKey, cert: certificate }
-
-// Create HTTPS server
-https.createServer(credentials, app).listen(443, () => {
-    console.log('Express server listening on port 443')
-})
 
 //R - fetchChestsEndpoint
 //API method: GET
@@ -224,11 +209,8 @@ async function fetchItemsEndpoint(request, response) {
 
 app.get('/fetchItems', fetchItemsEndpoint)
 
-//sets variable PORT to the port number we are using, 1234
-let PORT = 1234
+const PORT = process.env.PORT || 1234
 
-//opens the PORT and listening for requests - logs this information
-//uses function() callback function that will execute once the server starts listening on the specified PORT.
 app.listen(PORT, function () {
     console.log('Listening at port:', PORT)
 })
